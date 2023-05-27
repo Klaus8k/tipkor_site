@@ -3,14 +3,64 @@
 {% load static %}
 
 <head>
-    <title>tipkor.ru</title>
-    <meta charset="UTF-8">
-    <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- insert href of fonts -->
-    <link rel="icon" href="{% static 'tipkor/img/favicon.ico' %}" type="image/x-icon">
-    <link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/bootstrap.min.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/tipkor.css' %}">
-    <script src="{% static 'tipkor/js/bootstrap.min.js' %}"></script>
-    <script src="{% static 'tipkor/js/tipkor.js' %}"></script>
+	<title>tipkor.ru</title>
+	<meta charset="UTF-8">
+	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<!-- insert href of fonts -->
+	<link rel="icon" href="{% static 'tipkor/img/favicon.ico' %}" type="image/x-icon">
+	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/tipkor.css' %}">
+	<script src="{% static 'tipkor/js/bootstrap.min.js' %}"></script>
+	<script src="{% static 'tipkor/js/tipkor.js' %}"></script>
 </head>
+
+<body>
+	<div class="container">
+		<header class="d-flex flex-wrap justify-content-center py-4 mb-5 border-bottom">
+			Здесь размещаем контакты, график и т.д. по схеме в кореловском файле строка из 6 блоков
+		</header>
+	</div>
+
+	<div class="container">
+		<div class="row row-cols-1 row-cols-md-3">
+
+			<!-- карточка вида заказа -->
+			<div class="card_block p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Изготовление печатей и штампов</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже</p>
+						<a href="#" class="btn btn-primary px-5">Печати</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="card_block p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Полиграфия</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Полиграфия</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="card_block p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Широкоформатная печать</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже</p>
+						<a href="#" class="btn btn-primary px-5">Сольвент</a>
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
+</body>
+
+</html>
