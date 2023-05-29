@@ -1,3 +1,4 @@
 export DJ_KEY="sdfasdfawefsdf"
+export DJ_D="True"
 export DJ_DB_USER="postgres"
 export DJ_DB_PASS="postoleg2222"

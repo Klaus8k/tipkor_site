@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('DJ_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJ_D') 
 
-ALLOWED_HOSTS = ['tipkor.ru','79.133.181.123', 'localhost',]
+ALLOWED_HOSTS = ['tipkor.ru','79.133.181.123', 'localhost', '127.0.0.1']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'poly',
 ]
 
 MIDDLEWARE = [
