@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('DJ_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('True') 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['tipkor.ru','79.133.181.123', 'localhost',]
 
 
 # Application definition
@@ -78,8 +78,12 @@ WSGI_APPLICATION = 'tipkor.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'test',
+        'USER': os.getenv('DJ_DB_USER'),
+        'PASSWORD': os.getenv('DJ_DB_PASS'),
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
