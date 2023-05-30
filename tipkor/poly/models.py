@@ -15,8 +15,8 @@ class MetaPoly(models.Model):
 
     DUPLEX = [(True, "4+4"), (False, "4+0")]
 
-    x = models.IntegerField(help_text="Горизонтальный размер")
-    y = models.IntegerField(help_text="Вертикальный размер")
+    x = models.IntegerField(null=True, help_text="Горизонтальный размер")
+    y = models.IntegerField(null=True, help_text="Вертикальный размер")
     paper = models.CharField(
         choices=PAPER_CHOICE, max_length=20, help_text="Плотность бумаги"
     )
