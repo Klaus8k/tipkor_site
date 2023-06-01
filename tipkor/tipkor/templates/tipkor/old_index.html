@@ -16,38 +16,59 @@
 </head>
 
 <body>
-	<div class="container">
-		<header class="d-flex flex-wrap justify-content-center py-4 mb-5 border-bottom">
-			<div>
-				Здесь размещаем контакты, график и т.д. по схеме в кореловском файле строка из 6 блоков
+	<div class="container pt-2">
+		<div class="row d-flex justify-content-center">
+			<div class="main_logo col d-flex justify-content-center border">logo</div>
+			<div class="hi_telefon col border" style="text-align: center; font-size: large;">8 (964) 571-65-51</div>
+			<div class="hi_grafic col border">пн-пт 10:00-18:00</div>
+			<div class="hi_watssap col-md-2 border">
+				<div class="img_mess">
+					<img id="hi_mess" src="" alt="">
+					<a style="font-size: small;">whatssap</a>
+				</div>
 			</div>
-			<br>
+			<div class="hi_teleg col-md-2 border">
+				<div class="img_mess">
+					<img id="hi_mess" src="" alt="">
+					<a style="font-size: small;">telegram</a>
+				</div>
+			</div>
+		</div>
 
-		</header>
-		<div>
-			узкая длинная картинка
+	</div>
+
+
+	<div class="hi_imgage container p-3">
+		<div class="row">
+			<img class="col" id="header_img" src="" alt="">
 		</div>
-		<div>
-			Приветственный текст
+	</div>
+
+
+	<div class="container p-3">
+		<div class="row">
+			<h1 id="slogan">Офсетная печать, широкоформатка, печати штампы</h1>
 		</div>
+	</div>
 	</div><br><br>
 
 	<div class="container">
-	<h5 style="color: red;">Вывод информации из модели</h5>
-	<br>
-	card
-	<div> {% for item in cards %}
-		<p>{{item }}</p>
-		{% endfor %}
+		<h5 style="color: red;">Вывод информации из модели</h5>
+		<br>
+		card
+		<div> {% for item in cards %}
+			<p>{{item }}</p>
+			{% endfor %}
+		</div>-
+		-
+		<br>
+		leaf
+		<div> {% for item in leaf %}
+			<p>{{item }}</p>
+			{% endfor %}
+		</div>
 	</div>
-<br>
-leaf
-<div> {% for item in leaf %}
-	<p>{{item }}</p>
-	{% endfor %}
-</div>
-</div>
-<br><br>
+	<br><br>
 
 	<div class="container">
 		<div class="row row-cols-1 row-cols-md-3">
@@ -55,7 +76,8 @@ leaf
 			<!-- карточка вида заказа -->
 			<div class="card_block p-3">
 				<div class="card p-2 border">
-					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top" style="height: 100px; width: 300px;" alt="...">
+					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top"
+						style="height: 100px; width: 300px;" alt="...">
 					<div class="card-body">
 						<h3 class="card-title">Печатей и штамп</h3>
 						<p class="card-text">По кнопке якорь на прайс ниже</p>
@@ -66,7 +88,8 @@ leaf
 
 			<div class="card_block p-3">
 				<div class="card p-2 border">
-					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top" style="height: 100px; width: 300px;" alt="...">
+					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top"
+						style="height: 100px; width: 300px;" alt="...">
 					<div class="card-body">
 						<h3 class="card-title">Полиграфия</h3>
 						<p class="card-text">По кнопке якорь на прайс ниже.</p>
@@ -77,7 +100,8 @@ leaf
 
 			<div class="card_block p-3">
 				<div class="card p-2 border">
-					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top" style="height: 100px; width: 300px;" alt="...">
+					<img src="{% static '/tipkor/img/order_cost.jpg' %}" class="card-img-top"
+						style="height: 100px; width: 300px;" alt="...">
 					<div class="card-body">
 						<h3 class="card-title">Широкоформатная печать</h3>
 						<p class="card-text">По кнопке якорь на прайс ниже</p>
