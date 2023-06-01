@@ -18,9 +18,16 @@
 <body>
 	<div class="container pt-2">
 		<div class="row d-flex justify-content-center align-items-center">
-			<div class="main_logo col d-flex justify-content-center border">logo</div>
-			<div class="hi_telefon col border" style="text-align: center; font-size: large;">8 (964) 571-65-51</div>
-			<div class="hi_grafic col border">пн-пт 10:00-18:00</div>
+			<div class="main_logo col d-flex justify-content-center border">
+				<img src="{% static '/tipkor/img/logo.gif' %}" alt="">
+			</div>
+			<div class="hi_telefon col border" style="text-align: center;">
+				<p class="fs-2">8 (964) 571-65-51</p>
+			</div>
+			<div class="hi_grafic col border">
+				<p class="fs-4">пн-пт 10:00-18:00</p>
+				
+			</div>
 			<div class="hi_watssap col-md-2 border">
 				<div class="img_mess">
 					<img id="hi_mess" src="" alt="">
@@ -40,9 +47,9 @@
 	<div class="container pt-2">
 		<div class="row">
 			<div class="btn-group btn-group-lg top_buttons" role="group" aria-label="Простой пример">
-				<button type="button" class="btn btn-primary border">Левая</button>
-				<button type="button" class="btn btn-primary border">Средняя</button>
-				<button type="button" class="btn btn-primary border">Правая</button>
+				<button type="button" class="btn btn-primary border fs-2">Полиграфия</button>
+				<button type="button" class="btn btn-primary border fs-2">Наружка</button>
+				<button type="button" class="btn btn-primary border fs-2">Печати</button>
 			</div>
 		</div>
 	</div>
@@ -85,9 +92,7 @@
 			<!-- карточка вида заказа -->
 			<div class="card_block p-3">
 				<div class="card p-2 border">
-					<div class="ratio ratio-21x9">
-						<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
-					</div>
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
 					<div class="card-body">
 						<h3 class="card-title">Печатей и штамп</h3>
 						<p class="card-text">По кнопке якорь на прайс ниже</p>
