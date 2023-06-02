@@ -21,7 +21,7 @@
 #header_img {
     height: 80px;
     width: auto;
-    background: green;
+    background: rgb(0, 58, 108);
 }
 
 
@@ -30,6 +30,16 @@
     color: rebeccapurple;
 }
 
+#titles {
+    text-align: center;
+    color: rgb(1, 100, 128);
+}
+
+.dropdown-menu {
+    min-width: 250px;
+    font-size: x-large;
+    font-weight: 600;
+  }
 
 
 @media screen and (max-width: 992px) {
