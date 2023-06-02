@@ -47,12 +47,14 @@
         padding: 10px !important;
     }
 
+    .btn_poly {
+    }
+
     .row {
         display: flex;
         flex-direction: column;
     }
     .top_buttons {
-        /* display: flex; */
         flex-direction:column;
         /* align-content: stretch; */
     }
