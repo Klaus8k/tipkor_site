@@ -1,3 +1,5 @@
+
+
 .img_mess {
         display: flex;
         justify-content: center;
@@ -10,15 +12,18 @@
     background: green;
 }
 
+.hi_telefon {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 #header_img {
     height: 80px;
     width: auto;
     background: green;
 }
 
-.top_buttons {
-    /* height: 60px; */
-}
 
 #slogan {
     text-align: center;
@@ -38,7 +43,9 @@
 }
 
 @media screen and (max-width: 768px) {
-
+    .top_line {
+        padding: 10px !important;
+    }
 
     .row {
         display: flex;
