@@ -2,8 +2,10 @@ from django.contrib import admin
 from django.urls import path
 from django.views.generic.base import TemplateView
 
-from .views import PolyView
+from .views import BookletView, CardView, LeafletView
 
 urlpatterns = [
-    path('card/', PolyView.as_view()),
+    path('card/', CardView.as_view()),
+    path('leaflet/', LeafletView.as_view()),
+    path('booklet/', BookletView.as_view()),
 ]
