@@ -17,6 +17,7 @@
 </head>
 
 <body>
+	<!-- Верхняя строка -->
 	<div class="container pt-2">
 		<div class="top_line row d-flex justify-content-center align-items-center">
 			<div class="main_logo col d-flex justify-content-center border">
@@ -44,7 +45,7 @@
 		</div>
 	</div>
 
-	<!-- навигация кнопками сюда, обычные кнопки, пока на якори в странице -->
+	<!-- Навигация -->
 	<div class="container pt-2">
 		<div class="row">
 			<div class="top_buttons d-flex justify-content-center border">
@@ -61,9 +62,9 @@
 						Полиграфия
 					</a>
 					<ul class="dropdown-menu dropdown-menu-dark">
-						<li><a class="dropdown-item" href="#poly">визитки</a></li>
-						<li><a class="dropdown-item" href="#">листовки</a></li>
-						<li><a class="dropdown-item" href="#">буклеты</a></li>
+						<li><a class="dropdown-item" href="/poly/card">визитки</a></li>
+						<li><a class="dropdown-item" href="/poly/leaflet">листовки</a></li>
+						<li><a class="dropdown-item" href="/poly/booklet">буклеты</a></li>
 					</ul>
 				</div>
 
@@ -92,19 +93,15 @@
 				</div>
 
 
-				<!-- Кноки с сворачивающиеся -->
+				<!-- Кноки с сворачивающиеся надо сделать -->
+
 			</div>
 		</div>
 	</div>
-	<!-- Картинка -->
-	<div class="hi_imgage container p-3">
-		<div class="row">
-			<img class="col" id="header_img" src="" alt="">
-		</div>
-	</div>
+
 
 	{% block content %}
-    {% endblock %}
+	{% endblock %}
 
 
 

@@ -2,7 +2,7 @@ from typing import Any, Dict
 
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
-from django.views.generic import ListView, View, TemplateView
+from django.views.generic import ListView, TemplateView, View
 
 from .models import Cards, Leaflets
 
