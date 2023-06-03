@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container border">
+    <h5 style="color: red;">Вывод информации из модели</h5>
+    <br>
+    card
+    <div> {% for item in card %}
+        <p>{{item }}</p>
+        {% endfor %}
+    </div>-
+
+
+{% endblock %}
