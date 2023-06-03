@@ -1,5 +1,5 @@
 from django.contrib import admin
-from poly.models import Cards, Leaflets, FormatsPoly
+from poly.models import Card_Model, Formats_Poly_Model, Leaflets_Model
 
 # Register your models here.
-admin.site.register([Cards, Leaflets, FormatsPoly])
+admin.site.register([Card_Model, Leaflets_Model, Formats_Poly_Model])

@@ -4,12 +4,12 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.views.generic import ListView, TemplateView, View
 
-from .models import Cards, Leaflets
+from .models import Card_Model, Leaflets_Model
 
 
 # Делаем 3 отдельными классами пока
 class CardView(ListView):
-    model = Cards
+    model = Card_Model
     context_object_name = 'card'
     template_name = 'card.html'
 
@@ -19,7 +19,7 @@ class CardView(ListView):
     #     return context
 
 class LeafletView(ListView):
-    model = Leaflets
+    model = Leaflets_Model
     context_object_name = 'leaflet'
     template_name = 'leaflet.html'
 
