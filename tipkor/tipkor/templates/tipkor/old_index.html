@@ -11,22 +11,23 @@
 	<link rel="icon" href="{% static 'tipkor/img/favicon.ico' %}" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/tipkor.css' %}">
+	<script src="{% static 'tipkor/js/bootstrap.bundle.min.js' %}"></script>
 	<script src="{% static 'tipkor/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'tipkor/js/tipkor.js' %}"></script>
 </head>
 
 <body>
 	<div class="container pt-2">
-		<div class="row d-flex justify-content-center align-items-center">
+		<div class="top_line row d-flex justify-content-center align-items-center">
 			<div class="main_logo col d-flex justify-content-center border">
 				<img src="{% static '/tipkor/img/logo.gif' %}" alt="">
 			</div>
-			<div class="hi_telefon col border" style="text-align: center;">
-				<p class="fs-2">8 (964) 571-65-51</p>
+			<div class="hi_telefon col border ">
+				<p class="fs-3 mb-0"><strong>8 (964) 571-65-51</strong></p>
 			</div>
-			<div class="hi_grafic col border">
-				<p class="fs-4">пн-пт 10:00-18:00</p>
-				
+			<div class="hi_grafic col border" style="text-align: center;">
+				<p class="fs-4  mb-0">пн-пт 10:00-18:00</p>
+
 			</div>
 			<div class="hi_watssap col-md-2 border">
 				<div class="img_mess">
@@ -46,26 +47,209 @@
 	<!-- навигация кнопками сюда, обычные кнопки, пока на якори в странице -->
 	<div class="container pt-2">
 		<div class="row">
-			<div class="top_buttons d-flex justify-content-center border" role="group" aria-label="Простой пример">
-				<button type="button" class="btn btn-primary btn-lg col-4 m-1">Полиграфия</button>
-				<button type="button" class="btn btn-primary btn-lg col-4 m-1">Наружка</button>
-				<button type="button" class="btn btn-primary btn-lg col-4 m-1">Печати</button>
+			<div class="top_buttons d-flex justify-content-center border">
+
+				<!-- Просто кнопки без выпадающего меню
+				<a class="btn btn-primary flex-fill btn-lg  m-1" href="#poly">Полиграфия</a>
+				<a class="btn btn-primary flex-fill btn-lg  m-1" href="#shiro">Широкоформатная печать</a>
+				<a class="btn btn-primary flex-fill btn-lg  m-1" href="#stamp">Печати</a> -->
+
+				<!-- Топ кнопки с выпадающим меню -->
+				<div class="dropdown d-flex flex-fill">
+					<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
+						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+						Полиграфия
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark">
+						<li><a class="dropdown-item" href="#poly">визитки</a></li>
+						<li><a class="dropdown-item" href="#">листовки</a></li>
+						<li><a class="dropdown-item" href="#">буклеты</a></li>
+					</ul>
+				</div>
+
+				<div class="dropdown d-flex flex-fill">
+					<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
+						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+						Широкоформатная печать
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark">
+						<li><a class="dropdown-item" href="#poly">баннеры</a></li>
+						<li><a class="dropdown-item" href="#">наклейки</a></li>
+						<li><a class="dropdown-item" href="#">таблички</a></li>
+					</ul>
+				</div>
+
+				<div class="dropdown d-flex flex-fill">
+					<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
+						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+						Печати
+					</a>
+					<ul class="dropdown-menu dropdown-menu-dark">
+						<li><a class="dropdown-item" href="#poly">печати</a></li>
+						<li><a class="dropdown-item" href="#">штампы</a></li>
+						<li><a class="dropdown-item" href="#">другое</a></li>
+					</ul>
+				</div>
+
+
+				<!-- Кноки с сворачивающиеся -->
 			</div>
 		</div>
 	</div>
-
+	<!-- Картинка -->
 	<div class="hi_imgage container p-3">
 		<div class="row">
 			<img class="col" id="header_img" src="" alt="">
 		</div>
 	</div>
-
+	<!-- Описание главная -->
 	<div class="container p-3">
 		<div class="row border">
 			<h1 id="slogan">Офсетная печать, широкоформатка, печати штампы</h1>
 		</div>
+		<div>
+			<p style="font-size: 18px; text-align: center; margin-top: 20px;">Lorem ipsum dolor, sit amet consectetur
+				adipisicing elit. Reiciendis magnam eveniet culpa eum
+				reprehenderit velit, cupiditate corrupti voluptatum, aliquam quibusdam aspernatur maiores quae adipisci
+				est? Eaque quis delectus porro sunt.</p>
+		</div>
 	</div>
-	</div><br><br>
+
+	<!-- Полиграфия -->
+	<div class="container p-2">
+		<div class="row border">
+			<h2 id="titles">Полиграфия</h2>
+			<a name="poly"></a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row row-cols-1 row-cols-md-3">
+			<!-- карточка вида заказа -->
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Визитки</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Расчет визиток</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Листовки</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Расчет листовок</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Буклеты</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Расчет буклетов</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br>
+	<!-- Широкоформатка -->
+	<div class="container p-2">
+		<div class="row border">
+			<h2 id="titles">Широкоформатка</h2>
+			<a name="poly"></a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row row-cols-1 row-cols-md-3">
+			<!-- карточка вида заказа -->
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Баннеры</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Расчет баннера</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Наклейеки</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Расчет наклйки</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Таблички</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Расчет таблички</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Печати -->
+	<div class="container p-2">
+		<div class="row border">
+			<h2 id="titles">Печати</h2>
+			<a name="poly"></a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row row-cols-1 row-cols-md-3">
+			<!-- карточка вида заказа -->
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Печати ИП ООО</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Заказ печати</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Штампы</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Заказ штампа</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="p-3">
+				<div class="card p-2 border">
+					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
+					<div class="card-body">
+						<h3 class="card-title">Другое</h3>
+						<p class="card-text">По кнопке якорь на прайс ниже.</p>
+						<a href="#" class="btn btn-primary px-5">Другое</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br>
 
 
 	<div class="container border">
@@ -84,65 +268,10 @@
 			{% endfor %}
 		</div>
 	</div>
-	<br><br>
-
-	<div class="container">
-		<div class="row row-cols-1 row-cols-md-3">
-
-			<!-- карточка вида заказа -->
-			<div class="card_block p-3">
-				<div class="card p-2 border">
-					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
-					<div class="card-body">
-						<h3 class="card-title">Печатей и штамп</h3>
-						<p class="card-text">По кнопке якорь на прайс ниже</p>
-						<a href="#" class="btn btn-primary px-5">Печати</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="card_block p-3">
-				<div class="card p-2 border">
-					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
-					<div class="card-body">
-						<h3 class="card-title">Полиграфия</h3>
-						<p class="card-text">По кнопке якорь на прайс ниже.</p>
-						<a href="#" class="btn btn-primary px-5">Полиграфия</a>
-					</div>
-				</div>
-			</div>
-
-			<div class="card_block p-3">
-				<div class="card p-2 border">
-					<img src="{% static '/tipkor/img/order_cost.gif' %}" class="icard-img-top img-fluid" alt="...">
-					<div class="card-body">
-						<h3 class="card-title">Широкоформатная печать</h3>
-						<p class="card-text">По кнопке якорь на прайс ниже</p>
-						<a href="#" class="btn btn-primary px-5">Сольвент</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row pt-3">
-			<div class="col-12 d-flex justify-content-center">
-				<h1>POLY</h1>
-			</div>
-		</div>
-	</div>
-	<div class="container">
-		<div class="row">
-			<div class="poly_text col-12 d-flex justify-content-center">
-				<h3>Описание материалы и т.д.</h3>
-			</div>
-			<div class="poly_text col-12 d-flex justify-content-center">
-				таблица сюда контекстом из базы данных инфу
-			</div>
-		</div>
-	</div>
 
 
+
+	<!-- FOOTER -->
 	<div class="container">
 		<footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
 			<div class="col-md-4 d-flex align-items-center">

@@ -1,3 +1,5 @@
+
+
 .img_mess {
         display: flex;
         justify-content: center;
@@ -10,21 +12,34 @@
     background: green;
 }
 
+.hi_telefon {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+}
+
 #header_img {
     height: 80px;
     width: auto;
-    background: green;
+    background: rgb(0, 58, 108);
 }
 
-.top_buttons {
-    /* height: 60px; */
-}
 
 #slogan {
     text-align: center;
     color: rebeccapurple;
 }
 
+#titles {
+    text-align: center;
+    color: rgb(1, 100, 128);
+}
+
+.dropdown-menu {
+    min-width: 250px;
+    font-size: x-large;
+    font-weight: 600;
+  }
 
 
 @media screen and (max-width: 992px) {
@@ -38,15 +53,20 @@
 }
 
 @media screen and (max-width: 768px) {
+    .top_line {
+        padding: 10px !important;
+    }
 
+    .btn_poly {
+    }
 
     .row {
         display: flex;
         flex-direction: column;
     }
-    .resume_block {
-        display: flex;
-        flex-direction: column-reverse;
+    .top_buttons {
+        flex-direction:column;
+        /* align-content: stretch; */
     }
     
     .text {
