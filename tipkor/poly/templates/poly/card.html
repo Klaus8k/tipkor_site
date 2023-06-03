@@ -12,6 +12,13 @@
         <p>{{item }}</p>
         {% endfor %}
     </div>-
+    form
+    <form action="{% url 'poly:card' %}" method="get">
+        {% csrf_token %}
+        {{ card_form }}
+        <button type="submit" class="btn btn-primary" value="card_form">Расчет</button>
+        <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
+    </form>
 
 
 {% endblock %}
