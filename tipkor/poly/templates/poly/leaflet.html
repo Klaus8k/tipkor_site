@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container border">
+    <h5 style="color: red;">Вывод информации из модели</h5>
+
+    <br>
+    leaflet
+    <div> {% for item in leaflet %}
+        <p>{{item }}</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

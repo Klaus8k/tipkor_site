@@ -58,6 +58,7 @@ TEMPLATES = [
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
             BASE_DIR / 'tipkor/templates/tipkor', # path to templates files
+            BASE_DIR / 'poly/templates/poly', # path to templates files
         ],
         'APP_DIRS': True,
         'OPTIONS': {
