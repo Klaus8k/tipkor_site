@@ -14,7 +14,7 @@ class CardView(ListView, FormMixin):
     model = Card_Model
     context_object_name = 'card'
     template_name = 'card.html'
-    # form_class = Card_Form
+    form_class = Card_Form
     
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
