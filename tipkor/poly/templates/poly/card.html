@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="container border">
+    <h5 style="color: red;">Вывод информации из модели</h5>
+    <br>
+    card
+    <div> {% for item in card %}
+        <p>{{item }}</p>
+        {% endfor %}
+    </div>-
+    form
+    <form action="{% url 'poly:card' %}" method="get">
+        {% csrf_token %}
+        {{ card_form }}
+        <button type="submit" class="btn btn-primary" value="card_form">Расчет</button>
+        <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
+    </form>
+
+
+{% endblock %}
