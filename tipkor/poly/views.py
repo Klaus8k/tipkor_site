@@ -19,7 +19,7 @@ class CardView(TemplateView, FormMixin):
 
     form_class = Card_Form
     template_name = 'card.html'
-    success_url = reverse_lazy('poly:card')
+    success_url = reverse_lazy('poly:card')      
 
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
@@ -29,9 +29,11 @@ class CardView(TemplateView, FormMixin):
         return self.get(HttpRequest, *args, **kwargs)
 
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        if 'data' in self.get_form_kwargs().keys():
-            get_pressrun = self.get_form_kwargs()['data'].dict()['pressrun']
-            kwargs.update({'result' : Card_Model.result(get_pressrun)})
+        data_from_form = self.get_form_kwargs()
+        if 'data' in data_from_form.keys():
+            self.pressrun = data_from_form['data']['pressrun']
+            self.duplex = data_from_form['data']['duplex']
+            kwargs.update({'result' : Card_Model.result(self.pressrun, self.duplex)})
         return super().get(request, *args, **kwargs)
 
     # super().get(request=HttpRequest, *args, **kwargs)

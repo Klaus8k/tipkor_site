@@ -28,7 +28,7 @@ class MetaPoly(models.Model):
         duplex = "4+0"
         if self.duplex:
             duplex = "4+4"
-        return "{}x{}, {}г/м, {}, {}шт - {}руб".format(
+        return "{}x{}, {}г/м, {}, {}шт - {} руб.".format(
             self.x, self.y, self.paper, duplex, self.pressrun, self.cost
         )
 
@@ -46,8 +46,11 @@ class Card_Model(MetaPoly):
         help_text="Плотность бумаги",
     )
 
-    def result(pressrun):
-        return Card_Model.objects.filter(pressrun=pressrun)
+    def result(pressrun, duplex):
+        if Card_Model.objects.filter(pressrun=pressrun, duplex=duplex):
+            result = Card_Model.objects.filter(pressrun=pressrun, duplex=duplex)
+            return result[0]
+        else: return 'No matching'
 
 class Formats_Poly_Model(models.Model):
     format_paper = models.CharField(max_length=5)
