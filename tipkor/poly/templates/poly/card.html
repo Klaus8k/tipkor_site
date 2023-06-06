@@ -6,7 +6,7 @@
 
 <div class="container border">
     <h5 style="color: red;">Вывод информации из модели</h5>
-    {{ result }}
+    <h1>{{ result }}</h1>
 
     <br>
     card
@@ -15,7 +15,7 @@
         {% endfor %}
     </div>- -->
     form
-    <form action="{% url 'poly:card' %}" method="get">
+    <form action="{% url 'poly:card' %}" method="post">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="btn btn-primary" value="card_form">Расчет</button>
