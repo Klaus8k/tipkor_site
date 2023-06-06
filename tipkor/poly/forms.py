@@ -1,9 +1,10 @@
-from django.forms import ModelForm
+from django import forms
 
-from .models import Card_Model
+DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать")]
 
 
-class Card_Form(ModelForm):
-    class Meta:
-        model = Card_Model
-        fields = ['x', 'y', 'pressrun', 'duplex']
+class Card_Form(forms.Form):
+    x = forms.IntegerField(max_value=100, disabled=True, initial=90)
+    y = forms.IntegerField(max_value=100, disabled=True, initial=50)
+    duplex = forms.ChoiceField(initial=True, choices=DUPLEX)
+    pressrun = forms.IntegerField(help_text="Тираж")
