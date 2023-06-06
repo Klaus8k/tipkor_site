@@ -50,7 +50,8 @@ class CardView(PolyMeta):
 
 
 
-class LeafletView(ListView):
+class LeafletView(PolyMeta):
+    
     model = Leaflets_Model
     context_object_name = 'leaflet'
     template_name = 'leaflet.html'

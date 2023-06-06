@@ -45,12 +45,6 @@ class MetaPoly(models.Model):
 class Card_Model(MetaPoly):
     x = models.IntegerField(default=90, help_text="Горизонтальный размер")
     y = models.IntegerField(default=50, help_text="Вертикальный размер")
-    paper = models.CharField(
-        choices=[("300", "300 г/м")],
-        default="300",
-        max_length=20,
-        help_text="Плотность бумаги",
-    )
 
 class Formats_Poly_Model(models.Model):
     format_paper = models.CharField(max_length=5)
@@ -58,10 +52,12 @@ class Formats_Poly_Model(models.Model):
     y = models.IntegerField()
 
     def __str__(self):
-        return self.format_paper
+        return f'{self.format_paper} - {self.x}x{self.y}'
     
 class Leaflets_Model(MetaPoly):
     format_choice = models.ForeignKey(Formats_Poly_Model, on_delete=models.CASCADE)
 
     def __str__(self):
-        return str(self.format_choice.format_paper) + super().__str__()[4:]
+        x = self.format_choice
+        print(x)
+        return f'{x.format_paper} + {x.x} + {x.y} + {super().__str__()}'
