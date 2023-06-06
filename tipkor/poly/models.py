@@ -46,6 +46,9 @@ class Card_Model(MetaPoly):
         help_text="Плотность бумаги",
     )
 
+    def result(pressrun):
+        return Card_Model.objects.filter(pressrun=pressrun)
+
 class Formats_Poly_Model(models.Model):
     format_paper = models.CharField(max_length=5)
     x = models.IntegerField()

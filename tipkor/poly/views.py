@@ -6,7 +6,7 @@ from django.shortcuts import render
 from django.urls.base import reverse_lazy
 from django.views.generic import (CreateView, FormView, ListView, TemplateView,
                                   View)
-from django.views.generic.base import TemplateView, ContextMixin
+from django.views.generic.base import ContextMixin, TemplateView
 from django.views.generic.edit import FormMixin
 
 from .forms import Card_Form
@@ -23,15 +23,15 @@ class CardView(TemplateView, FormMixin):
 
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        data = self.get_form_kwargs()['data'].dict()
+        data_from_form = self.get_form_kwargs()['data'].dict()
         context = super().get_context_data(**kwargs)
-        context['form'] = self.form_class(data)
-        
+        context['form'] = self.form_class(data_from_form)
         return self.get(HttpRequest, *args, **kwargs)
 
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         if 'data' in self.get_form_kwargs().keys():
-            kwargs.update({'result' : 10})
+            get_pressrun = self.get_form_kwargs()['data'].dict()['pressrun']
+            kwargs.update({'result' : Card_Model.result(get_pressrun)})
         return super().get(request, *args, **kwargs)
 
     # super().get(request=HttpRequest, *args, **kwargs)
