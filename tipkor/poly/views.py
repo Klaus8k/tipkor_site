@@ -13,13 +13,13 @@ from .forms import Card_Form
 from .models import Card_Model, Leaflets_Model
 
 # Делаем 3 отдельными классами пока
-# class CardView(FormView):
 
-class CardView(TemplateView, FormMixin):
+class PolyMeta(TemplateView, FormMixin):
 
-    form_class = Card_Form
-    template_name = 'card.html'
-    success_url = reverse_lazy('poly:card')      
+    form_class = None
+    template_name = ''
+    success_url = reverse_lazy('')      
+    model_class = None
 
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
@@ -29,21 +29,29 @@ class CardView(TemplateView, FormMixin):
         return self.get(HttpRequest, *args, **kwargs)
 
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        data_from_form = self.get_form_kwargs()
-        if 'data' in data_from_form.keys():
-            self.pressrun = data_from_form['data']['pressrun']
-            self.duplex = data_from_form['data']['duplex']
-            kwargs.update({'result' : Card_Model.result(self.pressrun, self.duplex)})
+        if self.get_form().is_bound:
+            self.data_form = self.get_form_kwargs()['data'] # Из реквеста берем данные формы
+            self.data_form = self.data_form.dict()
+            self.data_form.pop('csrfmiddlewaretoken')
+            kwargs.update({'result' : self.model_class.get_cost(**self.data_form)})
         return super().get(request, *args, **kwargs)
 
-    # super().get(request=HttpRequest, *args, **kwargs)
+    class Meta:
+        abstract = True
+
+
+class CardView(PolyMeta):
+    form_class = Card_Form
+    template_name = 'card.html'
+    success_url = reverse_lazy('poly:card')      
+    model_class = Card_Model
 
 
 
 
 
-
-class LeafletView(ListView):
+class LeafletView(PolyMeta):
+    
     model = Leaflets_Model
     context_object_name = 'leaflet'
     template_name = 'leaflet.html'
