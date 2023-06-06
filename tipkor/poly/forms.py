@@ -7,5 +7,3 @@ class Card_Form(ModelForm):
     class Meta:
         model = Card_Model
         fields = ['x', 'y', 'pressrun', 'duplex']
-
-        

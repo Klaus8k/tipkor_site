@@ -13,7 +13,7 @@ class MetaPoly(models.Model):
         (PAPER_300, "300 г/м"),
     ]
 
-    DUPLEX = [(True, "4+4"), (False, "4+0")]
+    DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать")]
 
     x = models.IntegerField(blank=True, null=True, help_text="Горизонтальный размер")
     y = models.IntegerField(blank=True, null=True, help_text="Вертикальный размер")

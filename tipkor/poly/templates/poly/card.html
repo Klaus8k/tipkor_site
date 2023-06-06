@@ -9,16 +9,31 @@
     Форма расчета заказа визиток: размер - неактивен, тираж меняется по 500шт, дуплекс как есть
     <br>
     <br>
-    <form class="form-control form-control-lg justify-items-end" action="{% url 'poly:card' %}" method="post">
+    <form class="form-control form-control-lg" action="{% url 'poly:card' %}" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary" value="card_form">Расчет</button>
-        <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
-    </form>
+        <div class="size row d-flex justify-content-center align-items-center">
+            <div class="col-3 p-2 border">ширина(мм): {{ form.x }}</div>
+            <div class="col-3 p-2 border">высота(мм): {{ form.y }}</div>
+        </div>
+        <div class="press_and_duplex row d-flex justify-content-center align-items-center">
+            <div class="col-3 p-2 border ">4+4 (4+0): {{ form.duplex }}</div>
+            <div class="col-3 p-2 border">тираж(шт): {{ form.pressrun }}</div>
+        </div>
 
-    <br><br>
+        <div class="rowborder">
 
-    <h1 style="color: red;">{{ result }}</h1>
+            <div class="col-6">
+                <button type="submit" class="btn btn-primary" value="card_form">Расчет</button>
+                <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
+            </div>
+        </div>
+</div>
+
+</form>
+
+<br><br>
+
+<h1 style="color: red;">{{ result }}</h1>
 
 
-    {% endblock %}
+{% endblock %}
