@@ -20,12 +20,13 @@
             <div class="col-3 p-2 border">тираж(шт): {{ form.pressrun }}</div>
         </div>
 
-        <div class="rowborder">
+        <div class="press_and_duplex row d-flex justify-content-center align-items-center pt-3">
 
-            <div class="col-6">
-                <button type="submit" class="btn btn-primary" value="card_form">Расчет</button>
-                <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
-            </div>
+            <button type="submit" class="btn btn-primary col-3" value="card_form">Расчет</button>
+            <a href="{% url 'poly:card' %}" class="btn btn-danger  col-3">Сброс</a>
+        </div>
+        <div class="container border pt-3">
+            <h1 style="color: red;">Цена тиража: {{ result }}</h1>
         </div>
 </div>
 
@@ -33,7 +34,6 @@
 
 <br><br>
 
-<h1 style="color: red;">{{ result }}</h1>
 
 
 {% endblock %}
