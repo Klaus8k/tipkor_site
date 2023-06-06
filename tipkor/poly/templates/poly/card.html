@@ -9,9 +9,9 @@
     Форма расчета заказа визиток: размер - неактивен, тираж меняется по 500шт, дуплекс как есть
     <br>
     <br>
-    <form action="{% url 'poly:card' %}" method="post">
+    <form class="form-control form-control-lg justify-items-end" action="{% url 'poly:card' %}" method="post">
         {% csrf_token %}
-        {{ form }}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-primary" value="card_form">Расчет</button>
         <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
     </form>
