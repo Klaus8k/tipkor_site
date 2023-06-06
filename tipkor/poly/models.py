@@ -31,6 +31,12 @@ class MetaPoly(models.Model):
         return "{}x{}, {}г/м, {}, {}шт - {} руб.".format(
             self.x, self.y, self.paper, duplex, self.pressrun, self.cost
         )
+    
+    @classmethod
+    def get_cost(cls, **kwargs): 
+        if cls.objects.filter(**kwargs):
+            return cls.objects.filter(**kwargs)[0]
+        else: return 'No matching'
 
     class Meta:
         abstract = True
@@ -45,12 +51,6 @@ class Card_Model(MetaPoly):
         max_length=20,
         help_text="Плотность бумаги",
     )
-
-    def result(pressrun, duplex):
-        if Card_Model.objects.filter(pressrun=pressrun, duplex=duplex):
-            result = Card_Model.objects.filter(pressrun=pressrun, duplex=duplex)
-            return result[0]
-        else: return 'No matching'
 
 class Formats_Poly_Model(models.Model):
     format_paper = models.CharField(max_length=5)
