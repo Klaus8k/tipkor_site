@@ -41,6 +41,17 @@
     font-weight: 600;
   }
 
+.disabled {
+    
+}
+.size {
+    width: auto;
+}
+
+.pressrun {
+    display: flex;
+    justify-content: end;
+}
 
 @media screen and (max-width: 992px) {
     .hi_grafic {
