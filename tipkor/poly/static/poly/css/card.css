@@ -34,15 +34,15 @@
 
 /* xs срабатывает меньше 576px */
 @media screen and (max-width: 576px) {
-    .size_calc  {
+    /* .size_calc  {
         display: flex;
         justify-content: center;
-    }
+    } */
 
-    .size {
+    /* .size {
         display: flex;
         justify-content: center;
-    }
+    } */
 
     .card_form {
         flex-direction: row;
