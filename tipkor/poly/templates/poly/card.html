@@ -14,7 +14,7 @@
     <br>
     <br>
     <div class="card_form row ">
-        <div class="calc col-xl-5 col-lg-7 col-md-8 col-sm-6 col-10 ">
+        <div class="calc col-xl-5 col-lg-7 col-md-8 col-sm-6">
             <form class="form-control form-control-lg " action="{% url 'poly:card' %}" method="post">
                 {% csrf_token %}
                 <div class="row border">
@@ -29,8 +29,8 @@
 
                 <div class="row">
                     <div class="col border">
-                        <input type="submit" class="btn btn-primary" value="Расчет"></input>
-                        <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
+                        <input type="submit" class="yes_button btn btn-primary" value="Расчет"></input>
+                        <a href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</a>
                     </div>
                 </div>
             </form>

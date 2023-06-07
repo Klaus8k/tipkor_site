@@ -1,26 +1,27 @@
 .card_img {
     background-color: blue;
-
-    /* display: none; */
 }
-
-
-/* .form_label {
-    height: 30px;
-    width: 150px;
-} */
-
-
 
 #id_x, #id_y, #id_duplex, #id_pressrun  {
-    height: 30px;
+    height: 40px;
     width: 150px;
 }
 
-#id_duplex {
-    min-height: 30px;
-
+.yes_button {
+    height: 30px;
+    width: 100px;
 }
+
+.reset_button {
+    height: 30px;
+    width: 50px;
+    padding-top: 5px;
+    padding-left: 7px;
+}
+
+
+
+
 
 /* md срабатывает меньше 992 */
 @media screen and (max-width: 992px) {
@@ -51,15 +52,18 @@
 
 /* xs срабатывает меньше 576px */
 @media screen and (max-width: 576px) {
-    /* .size_calc  {
-        display: flex;
-        justify-content: center;
-    } */
 
-    /* .size {
-        display: flex;
-        justify-content: center;
-    } */
+    .yes_button {
+        height: 30px;
+        width: 80px;
+    }
+
+    .reset_button {
+        height: 30px;
+        width: auto;
+        padding-top: 5px;
+        padding-left: 7px;
+    }
 
     .card_form {
         flex-direction: row;
