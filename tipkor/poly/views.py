@@ -20,6 +20,7 @@ class PolyMeta(TemplateView, FormMixin):
     template_name = ''
     success_url = reverse_lazy('')      
     model_class = None
+    del_keys = ['csrfmiddlewaretoken']
 
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
@@ -32,7 +33,8 @@ class PolyMeta(TemplateView, FormMixin):
         if self.get_form().is_bound:
             self.data_form = self.get_form_kwargs()['data'] # Из реквеста берем данные формы
             self.data_form = self.data_form.dict()
-            self.data_form.pop('csrfmiddlewaretoken')
+            for i in self.del_keys:
+                self.data_form.pop(i)
             kwargs.update({'result' : self.model_class.get_cost(**self.data_form)})
         return super().get(request, *args, **kwargs)
 
@@ -45,9 +47,7 @@ class CardView(PolyMeta):
     template_name = 'card.html'
     success_url = reverse_lazy('poly:card')      
     model_class = Card_Model
-
-
-
+    del_keys = ['paper', 'card_format','csrfmiddlewaretoken']
 
 
 class LeafletView(PolyMeta):

@@ -1,26 +1,23 @@
 .card_img {
-    background-color: blue;
+    background-color: rgb(97, 213, 255);
 }
 
-#id_x, #id_y, #id_duplex, #id_pressrun  {
+#id_paper, #id_card_format, #id_duplex, #id_pressrun  {
     height: 40px;
     width: 150px;
 }
 
 .yes_button {
     height: 30px;
-    width: 100px;
+    width: 150px;
 }
 
 .reset_button {
     height: 30px;
     width: 50px;
-    padding-top: 5px;
-    padding-left: 7px;
+    /* padding-top: 5px;
+    padding-left: 7px; */
 }
-
-
-
 
 
 /* md срабатывает меньше 992 */
@@ -31,23 +28,9 @@
 /* sm срабатывает меньше 768 */
 @media screen and (max-width: 768px) {
 
-
     .card_form {
         flex-direction: row;
-        background-color: red;
-    }
-
-    .calc {
-
-        background-color: blue;
-    }
-
-
-    .card_img {
-        background-color: aquamarine;
-
-    }
-        
+    }        
 }
 
 /* xs срабатывает меньше 576px */
@@ -55,23 +38,11 @@
 
     .yes_button {
         height: 30px;
-        width: 80px;
-    }
-
-    .reset_button {
-        height: 30px;
-        width: auto;
-        padding-top: 5px;
-        padding-left: 7px;
+        width: 150px;
     }
 
     .card_form {
         flex-direction: row;
-        background-color: red;
-    }
-
-    .calc {
-        background-color: rgb(16, 244, 16);
     }
 
     .card_img {

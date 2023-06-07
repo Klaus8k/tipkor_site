@@ -7,44 +7,73 @@
 <head>
     <link rel="stylesheet" type="text/css" href="{% static 'poly/css/card.css' %}">
 </head>
+<br>
+<br>
+<br>
+
 
 <div class="container">
-    <br>
-    Форма расчета заказа визиток: размер - неактивен, тираж меняется по 500шт, дуплекс как есть
-    <br>
-    <br>
+    <div class="card_text">
+        <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
+            minus
+            mollitia eveniet perferendis, incidunt alias quod a tempore quis magni numquam laboriosam, illo provident
+            tempora!</p>
+    </div>
+    <h1>Визитки</h1>
+</div>
+
+
+<!-- Форма -->
+<div class="container">
     <div class="card_form row ">
-        <div class="calc col-xl-5 col-lg-7 col-md-8 col-sm-6">
-            <form class="form-control form-control-lg " action="{% url 'poly:card' %}" method="post">
+        <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
+            <form class="form-control-lg " action="{% url 'poly:card' %}" method="post">
                 {% csrf_token %}
                 <div class="row border">
-                    <div class="form_label col border">{{ form.x }}<p>ширина(мм):</p></div>
-                    <div class="form_label col border">{{ form.y }}<p>высота(мм):</p></div>
+                    <div class="col border">{{ form.paper }}<p>Плотность бумаги</p>
+                    </div>
+                    <div class="col border">{{ form.card_format }}<p>Размер визитки</p>
+                    </div>
                 </div>
 
                 <div class="row border pt-4">
-                    <div class="form_label col border">{{ form.duplex }}<p>4+4/4+0:</p></div>
-                    <div class="form_label col border">{{ form.pressrun }}<p>тираж(шт):</p></div>
+                    <div class="col border">{{ form.duplex }}<p>4+4/4+0:</p>
+                    </div>
+                    <div class="col border">{{ form.pressrun }}<p>тираж(шт):</p>
+                    </div>
                 </div>
 
                 <div class="row">
                     <div class="col border">
                         <input type="submit" class="yes_button btn btn-primary" value="Расчет"></input>
-                        <a href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</a>
+                        <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
                     </div>
                 </div>
             </form>
         </div>
 
         <div class="card_img col border">
-            img
+            картинка визитки
         </div>
     </div>
+    <!-- Результат -->
+</div>
 
-    <div class="row border mt-4">
-        <h1 style="color: red;">Цена тиража: {{ result }}</h1>
+<br><br>
+<div class="container">
+    <div class="result_info">
+        <div class="row border">
+            <h1 style="color: red;">Цена тиража: {{ result }}</h1>
+            <h4>Готовность - число, пояснения</h4>
+        </div>
     </div>
-
+    <br>
+    <div class="row border">
+        <div class="more_info">
+            <h4>Макет для скачивания, про дизайн</h4>
+        </div>
+    </div>
 </div>
 
 </form>

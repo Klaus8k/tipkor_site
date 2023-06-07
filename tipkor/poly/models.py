@@ -43,8 +43,12 @@ class MetaPoly(models.Model):
 
 
 class Card_Model(MetaPoly):
+    PAPER_CHOICE = [("300", "300 г/м"),]
     x = models.IntegerField(default=90, help_text="Горизонтальный размер")
     y = models.IntegerField(default=50, help_text="Вертикальный размер")
+    paper = models.CharField(
+        choices=PAPER_CHOICE, max_length=20, help_text="Плотность бумаги"
+    )
 
 class Formats_Poly_Model(models.Model):
     format_paper = models.CharField(max_length=5)
