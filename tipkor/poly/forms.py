@@ -19,6 +19,7 @@ class Card_Form(forms.Form):
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
 class Leaflet_Form(forms.Form):
+    pass
     # https://stackoverflow.com/questions/291945/how-do-i-filter-foreignkey-choices-in-a-django-modelform
 
 
