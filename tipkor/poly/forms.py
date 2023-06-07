@@ -1,5 +1,7 @@
 from django import forms
 
+from .models import Leaflets_Model, Formats_Poly_Model
+
 DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать"),]
 
 
@@ -17,4 +19,13 @@ class Card_Form(forms.Form):
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
 class Leaflet_Form(forms.Form):
-    pass
+    # https://stackoverflow.com/questions/291945/how-do-i-filter-foreignkey-choices-in-a-django-modelform
+
+
+
+
+
+# class Leaflet_Form(forms.ModelForm):
+    # class Meta:
+        # model = Leaflets_Model
+        # fields = ['paper', 'format_choice', 'duplex', 'pressrun']

@@ -9,7 +9,7 @@ from django.views.generic import (CreateView, FormView, ListView, TemplateView,
 from django.views.generic.base import ContextMixin, TemplateView
 from django.views.generic.edit import FormMixin
 
-from .forms import Card_Form
+from .forms import Card_Form, Leaflet_Form
 from .models import Card_Model, Leaflets_Model
 
 # Делаем 3 отдельными классами пока
@@ -51,10 +51,13 @@ class CardView(PolyMeta):
 
 
 class LeafletView(PolyMeta):
-    
-    model = Leaflets_Model
-    context_object_name = 'leaflet'
+    form_class = Leaflet_Form
     template_name = 'leaflet.html'
+    success_url = 'poly:leaflet'
+    model_class = Leaflets_Model
+    
+
+    
 
 class BookletView(TemplateView):
 

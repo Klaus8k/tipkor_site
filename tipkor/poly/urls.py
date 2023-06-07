@@ -8,6 +8,6 @@ app_name = 'poly'
 
 urlpatterns = [
     path('card/', CardView.as_view(), name='card'),
-    path('leaflet/', LeafletView.as_view()),
+    path('leaflet/', LeafletView.as_view(), name='leaflet'),
     path('booklet/', BookletView.as_view()),
 ]
