@@ -5,7 +5,7 @@
 {% block content %}
 
 <head>
-    <script src="{% static 'poly/css/card.css' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'poly/css/card.css' %}">
 </head>
 
 <div class="container">
@@ -13,33 +13,38 @@
     Форма расчета заказа визиток: размер - неактивен, тираж меняется по 500шт, дуплекс как есть
     <br>
     <br>
-    <div class="row">
-        <form class="form-control form-control-lg" action="{% url 'poly:card' %}" method="post">
-            <div class="calc col-lg-5 col-md-8 col-xs-12 ">
+    <div class="card_form row ">
+        <div class="calc col-xl-5 col-lg-7 col-md-8 col-sm-6 ">
+            <form class="form-control form-control-lg " action="{% url 'poly:card' %}" method="post">
                 {% csrf_token %}
-                <div class="row border ">
-                    <div class="col border">ширина(мм): {{ form.x }}</div>
-                    <div class="col border">высота(мм): {{ form.y }}</div>
-                </div>
-                <br>
                 <div class="row border">
-                    <div class="col border">4+4/4+0: {{ form.duplex }}</div>
-                    <div class="col border">тираж(шт): {{ form.pressrun }}</div>
+                    <div class="size col border">ширина(мм): {{ form.x }}</div>
+                    <div class="size col border">высота(мм): {{ form.y }}</div>
                 </div>
-                <br>
+
+                <div class="row border ">
+                    <div class="size col border">4+4/4+0: {{ form.duplex }}</div>
+                    <div class="size col border">тираж(шт): {{ form.pressrun }}</div>
+                </div>
+
                 <div class="row">
                     <div class="col border">
                         <input type="submit" class="btn btn-primary" value="Расчет"></input>
                         <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
                     </div>
                 </div>
-            </div>
+            </form>
+        </div>
 
-            <div class="container border pt-3">
-                <h1 style="color: red;">Цена тиража: {{ result }}</h1>
-            </div>
+        <div class="card_img col border">
+            img
+        </div>
     </div>
-</div>
+
+    <div class="row border mt-4">
+        <h1 style="color: red;">Цена тиража: {{ result }}</h1>
+    </div>
+
 </div>
 
 </form>

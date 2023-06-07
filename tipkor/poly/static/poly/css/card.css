@@ -1,18 +1,59 @@
+.card_img {
+    background-color: blue;
 
-
-
-
-
-@media screen and (min-width: 992px) {
-
-    
+    /* display: none; */
 }
 
-@media screen and (min-width: 768px) {
 
-        .calc {
-            display: flex;
-            justify-items: center;
-        }
-    
+/* md срабатывает меньше 992 */
+@media screen and (max-width: 992px) {
+
+}
+
+/* sm срабатывает меньше 768 */
+@media screen and (max-width: 768px) {
+
+
+    .card_form {
+        flex-direction: row;
+        background-color: red;
+    }
+
+    .calc {
+
+        background-color: blue;
+    }
+
+
+    .card_img {
+        background-color: aquamarine;
+
+    }
+        
+}
+
+/* xs срабатывает меньше 576px */
+@media screen and (max-width: 576px) {
+    .size_calc  {
+        display: flex;
+        justify-content: center;
+    }
+
+    .size {
+        display: flex;
+        justify-content: center;
+    }
+
+    .card_form {
+        flex-direction: row;
+        background-color: red;
+    }
+
+    .calc {
+        background-color: rgb(16, 244, 16);
+    }
+
+    .card_img {
+        display: none;        
+    }
 }
