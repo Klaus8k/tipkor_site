@@ -5,6 +5,23 @@
 }
 
 
+/* .form_label {
+    height: 30px;
+    width: 150px;
+} */
+
+
+
+#id_x, #id_y, #id_duplex, #id_pressrun  {
+    height: 30px;
+    width: 150px;
+}
+
+#id_duplex {
+    min-height: 30px;
+
+}
+
 /* md срабатывает меньше 992 */
 @media screen and (max-width: 992px) {
 

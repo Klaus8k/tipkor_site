@@ -14,17 +14,17 @@
     <br>
     <br>
     <div class="card_form row ">
-        <div class="calc col-xl-5 col-lg-7 col-md-8 col-sm-6 ">
+        <div class="calc col-xl-5 col-lg-7 col-md-8 col-sm-6 col-10 ">
             <form class="form-control form-control-lg " action="{% url 'poly:card' %}" method="post">
                 {% csrf_token %}
                 <div class="row border">
-                    <div class="size col border">ширина(мм): {{ form.x }}</div>
-                    <div class="size col border">высота(мм): {{ form.y }}</div>
+                    <div class="form_label col border">{{ form.x }}<p>ширина(мм):</p></div>
+                    <div class="form_label col border">{{ form.y }}<p>высота(мм):</p></div>
                 </div>
 
-                <div class="row border ">
-                    <div class="size col border">4+4/4+0: {{ form.duplex }}</div>
-                    <div class="size col border">тираж(шт): {{ form.pressrun }}</div>
+                <div class="row border pt-4">
+                    <div class="form_label col border">{{ form.duplex }}<p>4+4/4+0:</p></div>
+                    <div class="form_label col border">{{ form.pressrun }}<p>тираж(шт):</p></div>
                 </div>
 
                 <div class="row">
