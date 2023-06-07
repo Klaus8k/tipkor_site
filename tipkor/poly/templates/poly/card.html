@@ -4,34 +4,47 @@
 
 {% block content %}
 
-<div class="container border">
+<head>
+    <script src="{% static 'poly/css/card.css' %}"></script>
+</head>
+
+<div class="container">
     <br>
     Форма расчета заказа визиток: размер - неактивен, тираж меняется по 500шт, дуплекс как есть
     <br>
     <br>
+    <div class="row">
         <form class="form-control form-control-lg" action="{% url 'poly:card' %}" method="post">
-            {% csrf_token %}
-            <div class="size border row d-flex justify-content-center align-items-center">
-                <div class="col-3 p-2 border">ширина(мм): {{ form.x }}</div>
-                <div class="col-3 p-2 border">высота(мм): {{ form.y }}</div>
-            </div>
-            <div class="press_and_duplex border row d-flex justify-content-center align-items-center">
-                <div class="col-3 p-2 border ">4+4 (4+0): {{ form.duplex }}</div>
-                <div class="col-3 p-2 border">тираж(шт): {{ form.pressrun }}</div>
+            <div class="calc col-lg-5 col-md-8 col-xs-12 ">
+                {% csrf_token %}
+                <div class="row border ">
+                    <div class="col border">ширина(мм): {{ form.x }}</div>
+                    <div class="col border">высота(мм): {{ form.y }}</div>
+                </div>
+                <br>
+                <div class="row border">
+                    <div class="col border">4+4/4+0: {{ form.duplex }}</div>
+                    <div class="col border">тираж(шт): {{ form.pressrun }}</div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col border">
+                        <input type="submit" class="btn btn-primary" value="Расчет"></input>
+                        <a href="{% url 'poly:card' %}" class="btn btn-danger">Сброс</a>
+                    </div>
+                </div>
             </div>
 
-            <div class="buttons row d-flex justify-content-center align-items-center pt-3">
-
-                <button type="submit" class="btn btn-primary col-3 p-2" value="card_form">Расчет</button>
-                <a href="{% url 'poly:card' %}" class="btn btn-danger p-2 col-3">Сброс</a>
-            </div>
             <div class="container border pt-3">
                 <h1 style="color: red;">Цена тиража: {{ result }}</h1>
             </div>
     </div>
 </div>
+</div>
 
 </form>
+
+<div></div>
 
 <br><br>
 

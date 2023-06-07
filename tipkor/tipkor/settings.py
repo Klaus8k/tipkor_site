@@ -132,6 +132,8 @@ STATIC_ROOT = BASE_DIR / 'static'
 
 STATICFILES_DIRS = [  # dirs of static files
     BASE_DIR / "tipkor/static",  # for index page
+    BASE_DIR / "poly/static",  # for poly app
+
 ]
 
 STATIC_URL = 'static/'
