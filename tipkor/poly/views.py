@@ -15,7 +15,7 @@ from .models import Card_Model, Leaflets_Model
 # Делаем 3 отдельными классами пока
 
 class PolyMeta(TemplateView, FormMixin):
-
+    type_production = None
     form_class = None
     template_name = ''
     success_url = reverse_lazy('')      
@@ -34,6 +34,7 @@ class PolyMeta(TemplateView, FormMixin):
         if self.get_form().is_bound:
             self.data_form = self.get_form_kwargs()['data'] # Из реквеста берем данные формы
             self.data_form = self.data_form.dict()
+            self.data_form.update({'type_production': self.type_production})
             for i in self.del_keys:
                 self.data_form.pop(i)
             kwargs.update({'result' : self.model_class.get_cost(**self.data_form)})
@@ -44,6 +45,7 @@ class PolyMeta(TemplateView, FormMixin):
 
 
 class CardView(PolyMeta):
+    type_production = 'card'
     form_class = Card_Form
     template_name = 'card.html'
     success_url = reverse_lazy('poly:card')      
@@ -52,6 +54,7 @@ class CardView(PolyMeta):
 
 
 class LeafletView(PolyMeta):
+    type_production = 'leaflet'
     form_class = Leaflet_Form
     template_name = 'leaflet.html'
     success_url = 'poly:leaflet'

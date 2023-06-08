@@ -23,8 +23,7 @@ class Leaflet_Form(forms.Form):
     
     format_choice = forms.ModelChoiceField(
                                         queryset=Formats_Poly_Model.objects.all(),
-                                        empty_label=None)
-                                        
+                                        empty_label=None)                
     duplex = forms.ChoiceField(initial=True, choices=DUPLEX)
     paper = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
     pressrun = forms.IntegerField(help_text="Тираж")
