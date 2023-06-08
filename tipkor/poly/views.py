@@ -1,12 +1,8 @@
 from typing import Any, Dict
 
-from django.forms import ModelForm
 from django.http import HttpRequest, HttpResponse
-from django.shortcuts import render
 from django.urls.base import reverse_lazy
-from django.views.generic import (CreateView, FormView, ListView, TemplateView,
-                                  View)
-from django.views.generic.base import ContextMixin, TemplateView
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormMixin
 
 from .forms import Card_Form, Leaflet_Form

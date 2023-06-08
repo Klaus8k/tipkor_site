@@ -5,13 +5,10 @@ from django.db import models
 class MetaPoly(models.Model):
 
     FORMAT = None
-    PAPER_130 = "130"
-    PAPER_170 = "170"
-    PAPER_300 = "300"
     PAPER_CHOICE = [
-        (PAPER_130, "130 г/м"),
-        (PAPER_170, "170 г/м"),
-        (PAPER_300, "300 г/м"),
+        ("130", "130 г/м"),
+        ("170", "170 г/м"),
+        ("300", "300 г/м"),
     ]
     DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать")]
 
