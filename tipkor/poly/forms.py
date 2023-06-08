@@ -28,7 +28,6 @@ class Leaflet_Form(forms.Form):
     duplex = forms.ChoiceField(initial=True, choices=DUPLEX)
     paper = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
     pressrun = forms.IntegerField(help_text="Тираж")
-    # https://stackoverflow.com/questions/291945/how-do-i-filter-foreignkey-choices-in-a-django-modelform
 
 
 

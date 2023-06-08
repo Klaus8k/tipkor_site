@@ -57,7 +57,7 @@ class Formats_Poly_Model(models.Model):
     y = models.IntegerField()
 
     def __str__(self):
-        return f'{self.format_paper} - {self.x}x{self.y}'
+        return f'{self.format_paper} - {self.x}x{self.y}мм'
     
 class Leaflets_Model(MetaPoly):
     format_choice = models.ForeignKey(Formats_Poly_Model, on_delete=models.CASCADE)
