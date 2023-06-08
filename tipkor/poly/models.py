@@ -4,8 +4,7 @@ from django.db import models
 # Мета класс для полиграфии. с расчетом
 class MetaPoly(models.Model):
 
-    TYPE_PRODUCTION = None
-    
+    FORMAT = None
     PAPER_130 = "130"
     PAPER_170 = "170"
     PAPER_300 = "300"
@@ -14,12 +13,11 @@ class MetaPoly(models.Model):
         (PAPER_170, "170 г/м"),
         (PAPER_300, "300 г/м"),
     ]
-
     DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать")]
 
-    type_production = models.CharField(max_length=20)
-    x = models.IntegerField(blank=True, null=True, help_text="Горизонтальный размер")
-    y = models.IntegerField(blank=True, null=True, help_text="Вертикальный размер")
+    format = models.CharField(
+        choices=FORMAT, max_length=20, help_text="Формат"
+    )
     paper = models.CharField(
         choices=PAPER_CHOICE, max_length=20, help_text="Плотность бумаги"
     )
@@ -31,30 +29,28 @@ class MetaPoly(models.Model):
         duplex = "4+0"
         if self.duplex:
             duplex = "4+4"
-        return "{}x{}, {}г/м, {}, {}шт - {} руб.".format(
-            self.x, self.y, self.paper, duplex, self.pressrun, self.cost
+        return "{}г/м, {}, {}шт - {} руб.".format(
+            self.paper, duplex, self.pressrun, self.cost
         )
     
     @classmethod
     def get_cost(cls, **kwargs): 
         Order_Model.record_order(**kwargs)
+        kwargs.pop('type_production')
         order_set = cls.objects.filter(**kwargs)
-        print(order_set)
-
-        if cls.objects.filter(**kwargs):
-            return cls.objects.filter(**kwargs)[0]
+        if order_set:
+            return order_set[0]
         else: return 'No matching'
 
     class Meta:
         abstract = True
 
-# класс заказов (дата создания, что это, расчет из вида заказа, готовность)
+# Модель списка расчетов 
 class Order_Model(models.Model):
     date_create = None
     type_production = models.CharField(max_length=20, null=True)
     production = models.CharField(max_length=100, null=True)
     date_to_ready = None
-
 
     @classmethod
     def record_order(cls, *args, **kwargs):
@@ -76,13 +72,13 @@ class Formats_Poly_Model(models.Model):
 
 # Класс для визиток
 class Card_Model(MetaPoly):
-    
+    FORMAT = [('90x50', '90x50мм'),]
     PAPER_CHOICE = [("300", "300 г/м"),]
     TYPE_PRODUCTION = 'card'
 
-    type_production = models.CharField(max_length=20, default=TYPE_PRODUCTION)
-    x = models.IntegerField(default=90, help_text="Горизонтальный размер")
-    y = models.IntegerField(default=50, help_text="Вертикальный размер")
+    format = models.CharField(
+        choices=FORMAT, max_length=20, null=True
+    )
     paper = models.CharField(
         choices=PAPER_CHOICE, max_length=20, help_text="Плотность бумаги"
     )
@@ -93,8 +89,8 @@ class Leaflets_Model(MetaPoly):
     TYPE_PRODUCTION = 'leaflet'
 
     type_production = models.CharField(max_length=20, default=TYPE_PRODUCTION)
-    format_choice = models.ForeignKey(Formats_Poly_Model, on_delete=models.CASCADE)
+    format = models.ForeignKey(Formats_Poly_Model, on_delete=models.CASCADE)
 
     def __str__(self):
-        x = self.format_choice
+        x = self.format
         return f'{x.format_paper} + {x.x} + {x.y} + {super().__str__()}'

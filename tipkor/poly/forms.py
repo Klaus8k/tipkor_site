@@ -15,13 +15,11 @@ class Card_Form(forms.Form):
     pressrun = forms.IntegerField(help_text="Тираж")
 
 
-
-
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
 class Leaflet_Form(forms.Form):
     PAPER_CHOICE = Leaflets_Model.PAPER_CHOICE
     
-    format_choice = forms.ModelChoiceField(
+    format = forms.ModelChoiceField(
                                         queryset=Formats_Poly_Model.objects.all(),
                                         empty_label=None)                
     duplex = forms.ChoiceField(initial=True, choices=DUPLEX)
