@@ -74,7 +74,6 @@ class Formats_Poly_Model(models.Model):
 class Card_Model(MetaPoly):
     FORMAT = [('90x50', '90x50мм'),]
     PAPER_CHOICE = [("300", "300 г/м"),]
-    TYPE_PRODUCTION = 'card'
 
     format = models.CharField(
         choices=FORMAT, max_length=20, null=True
@@ -88,7 +87,6 @@ class Card_Model(MetaPoly):
 class Leaflets_Model(MetaPoly):
     TYPE_PRODUCTION = 'leaflet'
 
-    type_production = models.CharField(max_length=20, default=TYPE_PRODUCTION)
     format = models.ForeignKey(Formats_Poly_Model, on_delete=models.CASCADE)
 
     def __str__(self):
