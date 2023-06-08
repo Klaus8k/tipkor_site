@@ -34,6 +34,7 @@ class MetaPoly(models.Model):
     
     @classmethod
     def get_cost(cls, **kwargs): 
+        print(kwargs)
         if cls.objects.filter(**kwargs):
             return cls.objects.filter(**kwargs)[0]
         else: return 'No matching'
@@ -51,7 +52,7 @@ class Card_Model(MetaPoly):
     )
 
 class Formats_Poly_Model(models.Model):
-    format_paper = models.CharField(max_length=5)
+    format_paper = models.CharField(max_length=20)
     x = models.IntegerField()
     y = models.IntegerField()
 

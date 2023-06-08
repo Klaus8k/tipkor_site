@@ -9,12 +9,14 @@
 
 
 
-    <form class="form-control-lg " action="{% url 'poly:card' %}" method="post">
+    <form class="form-control-lg " action="{% url 'poly:leaflet' %}" method="post">
         {% csrf_token %}
         {{ form }}
         <input type="submit" class="yes_button btn btn-primary" value="Расчет"></input>
 
     </form>
+
+    <div> {{ result }}</div>
 
 </div>
 

@@ -25,6 +25,7 @@ class PolyMeta(TemplateView, FormMixin):
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         data_from_form = self.get_form_kwargs()['data'].dict()
+        print(data_from_form)
         context = super().get_context_data(**kwargs)
         context['form'] = self.form_class(data_from_form)
         return self.get(HttpRequest, *args, **kwargs)
@@ -55,6 +56,7 @@ class LeafletView(PolyMeta):
     template_name = 'leaflet.html'
     success_url = 'poly:leaflet'
     model_class = Leaflets_Model
+    del_keys = ['csrfmiddlewaretoken']
     
 
     
