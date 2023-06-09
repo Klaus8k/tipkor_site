@@ -82,7 +82,6 @@ class Card_Model(MetaPoly):
 
 # класс листовок
 class Leaflets_Model(MetaPoly):
-    TYPE_PRODUCTION = 'leaflet'
 
     format = models.ForeignKey(Formats_Poly_Model, on_delete=models.CASCADE)
 
