@@ -41,7 +41,7 @@ class MetaPoly(models.Model):
         )
 
     @classmethod
-    def get_cost(cls, **kwargs): 
+    def get_result(cls, **kwargs): 
         """ Метод возврата цены 
             пробует взять обеъект из базы по словарю
             елси есть возвращает цену (пока весь объкт)
@@ -53,9 +53,8 @@ class MetaPoly(models.Model):
         except:
             return 'No matching'
         kwargs.update({'cost': order_result.cost})
-        
-        Order_Model.save_calculation(**kwargs)
-        return order_result
+        order_result = Order_Model.save_calculation(**kwargs)
+        return Order_Model.objects.get(id=order_result)
 
     class Meta:
         abstract = True
@@ -81,6 +80,7 @@ class Order_Model(models.Model):
         }
         order = Order_Model(**dict_to_save)
         order.save()
+        return order.id
 
     def __str__(self) -> str: 
         return f'{self.date_create.strftime(DATE_TO_STR)} {self.type_production} {self.production} {self.cost} готовность: {self.time_ready.date()}'
@@ -92,7 +92,7 @@ class Order_Model(models.Model):
         work_time - стандартное время на работу"""
         work_time = 1
         time_create = datetime.datetime.now()
-        if time_create.hour > 15: # если заказ после 15-00 то +1 день на работу
+        if time_create.hour > 15 or time_create.hour < 9: # если заказ после 15-00 то +1 день на работу
             work_time += 1
         time_ready = time_create + datetime.timedelta(days=work_time)
         if time_ready.weekday() >= 5: # если на субботу или воскресенье попадает - переносится на понедельник готовность.

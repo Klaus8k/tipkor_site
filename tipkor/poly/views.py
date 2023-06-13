@@ -32,7 +32,9 @@ class PolyMeta(TemplateView, FormMixin):
             self.data_form.update({'type_production': self.type_production})
             for i in self.del_keys:
                 self.data_form.pop(i)
-            kwargs.update({'result' : self.model_class.get_cost(**self.data_form)})
+            result = {'result' : self.model_class.get_result(**self.data_form)} # TODO - приличный словарь для результата сделать. Что бы в шаблонах норм расставить
+            print(result['result'].cost)
+            kwargs.update(result)
         return super().get(request, *args, **kwargs)
 
     class Meta:
