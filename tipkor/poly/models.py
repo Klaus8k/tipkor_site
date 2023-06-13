@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.db import models
 
 
@@ -38,10 +40,6 @@ class MetaPoly(models.Model):
         )
 
     @classmethod
-    def save_calculation(cls, **kwargs):
-        Order_Model.save_calculation(**kwargs)
-    
-    @classmethod
     def get_cost(cls, **kwargs): 
         """ Метод возврата цены 
             пробует взять обеъект из базы по словарю
@@ -54,7 +52,7 @@ class MetaPoly(models.Model):
         except:
             return 'No matching'
         kwargs.update({'cost': order_set.cost})
-        cls.save_calculation(**kwargs)
+        Order_Model.save_calculation(**kwargs)
         return order_set
 
     class Meta:
@@ -68,8 +66,7 @@ class Order_Model(models.Model):
     time_ready = models.DateTimeField(null=True)
     cost = models.IntegerField(null=True)
 
-    @classmethod
-    def save_calculation(cls, **kwargs):   
+    def save_calculation(**kwargs):   
         """ собирает словарь для добавления в базу, еще дату надо"""
         dict_to_save = {
             'type_production': kwargs['type_production'],
@@ -77,9 +74,9 @@ class Order_Model(models.Model):
                             {Formats_Model.objects.get(id=kwargs['format'])} \
                             {kwargs['paper']}г/м", 
             'cost': kwargs['cost'],
-            'time_ready': str('tomorrow')
+            # 'time_ready': 
         }
-        order = cls(**dict_to_save)
+        order = Order_Model(**dict_to_save)
         order.save()
 
     def __str__(self) -> str:
@@ -99,5 +96,9 @@ class Card_Model(MetaPoly):
 
 # класс листовок
 class Leaflets_Model(MetaPoly):
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
+
+class Booklet_Model(MetaPoly):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
