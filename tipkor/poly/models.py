@@ -24,7 +24,7 @@ class MetaPoly(models.Model):
     DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать")]
     
     format = models.ForeignKey(Formats_Poly_Model, null=True, on_delete=models.CASCADE)
-    paper = models.CharField(choices=PAPER_CHOICE, max_length=20)
+    paper = models.CharField(default='130', choices=PAPER_CHOICE, max_length=20)
     pressrun = models.IntegerField()
     duplex = models.BooleanField(default=True, choices=DUPLEX)
     cost = models.IntegerField(null=True)
@@ -62,7 +62,7 @@ class MetaPoly(models.Model):
 
 # Модель списка расчетов 
 class Order_Model(models.Model):
-    date_create = None
+    date_create = models.DateTimeField(auto_now_add=True)
     type_production = models.CharField(max_length=20, null=True)
     production = models.CharField(max_length=100, null=True)
     date_to_ready = None
