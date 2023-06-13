@@ -1,7 +1,8 @@
-from datetime import datetime
+import datetime
 
 from django.db import models
 
+DATE_TO_STR = "%H:%M - %m/%d"
 
 class Formats_Model(models.Model):
     """" Класс форматов бумаги
@@ -48,13 +49,13 @@ class MetaPoly(models.Model):
         order_dict = kwargs.copy()
         del order_dict['type_production']
         try:
-            order_set = cls.objects.get(**order_dict)
+            order_result = cls.objects.get(**order_dict)
         except:
             return 'No matching'
-        kwargs.update({'cost': order_set.cost})
+        kwargs.update({'cost': order_result.cost})
         
         Order_Model.save_calculation(**kwargs)
-        return order_set
+        return order_result
 
     class Meta:
         abstract = True
@@ -69,33 +70,41 @@ class Order_Model(models.Model):
 
     @classmethod
     def save_calculation(cls, **kwargs):   
-        print(kwargs)
-        """ собирает словарь для добавления в базу, еще дату надо"""
+        """ собирает словарь для добавления в базу"""
+        format = Formats_Model.objects.get(id=kwargs['format'])
+        time_ready = cls.date_to_ready()
         dict_to_save = {
             'type_production': kwargs['type_production'],
-            'production': f"{kwargs['pressrun']}, {Formats_Model.objects.get(id=kwargs['format'])} {kwargs['paper']}г/м",
+            'production': f"{kwargs['pressrun']}шт., {format}, {kwargs['paper']}г/м",
             'cost': kwargs['cost'],
-            'time_ready': None,
+            'time_ready': time_ready,
         }
-        print(dict_to_save)
-        
         order = Order_Model(**dict_to_save)
         order.save()
 
     def __str__(self) -> str: 
-        return f'{self.date_create.strftime("%H:%M - %m:%d")} -- {self.type_production} - {self.production}'
+        return f'{self.date_create.strftime(DATE_TO_STR)} {self.type_production} {self.production} {self.cost} готовность: {self.time_ready.date()}'
 
-    def date_to_ready(self):
-        """Метод возврата даты готовности"""
-        pass
+
+    @staticmethod
+    def date_to_ready():
+        """Метод возврата даты готовности
+        work_time - стандартное время на работу"""
+        work_time = 1
+        time_create = datetime.datetime.now()
+        if time_create.hour > 15: # если заказ после 15-00 то +1 день на работу
+            work_time += 1
+        time_ready = time_create + datetime.timedelta(days=work_time)
+        if time_ready.weekday() >= 5: # если на субботу или воскресенье попадает - переносится на понедельник готовность.
+            while time_ready.weekday() != 0:
+                time_ready += datetime.timedelta(days=1)
+        return time_ready
 
 
 # Класс для визиток
 class Card_Model(MetaPoly):
-    PAPER_CHOICE = [("300", "300 г/м"),]
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
-
 
 # класс листовок
 class Leaflets_Model(MetaPoly):
