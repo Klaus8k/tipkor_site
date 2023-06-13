@@ -61,7 +61,7 @@ class MetaPoly(models.Model):
 
 # Модель списка расчетов 
 class Order_Model(models.Model):
-    date_create = models.DateTimeField(auto_now_add=True, null=True)
+    date_create = models.DateTimeField(auto_now_add=True)
     type_production = models.CharField(max_length=20, null=True)
     production = models.CharField(max_length=100, null=True)
     time_ready = models.DateTimeField(null=True)
@@ -82,8 +82,8 @@ class Order_Model(models.Model):
         order = Order_Model(**dict_to_save)
         order.save()
 
-    def __str__(self) -> str:
-        return f'{self.type_production} - {self.production}'
+    def __str__(self) -> str: 
+        return f'{self.date_create.strftime("%H:%M - %m:%d")} -- {self.type_production} - {self.production}'
 
     def date_to_ready(self):
         """Метод возврата даты готовности"""
