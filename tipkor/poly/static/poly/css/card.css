@@ -2,7 +2,7 @@
     background-color: rgb(97, 213, 255);
 }
 
-#id_paper, #id_card_format, #id_duplex, #id_pressrun  {
+#id_paper, #id_format, #id_duplex, #id_pressrun  {
     height: 40px;
     width: 150px;
 }

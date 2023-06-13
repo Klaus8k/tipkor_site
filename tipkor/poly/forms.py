@@ -1,18 +1,32 @@
 from django import forms
+from django.forms import ModelForm
 
-from .models import Formats_Poly_Model, Leaflets_Model
+from .models import Card_Model, Formats_Poly_Model, Leaflets_Model
 
 DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать"),]
 
 
-class Card_Form(forms.Form):
+class Card_Form(ModelForm):
     PAPER_CHOICE = [("300", "300 г/м"),]
-    CARD_FORMAT = [('90x50', '90x50мм'),]
+    FORMAT = [('90x50', '90x50мм'),]
+
+    class Meta:
+        model = Card_Model
+        fields = ['format', 'paper', 'pressrun', 'duplex' ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['format'] = forms.ModelChoiceField(
+                                queryset=Formats_Poly_Model.objects.filter(format_paper='Vizitka'),
+                                empty_label=None
+                                ) 
+        self.fields['paper'] = forms.ChoiceField(initial='300', choices=self.PAPER_CHOICE)
     
-    card_format = forms.ChoiceField(initial='90x50', choices=CARD_FORMAT)
-    duplex = forms.ChoiceField(initial=True, choices=DUPLEX)
-    paper = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
-    pressrun = forms.IntegerField(help_text="Тираж")
+
+    # card_format = forms.ChoiceField(initial='90x50', choices=CARD_FORMAT)
+    # duplex = forms.ChoiceField(initial=True, choices=DUPLEX)
+    # paper = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
+    # pressrun = forms.IntegerField(help_text="Тираж")
 
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
