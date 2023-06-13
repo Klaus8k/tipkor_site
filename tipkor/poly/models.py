@@ -103,8 +103,9 @@ class Order_Model(models.Model):
 
 # Класс для визиток
 class Card_Model(MetaPoly):
-    def __init__(self, *args, **kwargs) -> None:
-        super().__init__(*args, **kwargs)
+    pass
+    # def __init__(self, *args, **kwargs) -> None:
+    #     super().__init__(*args, **kwargs)
 
 # класс листовок
 class Leaflets_Model(MetaPoly):
