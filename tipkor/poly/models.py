@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Formats_Poly_Model(models.Model):
+class Formats_Model(models.Model):
     """" Класс форматов бумаги
     Атрибуты: Название, ширина, высота бумаги
     """
@@ -23,7 +23,7 @@ class MetaPoly(models.Model):
     ]
     DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать")]
     
-    format = models.ForeignKey(Formats_Poly_Model, null=True, on_delete=models.CASCADE)
+    format = models.ForeignKey(Formats_Model, null=True, on_delete=models.CASCADE)
     paper = models.CharField(default='130', choices=PAPER_CHOICE, max_length=20)
     pressrun = models.IntegerField()
     duplex = models.BooleanField(default=True, choices=DUPLEX)
@@ -62,10 +62,10 @@ class MetaPoly(models.Model):
 
 # Модель списка расчетов 
 class Order_Model(models.Model):
-    date_create = models.DateTimeField(auto_now_add=True)
+    date_create = models.DateTimeField(auto_now_add=True, null=True)
     type_production = models.CharField(max_length=20, null=True)
     production = models.CharField(max_length=100, null=True)
-    date_to_ready = None
+    time_ready = models.DateTimeField(null=True)
     cost = models.IntegerField(null=True)
 
     @classmethod
@@ -74,9 +74,10 @@ class Order_Model(models.Model):
         dict_to_save = {
             'type_production': kwargs['type_production'],
             'production': f"{kwargs['pressrun']}, \
-                            {Formats_Poly_Model.objects.get(id=kwargs['format'])} \
+                            {Formats_Model.objects.get(id=kwargs['format'])} \
                             {kwargs['paper']}г/м", 
             'cost': kwargs['cost'],
+            'time_ready': str('tomorrow')
         }
         order = cls(**dict_to_save)
         order.save()
@@ -91,6 +92,7 @@ class Order_Model(models.Model):
 
 # Класс для визиток
 class Card_Model(MetaPoly):
+    PAPER_CHOICE = [("300", "300 г/м"),]
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
 
