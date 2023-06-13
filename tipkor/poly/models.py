@@ -52,6 +52,7 @@ class MetaPoly(models.Model):
         except:
             return 'No matching'
         kwargs.update({'cost': order_set.cost})
+        
         Order_Model.save_calculation(**kwargs)
         return order_set
 
@@ -66,16 +67,18 @@ class Order_Model(models.Model):
     time_ready = models.DateTimeField(null=True)
     cost = models.IntegerField(null=True)
 
-    def save_calculation(**kwargs):   
+    @classmethod
+    def save_calculation(cls, **kwargs):   
+        print(kwargs)
         """ собирает словарь для добавления в базу, еще дату надо"""
         dict_to_save = {
             'type_production': kwargs['type_production'],
-            'production': f"{kwargs['pressrun']}, \
-                            {Formats_Model.objects.get(id=kwargs['format'])} \
-                            {kwargs['paper']}г/м", 
+            'production': f"{kwargs['pressrun']}, {Formats_Model.objects.get(id=kwargs['format'])} {kwargs['paper']}г/м",
             'cost': kwargs['cost'],
-            # 'time_ready': 
+            'time_ready': None,
         }
+        print(dict_to_save)
+        
         order = Order_Model(**dict_to_save)
         order.save()
 
