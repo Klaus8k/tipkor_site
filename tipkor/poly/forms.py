@@ -7,8 +7,8 @@ DUPLEX = [(True, "Двухсторонняя печать"), (False, "Однос
 
 
 class Card_Form(ModelForm):
-    PAPER_CHOICE = [("300", "300 г/м"),]
-    FORMAT = [('90x50', '90x50мм'),]
+    PAPER_CHOICE = [("300", "300 г/м"),]  # Бумага только 300г/м
+    FORMAT = 'Визитка' # Выбор только форматов с именем 'Визитка'
 
     class Meta:
         model = Card_Model
@@ -17,16 +17,10 @@ class Card_Form(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['format'] = forms.ModelChoiceField(
-                                queryset=Formats_Poly_Model.objects.filter(format_paper='Vizitka'),
+                                queryset=Formats_Poly_Model.objects.filter(format_paper=self.FORMAT),
                                 empty_label=None
                                 ) 
         self.fields['paper'] = forms.ChoiceField(initial='300', choices=self.PAPER_CHOICE)
-    
-
-    # card_format = forms.ChoiceField(initial='90x50', choices=CARD_FORMAT)
-    # duplex = forms.ChoiceField(initial=True, choices=DUPLEX)
-    # paper = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
-    # pressrun = forms.IntegerField(help_text="Тираж")
 
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
