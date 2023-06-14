@@ -20,18 +20,19 @@ class PolyMeta(TemplateView, FormMixin):
 
 
     def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
-        data_from_form = self.get_form_kwargs()['data'].dict()
+        data_from_form = self.get_form_kwargs()['data'].dict() # TODO - вынести в метод извлечение данных из формы
         context = super().get_context_data(**kwargs)
         context['form'] = self.form_class(data_from_form)
         return self.get(HttpRequest, *args, **kwargs)
 
     def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
         if self.get_form().is_bound:
-            self.data_form = self.get_form_kwargs()['data'] # Из реквеста берем данные формы
-            self.data_form = self.data_form.dict()
-            self.data_form.update({'type_production': self.type_production})
-            for i in self.del_keys:
-                self.data_form.pop(i)
+            self.data_form = self.get_form_kwargs()['data'].dict() # TODO - вынести в метод извлечение данных из формы
+
+            self.data_form['type_production': self.type_production]
+            
+            del self.data_form['csrfmiddlewaretoken']
+            
             # TODO try for 'no matches result'
             result = {'result' : self.model_class.get_result(**self.data_form)} # TODO - приличный словарь для результата сделать. Что бы в шаблонах норм расставить
             print(result['result'].cost)
