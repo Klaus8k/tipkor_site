@@ -42,10 +42,11 @@ class MetaPoly(models.Model):
 
     @classmethod
     def get_result(cls, **kwargs): 
-        """ Метод возврата цены 
-            пробует взять обеъект из базы по словарю
-            елси есть возвращает цену (пока весь объкт)
-            и передает словарь с ценой на запись в заказы"""
+        """Метод из базы берет цену если есть, если нет то str'no matching'
+        Передает на сохранение
+        Returns:
+            obj: Order_Model
+        """
         order_dict = kwargs.copy()
         del order_dict['type_production']
         try:
@@ -69,7 +70,12 @@ class Order_Model(models.Model):
 
     @classmethod
     def save_calculation(cls, **kwargs):   
-        """ собирает словарь для добавления в базу"""
+        """Берет формат из форматов по ИД
+        Вычисляет время готовности
+        собирает словарь для сохранения и сохраняет
+        Returns:
+            int: id сохраненного заказа
+        """
         format = Formats_Model.objects.get(id=kwargs['format'])
         time_ready = cls.date_to_ready()
         dict_to_save = {
@@ -88,8 +94,12 @@ class Order_Model(models.Model):
 
     @staticmethod
     def date_to_ready():
-        """Метод возврата даты готовности
-        work_time - стандартное время на работу"""
+        """Расчитывает дату готовности. Если после 15-00 и до 9-00 то + 1 день.
+        Если на выходные попадает то до близжайшего понедельника переносится дата
+        work_time - Времы работы над заказом
+        Returns:
+            date: Дата готовности заказа
+        """
         work_time = 1
         time_create = datetime.datetime.now()
         if time_create.hour > 15 or time_create.hour < 9: # если заказ после 15-00 то +1 день на работу

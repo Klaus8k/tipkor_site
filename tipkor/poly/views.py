@@ -1,3 +1,4 @@
+import pprint
 from typing import Any, Dict
 
 from django.http import HttpRequest, HttpResponse
@@ -38,6 +39,7 @@ class PolyMeta(TemplateView, FormMixin):
         if self.get_form().is_bound:
             result = self.model_class.get_result(**self.data_form)
             kwargs.update({'result': result})
+            
         return super().get(request, *args, **kwargs)
     
     def get_form_data(self) -> Dict:
@@ -68,9 +70,7 @@ class LeafletView(PolyMeta):
     template_name = 'leaflet.html'
     model_class = Leaflets_Model
     
-
     
-
 class BookletView(TemplateView):
 
     # model = Cards
