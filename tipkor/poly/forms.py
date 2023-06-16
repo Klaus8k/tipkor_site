@@ -38,6 +38,6 @@ class Leaflet_Form(ModelForm):
                                 empty_label=None
                                 ) 
 
-class TestForm(forms.Form):
+class Confirm_form(forms.Form):
     
     a = forms.CharField(max_length=10)
