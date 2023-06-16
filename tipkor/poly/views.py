@@ -3,6 +3,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormMixin
+from django.views.generic.detail import DetailView
 
 from .forms import Card_Form, Confirm_form, Leaflet_Form
 from .models import Card_Model, Leaflets_Model, Order_Model
@@ -15,31 +16,27 @@ class PolyMeta(TemplateView, FormMixin):
     template_name = ''
     model_class = None
 
-    def post(self, request, *args, **kwargs):
-
+    def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
         self.result = self.model_class.get_result(**self.data_form)
-        kwargs.update({'result': self.result})
-            
-        return self.get(request, *args, **kwargs)
+        kwargs.update({'result': self.result})   
+        return self.get(*args, **kwargs)
     
-
-    def get(self, request, *args, **kwargs):
-
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            kwargs.update({'calc_form': self.form_class(self.data_form)})            
+            context.update({'calc_form': self.form_class(self.data_form)})            
         else:
-            kwargs.update({'calc_form': self.form_class()})
-
-        return super().get(request, *args, **kwargs)
+            context.update({'calc_form': self.form_class()})
+        return context
     
     
     def get_form_dict(self):
-        form_dict = self.request.POST.copy()
+        form_dict = self.request.POST.copy().dict()
         form_dict.update({'type_production': self.type_production})
         del form_dict['csrfmiddlewaretoken']
         del form_dict['calc_form']
-        return form_dict.dict()
+        return form_dict
         
     class Meta:
         abstract = True
@@ -66,19 +63,9 @@ class BookletView(TemplateView):
     template_name = 'booklet.html'
     
     
-    
-class ConfirmView(TemplateView):
-    model_class = Order_Model
+# Вьюха для подтверждения заказа, контактов и макета
+class ConfirmView(DetailView, FormMixin):
+    model = Order_Model
     template_name = 'confirm.html'
+    context_object_name = 'order'
     
-    
-    
-
-
-    def get(self, request, **kwargs):
-        context = super().get_context_data(**kwargs)
-        print(context)
-
-        kwargs.update({'result' : self.model_class.objects.get(id=self.kwargs['result_id'])})
-        
-        return super().get(request, **kwargs)

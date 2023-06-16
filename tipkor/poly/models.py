@@ -90,6 +90,7 @@ class Order_Model(models.Model):
 
     def __str__(self) -> str: 
         return f'{self.date_create.strftime(DATE_TO_STR)} {self.type_production} {self.production} {self.cost} готовность: {self.time_ready.date()}'
+    
 
 
     @staticmethod
@@ -113,9 +114,8 @@ class Order_Model(models.Model):
 
 # Класс для визиток
 class Card_Model(MetaPoly):
-    pass
-    # def __init__(self, *args, **kwargs) -> None:
-    #     super().__init__(*args, **kwargs)
+    def __init__(self, *args, **kwargs) -> None:
+        super().__init__(*args, **kwargs)
 
 # класс листовок
 class Leaflets_Model(MetaPoly):
@@ -125,3 +125,10 @@ class Leaflets_Model(MetaPoly):
 class Booklet_Model(MetaPoly):
     def __init__(self, *args, **kwargs) -> None:
         super().__init__(*args, **kwargs)
+        
+
+# class Client_Model(models.Model):
+    
+#     name = models.CharField(max_length=20)
+#     email = models.EmailField()
+#     telephone = 

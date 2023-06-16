@@ -10,5 +10,5 @@ urlpatterns = [
     path('card/', CardView.as_view(), name='card'),
     path('leaflet/', LeafletView.as_view(), name='leaflet'),
     path('booklet/', BookletView.as_view()),
-    path('card/confirm/<result_id>/', ConfirmView.as_view(), name='confirm')
+    path('card/confirm/<pk>/', ConfirmView.as_view(), name='confirm')
 ]
