@@ -1,12 +1,10 @@
-import pprint
-from typing import Any, Dict
 
-from django.shortcuts import redirect
 from django.http import HttpRequest, HttpResponse
+from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormMixin
 
-from .forms import Card_Form, Leaflet_Form, Confirm_form
+from .forms import Card_Form, Confirm_form, Leaflet_Form
 from .models import Card_Model, Leaflets_Model, Order_Model
 
 # Делаем 3 отдельными классами пока
@@ -18,25 +16,20 @@ class PolyMeta(TemplateView, FormMixin):
     model_class = None
     confirm_form = Confirm_form()
 
-    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+    def post(self, request, *args, **kwargs):
 
-        
-        
-        if self.get_form().is_bound:
-            
-            self.data_form = self.get_form_data()
+        print(request.POST)
+        if 'calc_form' in request.POST:
+            self.data_form = self.get_form_dict()
             self.result = self.model_class.get_result(**self.data_form)
             kwargs.update({'result': self.result})
             
-            if self.confirm_form.is_bound:
-                print('11111111111111', self.confirm_form.is_bound)
-                SuccessOrderView.post(request, *args, **kwargs)
         
         return self.get(request, *args, **kwargs)
     
     
 
-    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+    def get(self, request, *args, **kwargs):
 
         if self.get_form().is_bound:
             kwargs.update({'calc_form': self.form_class(self.data_form)})
@@ -51,16 +44,20 @@ class PolyMeta(TemplateView, FormMixin):
         return super().get(request, *args, **kwargs)
     
     
-    def get_form_data(self) -> Dict:
+    def get_form_dict(self):
         """переводит данные из POST в словать
-        добавляет тип продукции и убирает токен
+        добавляет тип продукции и убирает токен и форму
         Returns:
             Dict: словарь параметров из формы с типом продукции
         """
-        form_data = self.request.POST.copy()
-        form_data.update({'type_production': self.type_production})
-        del form_data['csrfmiddlewaretoken']
-        return form_data.dict()
+        form_dict = self.request.POST.copy().dict()
+        form_dict.update({'type_production': self.type_production})
+        del form_dict['csrfmiddlewaretoken']
+        for i in form_dict.keys():
+            if i[-4:] == 'form':
+                del form_dict[i]
+                break
+        return form_dict
         
     class Meta:
         abstract = True

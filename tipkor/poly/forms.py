@@ -40,4 +40,4 @@ class Leaflet_Form(ModelForm):
 
 class Confirm_form(forms.Form):
     
-    a = forms.CharField(max_length=10)
+    a = forms.CharField(max_length=10, required=False)
