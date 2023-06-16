@@ -14,50 +14,32 @@ class PolyMeta(TemplateView, FormMixin):
     form_class = None
     template_name = ''
     model_class = None
-    confirm_form = Confirm_form()
 
     def post(self, request, *args, **kwargs):
 
-        print(request.POST)
-        if 'calc_form' in request.POST:
-            self.data_form = self.get_form_dict()
-            self.result = self.model_class.get_result(**self.data_form)
-            kwargs.update({'result': self.result})
+        self.data_form = self.get_form_dict()
+        self.result = self.model_class.get_result(**self.data_form)
+        kwargs.update({'result': self.result})
             
-        
         return self.get(request, *args, **kwargs)
-    
     
 
     def get(self, request, *args, **kwargs):
 
         if self.get_form().is_bound:
-            kwargs.update({'calc_form': self.form_class(self.data_form)})
-            kwargs.update({'confirm_form': self.confirm_form})
-            
+            kwargs.update({'calc_form': self.form_class(self.data_form)})            
         else:
             kwargs.update({'calc_form': self.form_class()})
 
-            
-        
- 
         return super().get(request, *args, **kwargs)
     
     
     def get_form_dict(self):
-        """переводит данные из POST в словать
-        добавляет тип продукции и убирает токен и форму
-        Returns:
-            Dict: словарь параметров из формы с типом продукции
-        """
-        form_dict = self.request.POST.copy().dict()
+        form_dict = self.request.POST.copy()
         form_dict.update({'type_production': self.type_production})
         del form_dict['csrfmiddlewaretoken']
-        for i in form_dict.keys():
-            if i[-4:] == 'form':
-                del form_dict[i]
-                break
-        return form_dict
+        del form_dict['calc_form']
+        return form_dict.dict()
         
     class Meta:
         abstract = True
@@ -85,15 +67,18 @@ class BookletView(TemplateView):
     
     
     
-class SuccessOrderView(TemplateView):
+class ConfirmView(TemplateView):
     model_class = Order_Model
-    template_name = 'success_order.html'
+    template_name = 'confirm.html'
     
-    def post(self, request, *args, **kwargs):
-        print('32333333333333333333333333')
-        
-        return super().get(request, *args, **kwqrgs)
+    
     
 
 
+    def get(self, request, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print(context)
+
+        kwargs.update({'result' : self.model_class.objects.get(id=self.kwargs['result_id'])})
         
+        return super().get(request, **kwargs)
