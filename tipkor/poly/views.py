@@ -68,4 +68,6 @@ class ConfirmView(DetailView, FormMixin):
     model = Order_Model
     template_name = 'confirm.html'
     context_object_name = 'order'
+    form_class = Confirm_form
+    
     
