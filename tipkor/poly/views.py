@@ -2,23 +2,22 @@
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
-from django.views.generic.edit import FormMixin
 from django.views.generic.detail import DetailView
+from django.views.generic.edit import FormMixin
 
-from .forms import Card_Form, Confirm_form, Leaflet_Form
-from .models import Card_Model, Leaflets_Model, Order_Model
+from .forms import Card_Form
+from .models import Poly
 
 # Делаем 3 отдельными классами пока
 
 class PolyMeta(TemplateView, FormMixin):
-    type_production = None
     form_class = None
     template_name = ''
     model_class = None
 
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
-        self.result = self.model_class.get_result(**self.data_form)
+        self.result = Poly.objects.get(**self.data_form) # it get obj from model poly
         kwargs.update({'result': self.result})   
         return self.get(*args, **kwargs)
     
@@ -33,7 +32,6 @@ class PolyMeta(TemplateView, FormMixin):
     
     def get_form_dict(self):
         form_dict = self.request.POST.copy().dict()
-        form_dict.update({'type_production': self.type_production})
         del form_dict['csrfmiddlewaretoken']
         del form_dict['calc_form']
         return form_dict
@@ -43,31 +41,29 @@ class PolyMeta(TemplateView, FormMixin):
 
 
 class CardView(PolyMeta):
-    type_production = 'card'
     form_class = Card_Form
     template_name = 'card.html'
-    model_class = Card_Model
 
 
-class LeafletView(PolyMeta):
-    type_production = 'leaflet'
-    form_class = Leaflet_Form
-    template_name = 'leaflet.html'
-    model_class = Leaflets_Model
+# class LeafletView(PolyMeta):
+#     type_production = 'leaflet'
+#     form_class = Leaflet_Form
+#     template_name = 'leaflet.html'
+#     model_class = Leaflets_Model
     
     
-class BookletView(TemplateView):
+# class BookletView(TemplateView):
 
-    # model = Cards
-    # context_object_name = 'booklet'
-    template_name = 'booklet.html'
+#     # model = Cards
+#     # context_object_name = 'booklet'
+#     template_name = 'booklet.html'
     
     
-# Вьюха для подтверждения заказа, контактов и макета
-class ConfirmView(DetailView, FormMixin):
-    model = Order_Model
-    template_name = 'confirm.html'
-    context_object_name = 'order'
-    form_class = Confirm_form
+# # Вьюха для подтверждения заказа, контактов и макета
+# class ConfirmView(DetailView, FormMixin):
+#     model = Order_Model
+#     template_name = 'confirm.html'
+#     context_object_name = 'order'
+#     form_class = Confirm_form
     
     
