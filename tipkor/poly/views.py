@@ -9,7 +9,6 @@ from order.models import Clients, Orders
 from .forms import Card_Form, Confirm_form
 from .models import Poly, date_to_ready
 
-
 # Делаем 3 отдельными классами пока
 
 class PolyMeta(TemplateView, FormMixin):
@@ -19,7 +18,7 @@ class PolyMeta(TemplateView, FormMixin):
 
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
-        self.result = Poly.objects.get(**self.data_form) # it get obj from model poly
+        self.result = Poly.objects.get(**self.data_form) #TODO get_or_404 
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)
@@ -65,7 +64,7 @@ class ConfirmView(DetailView, FormMixin):
         tel = self.request.POST.dict()['tel']
         client = Clients.objects.create(name=name,email=email,tel=tel)
         product = self.get_object().json_combine()
-        order = Orders.objects.create(client=client, product=product)
+        order = Orders.objects.create(client=client, product=product, ready_date=date_to_ready())
         order_id = order.id
         return HttpResponseRedirect(reverse('poly:success', args=[order_id]))
     
