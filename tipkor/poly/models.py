@@ -26,7 +26,7 @@ class Poly(models.Model):
     cost = models.IntegerField()
 
     def __str__(self):
-        return str(self.cost)
+        return str(self.id)
 
 
 # class MetaPoly(models.Model):

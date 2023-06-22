@@ -5,7 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
 
-from .forms import Card_Form
+from .forms import Card_Form, Confirm_form
 from .models import Poly
 
 # Делаем 3 отдельными классами пока
@@ -59,11 +59,9 @@ class CardView(PolyMeta):
 #     template_name = 'booklet.html'
     
     
-# # Вьюха для подтверждения заказа, контактов и макета
-# class ConfirmView(DetailView, FormMixin):
-#     model = Order_Model
-#     template_name = 'confirm.html'
-#     context_object_name = 'order'
-#     form_class = Confirm_form
-    
-    
+# Вьюха для подтверждения заказа, контактов и макета
+class ConfirmView(DetailView, FormMixin):
+    queryset = Poly.objects.all()
+    template_name = 'confirm.html'
+    # context_object_name = 'order'
+    form_class = Confirm_form

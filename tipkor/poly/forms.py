@@ -38,7 +38,8 @@ class Card_Form(ModelForm):
 #                                 empty_label=None
 #                                 ) 
 
-# class Confirm_form(forms.Form):
+class Confirm_form(forms.Form):
     
-#     name = forms.CharField(max_length=20, required=False)
-#     email = forms.EmailField()
+    name = forms.CharField(max_length=20, required=False)
+    email = forms.EmailField()
+    tel = forms.CharField(max_length=15)
