@@ -61,7 +61,12 @@ class CardView(PolyMeta):
     
 # Вьюха для подтверждения заказа, контактов и макета
 class ConfirmView(DetailView, FormMixin):
-    queryset = Poly.objects.all()
+    model = Poly
     template_name = 'confirm.html'
-    # context_object_name = 'order'
+    context_object_name = 'order'
     form_class = Confirm_form
+
+    def post(self, *args, **kwargs):
+        print(self.get_object())
+        print(self.request.POST.dict())
+        return super().get(*args, **kwargs)

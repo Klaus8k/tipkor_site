@@ -22,7 +22,29 @@
     </div>
     <h1>Подтвердить заказ</h1>
     <div>
-        {{ order }}
+        {{ order.cost }}
+    </div>
+    <div>
+        <form class="form-control-lg " action="{% url 'poly:confirm' order.id %}" method="post">
+            {% csrf_token %}
+            <div class="row border">
+                <div class="col border">{{ form.name }}<p>Имя</p>
+                </div>
+                <div class="col border">{{ form.email }}<p>почта</p>
+                </div>
+                <div class="col border">{{ form.tel }}<p>телефон</p>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col border">
+                    <button type="submit" class="yes_button btn btn-primary" name="form">заказать</button>
+                    <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                </div>
+            </div>
+        </form>
+
     </div>
 </div>
 

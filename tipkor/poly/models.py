@@ -25,8 +25,8 @@ class Poly(models.Model):
     post_obr = models.JSONField(null=True, blank=True)
     cost = models.IntegerField()
 
-    def __str__(self):
-        return str(self.id)
+    # def __str__(self):
+    #     return 
 
 
 # class MetaPoly(models.Model):
