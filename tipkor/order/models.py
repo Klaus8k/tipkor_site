@@ -5,6 +5,9 @@ class Clients(models.Model):
     name = models.CharField(max_length=50)
     email = models.EmailField()
     tel = models.CharField(max_length=15)
+    
+    def __str__(self):
+        return f'{self.name} - e-mail:{self.email} tel: {self.tel}'
 
 # Create your models here.
 class Orders(models.Model):
@@ -16,5 +19,5 @@ class Orders(models.Model):
     file = models.FileField(null=True, blank=True)
     
     def __str__(self):
-        return f'{self.client.email} - {self.create_date}'
+        return f'{self.client} - {self.create_date}'
     

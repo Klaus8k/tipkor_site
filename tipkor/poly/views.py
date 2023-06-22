@@ -7,7 +7,8 @@ from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders
 
 from .forms import Card_Form, Confirm_form
-from .models import Poly
+from .models import Poly, date_to_ready
+
 
 # Делаем 3 отдельными классами пока
 
@@ -19,7 +20,8 @@ class PolyMeta(TemplateView, FormMixin):
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
         self.result = Poly.objects.get(**self.data_form) # it get obj from model poly
-        kwargs.update({'result': self.result})   
+        kwargs.update({'result': self.result})
+        kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)
     
     def get_context_data(self, **kwargs):
@@ -49,8 +51,13 @@ class CardView(PolyMeta):
 class ConfirmView(DetailView, FormMixin):
     model = Poly
     template_name = 'confirm.html'
-    context_object_name = 'order'
     form_class = Confirm_form
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['order'] =  self.get_object() 
+        context['ready_date'] =  date_to_ready()
+        return context
     
     def post(self, *args, **kwargs):
         name = self.request.POST.dict()['name']

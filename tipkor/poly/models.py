@@ -1,12 +1,11 @@
 import datetime
-
 import json
 
-from django.db import models
 from django.core.exceptions import ValidationError
-
+from django.db import models
 from order.models import Orders
-from .constants import PAPER_CHOICE, DUPLEX
+
+from .constants import DUPLEX, PAPER_CHOICE
 
 
 def valid(value):
@@ -45,10 +44,6 @@ class Poly(models.Model):
                      'cost': self.cost
                      }
         return json_dict
-
-
-
-
 
 
 def date_to_ready():

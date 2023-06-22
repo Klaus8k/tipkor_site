@@ -23,6 +23,8 @@
     <h1>Подтвердить заказ</h1>
     <div>
         {{ order }}
+        <h3 style="color: rgb(76, 0, 255);">Готовность: {{ ready_date }}</h3>
+
     </div>
     <div>
         <form class="form-control-lg " action="{% url 'poly:confirm' order.id %}" method="post">
