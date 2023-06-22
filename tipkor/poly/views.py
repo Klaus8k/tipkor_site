@@ -1,10 +1,12 @@
 
-from django.http import HttpRequest, HttpResponse
-from django.shortcuts import redirect
+from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
+from django.shortcuts import redirect, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
 
+
+from order.models import Orders, Clients
 from .forms import Card_Form, Confirm_form
 from .models import Poly
 
@@ -65,8 +67,22 @@ class ConfirmView(DetailView, FormMixin):
     template_name = 'confirm.html'
     context_object_name = 'order'
     form_class = Confirm_form
-
+    
     def post(self, *args, **kwargs):
-        print(self.get_object())
-        print(self.request.POST.dict())
-        return super().get(*args, **kwargs)
+        kwargs['pk'] = 3
+        
+        return HttpResponseRedirect(reverse('poly:success', args=[3]))
+    
+    
+        
+    
+class SuccessView(DetailView):
+    model = Orders
+    template_name = 'success.html'
+    context_object_name = 'order'
+
+    
+
+        
+    
+    

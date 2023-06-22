@@ -9,9 +9,9 @@ class Clients(models.Model):
 # Create your models here.
 class Orders(models.Model):
     client = models.ForeignKey(Clients, on_delete=models.DO_NOTHING)
-    create_date = models.DateTimeField()
-    poduct = models.JSONField()
+    create_date = models.DateTimeField(auto_now=True)
+    poduct = models.JSONField(null=True, blank=True)
     ready_date = models.DateField()
-    pay_info = models.BooleanField()
-    file = models.FileField()
+    pay_info = models.BooleanField(null=True, blank=True)
+    file = models.FileField(null=True, blank=True)
     
