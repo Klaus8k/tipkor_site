@@ -4,9 +4,8 @@ from django.shortcuts import redirect, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
+from order.models import Clients, Orders
 
-
-from order.models import Orders, Clients
 from .forms import Card_Form, Confirm_form
 from .models import Poly
 
@@ -47,21 +46,6 @@ class CardView(PolyMeta):
     template_name = 'card.html'
 
 
-# class LeafletView(PolyMeta):
-#     type_production = 'leaflet'
-#     form_class = Leaflet_Form
-#     template_name = 'leaflet.html'
-#     model_class = Leaflets_Model
-    
-    
-# class BookletView(TemplateView):
-
-#     # model = Cards
-#     # context_object_name = 'booklet'
-#     template_name = 'booklet.html'
-    
-    
-# Вьюха для подтверждения заказа, контактов и макета
 class ConfirmView(DetailView, FormMixin):
     model = Poly
     template_name = 'confirm.html'
@@ -69,12 +53,15 @@ class ConfirmView(DetailView, FormMixin):
     form_class = Confirm_form
     
     def post(self, *args, **kwargs):
-        kwargs['pk'] = 3
-        
-        return HttpResponseRedirect(reverse('poly:success', args=[3]))
+        name = self.request.POST.dict()['name']
+        email = self.request.POST.dict()['email']
+        tel = self.request.POST.dict()['tel']
+        client = Clients.objects.create(name=name,email=email,tel=tel)
+        product = self.get_object().json_combine()
+        order = Orders.objects.create(client=client, product=product)
+        order_id = order.id
+        return HttpResponseRedirect(reverse('poly:success', args=[order_id]))
     
-    
-        
     
 class SuccessView(DetailView):
     model = Orders

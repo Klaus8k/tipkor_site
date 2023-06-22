@@ -22,7 +22,7 @@
     </div>
     <h1>Подтвердить заказ</h1>
     <div>
-        {{ order.cost }}
+        {{ order }}
     </div>
     <div>
         <form class="form-control-lg " action="{% url 'poly:confirm' order.id %}" method="post">

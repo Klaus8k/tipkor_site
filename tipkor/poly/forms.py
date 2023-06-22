@@ -1,10 +1,9 @@
 from django import forms
 from django.forms import ModelForm
+from django.core.exceptions import ValidationError
 
-from .constants import PAPER_CHOICE
+from .constants import PAPER_CHOICE, PRESSRUN_OFFSET
 from .models import Poly, Formats
-
-# DUPLEX = [(True, "Двухсторонняя печать"), (False, "Односторонняя печать"),]
 
 
 class Card_Form(ModelForm):
@@ -13,6 +12,7 @@ class Card_Form(ModelForm):
     class Meta:
         model = Poly
         fields = ['format_p', 'paper', 'pressrun', 'duplex' ]
+        
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -21,6 +21,7 @@ class Card_Form(ModelForm):
                                 empty_label=None
                                 ) 
         self.fields['paper'] = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
+        self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
 
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
