@@ -24,7 +24,7 @@ def send_email(adress, subject):
     mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
     print(mail_sender.ehlo())
     mail_sender.login(MAIL_LOGIN, MAIL_PASS)
-    mail_sender.sendmail(MAIL_LOGIN, TO, subject)
+    mail_sender.sendmail(MAIL_LOGIN, adress, subject)
     mail_sender.quit()
 
 
