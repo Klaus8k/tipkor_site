@@ -13,42 +13,49 @@
 
 
 <div class="container">
-    <div class="card_text">
-        <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
-            minus
-            mollitia eveniet perferendis, incidunt alias quod a tempore quis magni numquam laboriosam, illo provident
-            tempora!</p>
-    </div>
-    <h1>Подтвердить заказ</h1>
-    <div>
-        {{ order }}
-        <h3 style="color: rgb(76, 0, 255);">Готовность: {{ ready_date }}</h3>
-
-    </div>
-    <div>
-        <form class="form-control-lg " action="{% url 'poly:confirm' order.id %}" method="post">
-            {% csrf_token %}
-            <div class="row border">
-                <div class="col border">{{ form.name }}<p>Имя</p>
-                </div>
-                <div class="col border">{{ form.email }}<p>почта</p>
-                </div>
-                <div class="col border">{{ form.tel }}<p>телефон</p>
-                </div>
+    <div class="confirm_order border shadow p-3">
+        <div class="row">
+            <p> Скачать правила подготовки макета PDF 0.6 MB или ссылка на страницу с правилами</p>
+        </div>
+        <h1>Подтвердить заказ</h1>
+        <div>
+            <div class="col">
+                <h2 style="color: rgb(145, 1, 30);">Стоимость: {{ order.cost|default:"Сделайте расчет" }} руб.</h2>
+                <h5 style="color: rgb(93, 3, 131);">Формат: {{ order.format_p }}</h5>
+                <h5 style="color: rgb(93, 3, 131);">Материал: {{ order.paper }} г/м</h5>
+                <h5 style="color: rgb(93, 3, 131);">Двухсторонняя печать: {{ order.duplex|yesno:"Да,Нет" }}</h5>
+                <h5 style="color: rgb(93, 3, 131);">Тираж: {{ order.pressrun }} штук.</h5>
             </div>
-
-
-            <div class="row">
-                <div class="col border">
-                    <button type="submit" class="yes_button btn btn-primary" name="form">заказать</button>
-                    <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
-                </div>
+            <div class="col">
+                <h2 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}г.</h2>
+                <p>При заказе сегодня до 15:00</p>
             </div>
-        </form>
+        </div>
+        <div>
+            <form class="form-control-lg " action="{% url 'poly:confirm' order.id %}" method="post">
+                {% csrf_token %}
+                <div class="row border">
+                    <div class="col border">{{ form.name }}<p>Имя</p>
+                    </div>
+                    <div class="col border">{{ form.email }}<p>почта</p>
+                    </div>
+                    <div class="col border">{{ form.tel }}<p>телефон</p>
+                    </div>
+                    <div class="col border">{{ form.file }}<p>макет</p>
+                    </div>
+                </div>
 
+
+                <div class="row">
+                    <div class="col border">
+                        <button type="submit" class="yes_button btn btn-primary" name="form">заказать</button>
+                        <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                    </div>
+                </div>
+            </form>
+
+        </div>
     </div>
-</div>
 
 
 

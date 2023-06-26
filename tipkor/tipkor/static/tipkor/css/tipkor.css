@@ -1,4 +1,6 @@
-
+.main_logo {
+    max-width: 220px;
+}
 
 .img_mess {
         display: flex;

@@ -20,8 +20,8 @@
 	<!-- Верхняя строка -->
 	<div class="container pt-2">
 		<div class="top_line row d-flex justify-content-center align-items-center">
-			<div class="main_logo col d-flex justify-content-center border">
-				<img src="{% static '/tipkor/img/logo.gif' %}" alt="">
+			<div class="col d-flex justify-content-center border">
+				<img class="main_logo" src="{% static '/tipkor/img/logo.svg' %}" alt="">
 			</div>
 			<div class="hi_telefon col border ">
 				<p class="fs-3 mb-0"><strong>8 (964) 571-65-51</strong></p>
@@ -45,58 +45,96 @@
 		</div>
 	</div>
 
+
+
+
+
+
 	<!-- Навигация -->
+	<!-- !!!!!!!!!! Как же сделать разворачивающийся блок??? !!!!!!!!!! -->
 	<div class="container pt-2">
-		<div class="row">
-			<div class="top_buttons d-flex justify-content-center border">
+		<div class="top_buttons d-flex justify-content-center">
 
-				<!-- Просто кнопки без выпадающего меню
-				<a class="btn btn-primary flex-fill btn-lg  m-1" href="#poly">Полиграфия</a>
-				<a class="btn btn-primary flex-fill btn-lg  m-1" href="#shiro">Широкоформатная печать</a>
-				<a class="btn btn-primary flex-fill btn-lg  m-1" href="#stamp">Печати</a> -->
+			<div class="row border d-flex flex-fill">
 
-				<!-- Топ кнопки с выпадающим меню -->
-				<div class="dropdown d-flex flex-fill">
-					<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
-						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-						Полиграфия
-					</a>
-					<ul class="dropdown-menu dropdown-menu-dark">
-						<li><a class="dropdown-item" href="/poly/card">визитки</a></li>
-						<li><a class="dropdown-item" href="/poly/leaflet">листовки</a></li>
-						<li><a class="dropdown-item" href="/poly/booklet">буклеты</a></li>
-					</ul>
+				<!-- <div class="col border d-flex flex-fill"> -->
+				<button class="col btn btn-primary mx-2 px-4 d-flex flex-fill" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapse_poly" aria-expanded="false" aria-controls="collapse_poly">
+					Полиграфия</button>
+				<!-- <div class="col border"> -->
+				<div class="collapse p-3 " id="collapse_poly">
+					<a class="btn btn-primary d-flex flex-fill" href="/poly/card">визитки</a>
+					<a class="btn btn-primary d-flex flex-fill" href="/poly/leaflet">листовки</a>
+					<a class="btn btn-primary d-flex flex-fill" href="/poly/booklet">буклеты</a>
 				</div>
 
-				<div class="dropdown d-flex flex-fill">
-					<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
-						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-						Широкоформатная печать
-					</a>
-					<ul class="dropdown-menu dropdown-menu-dark">
-						<li><a class="dropdown-item" href="#poly">баннеры</a></li>
-						<li><a class="dropdown-item" href="#">наклейки</a></li>
-						<li><a class="dropdown-item" href="#">таблички</a></li>
-					</ul>
+				<!-- <div class="col border"> -->
+				<button class="col btn btn-primary mx-2 px-4 d-flex flex-fill" type="button" data-bs-toggle="collapse"
+					data-bs-target="#collapse_wide" aria-expanded="false" aria-controls="collapse_wide">
+					Широкоформатная</button>
+				<!-- <div class="col border"> -->
+
+				<div class="collapse p-3 " id="collapse_wide">
+					<a class="btn btn-primary d-flex flex-fill" href="/poly/card">визитки</a>
+					<a class="btn btn-primary d-flex flex-fill" href="/poly/leaflet">листовки</a>
+					<a class="btn btn-primary d-flex flex-fill" href="/poly/booklet">буклеты</a>
 				</div>
-
-				<div class="dropdown d-flex flex-fill">
-					<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
-						id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-						Печати
-					</a>
-					<ul class="dropdown-menu dropdown-menu-dark">
-						<li><a class="dropdown-item" href="#poly">печати</a></li>
-						<li><a class="dropdown-item" href="#">штампы</a></li>
-						<li><a class="dropdown-item" href="#">другое</a></li>
-					</ul>
-				</div>
-
-
-				<!-- Кноки с сворачивающиеся надо сделать -->
-
 			</div>
 		</div>
+
+
+
+
+
+
+
+
+
+
+	<div class="top_buttons d-flex justify-content-center border">
+
+		<!-- Топ кнопки с выпадающим меню -->
+		<div class="dropdown d-flex flex-fill">
+			<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
+				id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+				Полиграфия
+			</a>
+			<ul class="dropdown-menu dropdown-menu-dark">
+				<li><a class="dropdown-item" href="/poly/card">визитки</a></li>
+				<li><a class="dropdown-item" href="/poly/leaflet">листовки</a></li>
+				<li><a class="dropdown-item" href="/poly/booklet">буклеты</a></li>
+			</ul>
+		</div>
+
+		<div class="dropdown d-flex flex-fill">
+			<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
+				id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+				Широкоформатная печать
+			</a>
+			<ul class="dropdown-menu dropdown-menu-dark">
+				<li><a class="dropdown-item" href="#poly">баннеры</a></li>
+				<li><a class="dropdown-item" href="#">наклейки</a></li>
+				<li><a class="dropdown-item" href="#">таблички</a></li>
+			</ul>
+		</div>
+
+		<div class="dropdown d-flex flex-fill">
+			<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
+				id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+				Печати
+			</a>
+			<ul class="dropdown-menu dropdown-menu-dark">
+				<li><a class="dropdown-item" href="#poly">печати</a></li>
+				<li><a class="dropdown-item" href="#">штампы</a></li>
+				<li><a class="dropdown-item" href="#">другое</a></li>
+			</ul>
+		</div>
+
+
+		<!-- Кноки с сворачивающиеся надо сделать -->
+
+	</div>
+	</div>
 	</div>
 
 

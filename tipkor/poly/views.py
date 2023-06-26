@@ -26,7 +26,8 @@ class PolyMeta(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            context.update({'calc_form': self.form_class(self.data_form)})            
+            context.update({'calc_form': self.form_class(self.data_form)})       
+            print(self.data_form)     
         else:
             context.update({'calc_form': self.form_class()})
         return context
@@ -45,6 +46,7 @@ class PolyMeta(TemplateView, FormMixin):
 class CardView(PolyMeta):
     form_class = Card_Form
     template_name = 'card.html'
+    # default_calc = {'paper': '300', 'format_p': '1', 'duplex': 'True', 'pressrun': '1000'}
 
 
 class ConfirmView(DetailView, FormMixin):
