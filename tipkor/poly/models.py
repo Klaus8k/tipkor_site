@@ -1,4 +1,3 @@
-import datetime
 import json
 
 from django.core.exceptions import ValidationError
@@ -46,19 +45,4 @@ class Poly(models.Model):
         return json_dict
 
 
-def date_to_ready():
-    """Расчитывает дату готовности. Если после 15-00 и до 9-00 то + 1 день.
-    Если на выходные попадает то до близжайшего понедельника переносится дата
-    work_time - Времы работы над заказом
-    Returns:
-        date: Дата готовности заказа
-    """
-    work_time = 1
-    time_create = datetime.datetime.now()
-    if time_create.hour > 15 or time_create.hour < 9: # если заказ после 15-00 то +1 день на работу
-        work_time += 1
-    time_ready = time_create + datetime.timedelta(days=work_time)
-    if time_ready.weekday() >= 5: # если на субботу или воскресенье попадает - переносится на понедельник готовность.
-        while time_ready.weekday() != 0:
-            time_ready += datetime.timedelta(days=1)
-    return time_ready
+
