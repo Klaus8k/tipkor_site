@@ -4,10 +4,10 @@ from django.shortcuts import redirect, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
-from order.models import Clients, Orders
+from order.models import Clients, Orders, date_to_ready
 
 from .forms import Card_Form, Confirm_form
-from .models import Poly, date_to_ready
+from .models import Poly
 
 # Делаем 3 отдельными классами пока
 
@@ -59,14 +59,13 @@ class ConfirmView(DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
-        name = self.request.POST.dict()['name']
-        email = self.request.POST.dict()['email']
+        name = self.request.POST.dict()['name'].lower()
+        email = self.request.POST.dict()['email'].lower()
         tel = self.request.POST.dict()['tel']
-        client = Clients.objects.create(name=name,email=email,tel=tel)
+        client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
         product = self.get_object().json_combine()
-        order = Orders.objects.create(client=client, product=product, ready_date=date_to_ready())
-        order_id = order.id
-        return HttpResponseRedirect(reverse('poly:success', args=[order_id]))
+        order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
+        return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
     
     
 class SuccessView(DetailView):
