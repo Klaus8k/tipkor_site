@@ -5,6 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders, date_to_ready
+from order.sender import send_email
 
 from .forms import Card_Form, Confirm_form
 from .models import Poly
@@ -62,11 +63,18 @@ class ConfirmView(DetailView, FormMixin):
     
     def post(self, *args, **kwargs):
         name = self.request.POST.dict()['name'].lower()
+        
         email = self.request.POST.dict()['email'].lower()
+        # test email sender = 'klaus8@mail.ru'
+        # email = 'klaus8@mail.ru'
+        
         tel = self.request.POST.dict()['tel']
         client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
         product = self.get_object().json_combine()
         order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
+        
+        send_email(email, str(order.id) + order.__str__())
+        
         return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
     
     

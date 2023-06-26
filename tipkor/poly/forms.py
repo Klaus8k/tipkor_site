@@ -40,8 +40,8 @@ class Card_Form(ModelForm):
 #                                 ) 
 
 class Confirm_form(forms.Form):
-    
     name = forms.CharField(max_length=20, required=False)
     email = forms.EmailField()
     tel = forms.CharField(max_length=15)
-    file = forms.FileField()
+    file = forms.FileField(required=False)
+
