@@ -1,5 +1,10 @@
+.title_text {
+    font-weight:800;
+}
+
+
 .card_img {
-    background-color: rgb(97, 213, 255);
+    background-color: rgb(210, 210, 210);
 }
 
 #id_paper, #id_format_p, #id_duplex, #id_pressrun  {
@@ -9,14 +14,12 @@
 
 .calc_button {
     height: 30px;
-    width: 150px;
+    width: 200px;
 }
-
-
 
 .confirm_button {
     height: 30px;
-    width: 150px;
+    width: 200px;
 }
 
 

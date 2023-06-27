@@ -1,5 +1,5 @@
 .main_logo {
-    max-width: 220px;
+    max-width: 150px;
 }
 
 .img_mess {
@@ -11,7 +11,6 @@
 #hi_mess {
     height: 30px;
     width: 30px;
-    background: green;
 }
 
 .hi_telefon {
@@ -23,18 +22,23 @@
 #header_img {
     height: 80px;
     width: auto;
-    background: rgb(0, 58, 108);
+    /* background: rgb(95, 195, 235); */
 }
 
 
 #slogan {
     text-align: center;
-    color: rebeccapurple;
+    color: rgb(30, 155, 212);
+    font-weight: 800;
+    text-transform: uppercase;
+
 }
 
 #titles {
     text-align: center;
-    color: rgb(1, 100, 128);
+    color: rgb(0, 191, 244);
+    font-weight: 800;
+    text-transform: uppercase;
 }
 
 .dropdown-menu {

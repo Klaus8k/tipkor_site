@@ -15,7 +15,7 @@
     <div class="card_text">
         <p>-----------------</p>
     </div>
-    <h1>Визитки</h1>
+    <h1 class="title_text">Визитки</h1>
 </div>
 
 <!-- Форма -->
@@ -60,32 +60,31 @@
 <br><br>
 <div class="container">
     <div class="result_info p-3 border shadow">
-        <div class="row">
-            <div class="col">
-                <h2 style="color: rgb(145, 1, 30);">Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h2>
-                <h5 style="color: rgb(93, 3, 131);">Формат: {{ result.format_p }}</h5>
-                <h5 style="color: rgb(93, 3, 131);">Материал: {{ result.paper }} г/м</h5>
-                <h5 style="color: rgb(93, 3, 131);">Двухсторонняя печать: {{ result.duplex|yesno:"Да,Нет" }}</h5>
-                <h5 style="color: rgb(93, 3, 131);">Тираж: {{ result.pressrun }} штук.</h5>
+        <div class="row px-3">
+            <div class="col col-xl-3">
+                {% if result.id %}
+                <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
+                <h5>Формат: {{ result.format_p }}</h5>
+                <h5>Материал: {{ result.paper }} г/м</h5>
+                <h5>Двухсторонняя печать: {{ result.duplex|yesno:"Да,Нет" }}</h5>
+                <h5>Тираж: {{ result.pressrun }} штук.</h5>
             </div>
             <div class="col">
-                <h2 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h2>
+                <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>
                 <p>При заказе сегодня до 15:00</p>
             </div>
 
             <div class="pt-4">
-                {% if result.id %}
-
-                <a class="confirm_button btn btn-success" href="'confirm/'{{ result.id }}"> заказать
-                </a>
-
-
-                
-                {% endif %}
+                <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}"> заказать</a>
             </div>
             <div class="more_info">
-                <h5>Нажмите "заказать", что бы отправить нам заказ.</h5>
+                <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
             </div>
+            {% else %}
+
+            <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
+
+            {% endif %}
         </div>
     </div>
 
@@ -93,7 +92,7 @@
 
 <div class="container">
     <div class="bottom_text pt-4"></div>
-    <div class="row">
+    <div class="row px-3">
         <div class="col">
             <h5>Визитки</h5>
             <p>
