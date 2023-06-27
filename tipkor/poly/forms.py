@@ -1,9 +1,9 @@
 from django import forms
-from django.forms import ModelForm
 from django.core.exceptions import ValidationError
+from django.forms import ModelForm
 
-from .constants import PAPER_CHOICE, PRESSRUN_OFFSET
-from .models import Poly, Formats
+from .constants import FORMAT, PAPER_CHOICE, PRESSRUN_OFFSET
+from .models import Formats, Poly
 
 
 class Card_Form(ModelForm):
@@ -25,19 +25,23 @@ class Card_Form(ModelForm):
 
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
-# class Leaflet_Form(ModelForm):
-#     FORMAT = 'Визитка' # Выбор только форматов с именем 'Визитка'
+class Leaflet_Form(ModelForm):
+    FORMAT = 'A6' # Выбор только форматов с именем 'Визитка'
 
-#     class Meta:
-#         model = Leaflets_Model
-#         fields = ['format', 'paper', 'pressrun', 'duplex' ]
+    class Meta:
+        model = Poly
+        fields = ['format_p', 'paper', 'pressrun', 'duplex' ]
 
-#     def __init__(self, *args, **kwargs):
-#         super().__init__(*args, **kwargs)
-#         self.fields['format'] = forms.ModelChoiceField(
-#                                 queryset=Formats_Model.objects.exclude(format_paper=self.FORMAT),
-#                                 empty_label=None
-#                                 ) 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # self.fields['format_p'] = forms.ChoiceField(choices=FORMAT)
+        self.fields['format_p'] = forms.ModelChoiceField(
+                        queryset=Formats.objects.all(),
+                        empty_label=None, initial=Formats.objects.get(format_p=self.FORMAT),
+                        ) 
+        
+        self.fields['paper'] = forms.ChoiceField(initial='130', choices=PAPER_CHOICE)
+        self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
 
 class Confirm_form(forms.Form):
     name = forms.CharField(max_length=20, required=False)

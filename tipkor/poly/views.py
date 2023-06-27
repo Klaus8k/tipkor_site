@@ -7,7 +7,7 @@ from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
-from .forms import Card_Form, Confirm_form
+from .forms import Card_Form, Confirm_form, Leaflet_Form
 from .models import Poly
 
 # Делаем 3 отдельными классами пока
@@ -50,6 +50,10 @@ class CardView(PolyMeta):
     form_class = Card_Form
     template_name = 'card.html'
     # default_calc = {'paper': '300', 'format_p': '1', 'duplex': 'True', 'pressrun': '1000'}
+    
+class LeafletView(PolyMeta):
+    form_class = Leaflet_Form
+    template_name = 'leaflet.html'
 
 
 class ConfirmView(DetailView, FormMixin):
@@ -61,6 +65,8 @@ class ConfirmView(DetailView, FormMixin):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
         context['ready_date'] =  date_to_ready()
+        context['type_production'] = self.get_order_type()
+        
         return context
     
     def post(self, *args, **kwargs):
@@ -73,11 +79,21 @@ class ConfirmView(DetailView, FormMixin):
         tel = self.request.POST.dict()['tel']
         client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
         product = self.get_object().json_combine()
+        product['type_production'] = self.get_order_type()
         order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
         
         send_email(email, order=order)
         
         return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
+    
+    def get_order_type(self):
+        order_type = self.request.path.split('/')[2]
+        if order_type == 'card':
+            return 'Визитки'
+        elif order_type == 'leaflet':
+            return 'Листовки'
+        else: return 'Буклет'
+        
     
     
 class SuccessView(DetailView):

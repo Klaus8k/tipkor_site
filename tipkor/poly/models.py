@@ -15,12 +15,15 @@ class Formats(models.Model):
     """" Класс форматов бумаги
     Атрибуты: Название, ширина, высота бумаги
     """
-    format_p = models.CharField(max_length=20)
+    format_p = models.CharField(max_length=20, null=True, blank=True)
     x = models.IntegerField()
     y = models.IntegerField()
 
     def __str__(self):
-        return f'{self.format_p} ({self.x}x{self.y}мм)'
+        if self.format_p:
+            return f'{self.format_p} ({self.x}x{self.y}мм)'
+        else:
+            return '{}x{}'.format(self.x, self.y)
 
 class Poly(models.Model):
     format_p = models.ForeignKey(Formats,on_delete=models.DO_NOTHING)

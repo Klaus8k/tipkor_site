@@ -4,20 +4,108 @@
 
 {% block content %}
 
-<div class="container border">
-    <h5 style="color: red;">Вывод информации из модели</h5>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'poly/css/card.css' %}">
+</head>
+<br>
 
 
 
-    <form class="form-control-lg " action="{% url 'poly:leaflet' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" class="yes_button btn btn-primary" value="Расчет"></input>
+<div class="container">
+    <div class="card_text">
+        <p>-----------------</p>
+    </div>
+    <h1 class="title_text">Листовки</h1>
+</div>
 
-    </form>
+<!-- Форма -->
+<div class="container">
+    <div class="card_form border shadow p-3">
+        <div class="row">
 
-    <div> {{ result }}</div>
+            <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
+                <form class="form-control-lg " action="{% url 'poly:leaflet' %}" method="post">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col">{{ calc_form.paper }}<p>Плотность бумаги</p>
+                        </div>
+                        <div class="col">{{ calc_form.format_p }}<p>Формат листовки</p>
+                        </div>
+                    </div>
+
+                    <div class="row pt-4">
+                        <div class="col">{{ calc_form.duplex }}<p>4+4/4+0:</p>
+                        </div>
+                        <div class="col">{{ calc_form.pressrun }}<p>тираж(шт):</p>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col">
+                            <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
+                            <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card_img col">
+                картинка листовки
+            </div>
+        </div>
+        <!-- Результат -->
+    </div>
+</div>
+
+<br><br>
+<div class="container">
+    <div class="result_info p-3 border shadow">
+        <div class="row px-3">
+            <div class="col col-xl-3">
+                {% if result.id %}
+                <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
+                <h5>Формат: {{ result.format_p }}</h5>
+                <h5>Материал: {{ result.paper }} г/м</h5>
+                <h5>Двухсторонняя печать: {{ result.duplex|yesno:"Да,Нет" }}</h5>
+                <h5>Тираж: {{ result.pressrun }} штук.</h5>
+            </div>
+            <div class="col">
+                <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>
+                <p>При заказе сегодня до 15:00</p>
+            </div>
+
+            <div class="pt-4">
+                <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}"> заказать</a>
+            </div>
+            <div class="more_info">
+                <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
+            </div>
+            {% else %}
+
+            <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
+
+            {% endif %}
+        </div>
+    </div>
 
 </div>
+
+<div class="container">
+    <div class="bottom_text pt-4"></div>
+    <div class="row px-3">
+        <div class="col">
+            <h5>Листовки</h5>
+            <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
+                minus
+                mollitia eveniet perferendis, incidunt alias quod a tempore quis magni numquam laboriosam, illo
+                provident
+                tempora!</p>
+        </div>
+    </div>
+</div>
+
+
+<br><br>
 
 {% endblock %}
