@@ -74,13 +74,21 @@
             </div>
 
             <div class="pt-4">
-                <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}/"> заказать </a>
+                {% if result.id %}
+
+                <a class="confirm_button btn btn-success" href="'confirm/'{{ result.id }}"> заказать
+                </a>
+
+
+                
+                {% endif %}
             </div>
             <div class="more_info">
                 <h5>Нажмите "заказать", что бы отправить нам заказ.</h5>
             </div>
         </div>
     </div>
+
 </div>
 
 <div class="container">

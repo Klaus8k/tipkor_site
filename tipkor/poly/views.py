@@ -16,6 +16,7 @@ class PolyMeta(TemplateView, FormMixin):
     form_class = None
     template_name = ''
     model_class = None
+    
 
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
@@ -24,6 +25,7 @@ class PolyMeta(TemplateView, FormMixin):
         kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)
     
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
@@ -73,7 +75,7 @@ class ConfirmView(DetailView, FormMixin):
         product = self.get_object().json_combine()
         order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
         
-        send_email(email, str(order.id) + order.__str__())
+        send_email(email, order=order)
         
         return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
     
