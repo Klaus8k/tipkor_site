@@ -1,5 +1,7 @@
 import os
 import smtplib
+from email.header import Header
+from email.mime.text import MIMEText
 
 MAIL_HOST = 'smtp.mail.ru'
 MAIL_LOGIN = os.getenv('EMAIL_U')
@@ -14,12 +16,17 @@ text = 'test message'
 
 # Пока в спам улетают письма.
 def send_email(adress, order):
-    print(get_order_dict(order)) # Print to stdIO
-    # mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
-    # mail_sender.login(MAIL_LOGIN, MAIL_PASS)
-    # text = get_order_dict(order).encode('utf-8')
-    # mail_sender.sendmail(MAIL_LOGIN, adress, text)
-    # mail_sender.quit()
+
+    body = get_order_dict(order)
+    msg = MIMEText(body, 'plain', 'utf-8')
+    msg['Subject'] = Header(f'Заказ №{order.id}', 'utf-8')
+    msg['From'] = MAIL_LOGIN
+    msg['To'] = adress
+
+    mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
+    mail_sender.login(MAIL_LOGIN, MAIL_PASS)
+    mail_sender.sendmail(MAIL_LOGIN, adress, msg.as_string())
+    mail_sender.quit()
 
 def get_order_dict(order):
     client = order.client.name
@@ -28,7 +35,7 @@ def get_order_dict(order):
     product = order.product
     create_date = order.create_date
     ready_date = order.ready_date
-    return 'Клиент: {} {} {} \nЗаказано: {} \nСоздан: {} /nГотовность: {}'.format(client, tel, email, product, create_date, ready_date)
+    return 'Клиент: {} {} \nЗаказано: {} \nСоздан: {} \nГотовность: {}'.format(client, tel, product, create_date, ready_date)
     
 
 
