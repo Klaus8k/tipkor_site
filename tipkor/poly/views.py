@@ -7,7 +7,7 @@ from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
-from .forms import Card_Form, Confirm_form, Leaflet_Form, Booklet_Form
+from .forms import Booklet_Form, Card_Form, Confirm_form, Leaflet_Form
 from .models import Poly
 
 # Делаем 3 отдельными классами пока
