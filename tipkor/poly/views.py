@@ -7,7 +7,7 @@ from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
-from .forms import Card_Form, Confirm_form, Leaflet_Form
+from .forms import Card_Form, Confirm_form, Leaflet_Form, Booklet_Form
 from .models import Poly
 
 # Делаем 3 отдельными классами пока
@@ -54,6 +54,10 @@ class CardView(PolyMeta):
 class LeafletView(PolyMeta):
     form_class = Leaflet_Form
     template_name = 'leaflet.html'
+    
+class BookletView(PolyMeta):
+    form_class = Booklet_Form
+    template_name = 'booklet.html'
 
 
 class ConfirmView(DetailView, FormMixin):
@@ -92,7 +96,9 @@ class ConfirmView(DetailView, FormMixin):
             return 'Визитки'
         elif order_type == 'leaflet':
             return 'Листовки'
-        else: return 'Буклет'
+        elif order_type == 'booklet':
+            return 'Буклеты'
+        else: return 'Изделие не определено'
         
     
     

@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.db import models
 from order.models import Orders
 
-from .constants import DUPLEX, PAPER_CHOICE
+from .constants import DUPLEX, PAPER_CHOICE, BOOKLETS
 
 
 def valid(value):
@@ -30,7 +30,7 @@ class Poly(models.Model):
     paper = models.CharField(choices=PAPER_CHOICE, max_length=20)
     pressrun = models.IntegerField()
     duplex = models.BooleanField(choices=DUPLEX, max_length=50, default=True)
-    post_obr = models.JSONField(null=True, blank=True)
+    post_obr = models.CharField(null=True, blank=True, choices=BOOKLETS, max_length=20)
     cost = models.IntegerField()
 
     def __str__(self):
