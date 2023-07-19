@@ -5,7 +5,7 @@
 {% block content %}
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'poly/css/poly.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'wide/css/wide.css' %}">
 </head>
 <br>
 
@@ -24,20 +24,20 @@
         <div class="row">
 
             <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
-                <form class="form-control-lg " action="{% url 'poly:booklet' %}" method="post">
+                <form class="form-control-lg " action="{% url 'wide:banner' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{ calc_form.paper }}<p>Плотность бумаги</p>
+                        <div class="col">{{ calc_form.wide_size }}<p>Плотность бумаги</p>
                         </div>
-                        <div class="col">{{ calc_form.format_p }}<p>Формат листовки</p>
+                        <div class="col">{{ calc_form.heigth_size }}<p>Формат листовки</p>
                         </div>
                     </div>
 
                     <div class="row pt-4">
-                        <div class="col">{{ calc_form.duplex }}<p>4+4/4+0:</p>
+                        <div class="col">{{ calc_form.material_print }}<p>4+4/4+0:</p>
                         </div>
-                        <div class="col">{{ calc_form.pressrun }}<p>тираж(шт):</p>
-                        </div>
+                        <!-- <div class="col">{{ calc_form.pressrun }}<p>тираж(шт):</p> -->
+                        <!-- </div> -->
                     </div>
 
                     <div class="row">

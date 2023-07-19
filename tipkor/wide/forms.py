@@ -4,7 +4,7 @@ from django.forms import ModelForm
 
 
 
-from .constants import FORMAT, PAPER_CHOICE, PRESSRUN_OFFSET, BOOKLETS
+from .constants import POST_OBR
 from .models import Material, Wide
 
 
@@ -12,6 +12,8 @@ class Banner_Form(ModelForm):
 
     class Meta:
         model = Wide
+        fields = ['wide_size', 'heigth_size', 'material_print']
+
         # fields = ['format_p', 'paper', 'pressrun', 'duplex' ]
         
 
@@ -27,10 +29,9 @@ class Banner_Form(ModelForm):
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
 class Sticker_Form(ModelForm):
-
-    class Meta:
-        model = Wide
-    #     fields = ['format_p', 'paper', 'pressrun', 'duplex' ]
+    pass
+    # class Meta:
+    #     model = Wide
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)
@@ -45,10 +46,10 @@ class Sticker_Form(ModelForm):
         
 class Table_Form(ModelForm):
     # FORMAT = 'A4' # Выбор только форматов с именем 'Визитка'
-
-    class Meta:
-        model = Wide
-    #     fields = ['format_p', 'paper', 'pressrun', 'duplex', ]
+    pass
+    # class Meta:
+    #     model = Wide
+    # #     fields = ['format_p', 'paper', 'pressrun', 'duplex', ]
 
     # def __init__(self, *args, **kwargs):
     #     super().__init__(*args, **kwargs)

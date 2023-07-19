@@ -7,5 +7,6 @@ urlpatterns = [
     path('__debug__/', include('debug_toolbar.urls')),
     path('',TemplateView.as_view(template_name='tipkor.html')),
     path('poly/', include('poly.urls')),
+    path('wide/', include('wide.urls')),
     path('expirement/', TemplateView.as_view(template_name='expirement.html')),
 ]

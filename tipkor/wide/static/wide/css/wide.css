@@ -1,0 +1,55 @@
+.title_text {
+    font-weight:800;
+}
+
+
+.card_img {
+    background-color: rgb(210, 210, 210);
+}
+
+#id_paper, #id_format_p, #id_duplex, #id_pressrun, #id_post_obr  {
+    height: 40px;
+    width: 200px;
+}
+
+.calc_button {
+    height: 30px;
+    width: 200px;
+}
+
+.confirm_button {
+    height: 30px;
+    width: 200px;
+}
+
+
+
+/* md срабатывает меньше 992 */
+@media screen and (max-width: 992px) {
+
+}
+
+/* sm срабатывает меньше 768 */
+@media screen and (max-width: 768px) {
+
+    .card_form {
+        flex-direction: row;
+    }        
+}
+
+/* xs срабатывает меньше 576px */
+@media screen and (max-width: 576px) {
+
+    .calc_button {
+        height: 30px;
+        width: 150px;
+    }
+
+    .card_form {
+        flex-direction: row;
+    }
+
+    .card_img {
+        display: none;        
+    }
+}

@@ -23,7 +23,7 @@ class Wide(models.Model):
     wide_size = models.FloatField()
     heigth_size = models.FloatField()
     material_print = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
-    post_obr = models.CharField(choices=POST_OBR)
+    post_obr = models.CharField(choices=POST_OBR, max_length=30)
     cost = models.IntegerField()
     
     def __str__(self):
