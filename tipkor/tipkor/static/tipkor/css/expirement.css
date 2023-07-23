@@ -1,6 +1,22 @@
-.box {
+.box-1 {
+    
     height: 100px;
     width: 100px;
-    background-color: blueviolet;
+    background-color: rgb(128, 234, 241);
+    padding: 5px;
+}
+
+.box-2 {
+    height: 150px;
+    width: 100px;
+    background-color: rgb(128, 234, 241);
+    padding: 5px;
+    
+}
+
+.box-3 {
+    height: 170px;
+    width: 100px;
+    background-color: rgb(128, 234, 241);
     padding: 5px;
 }
