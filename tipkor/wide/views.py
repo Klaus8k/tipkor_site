@@ -1,10 +1,9 @@
-from loguru import logger
-
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
+from loguru import logger
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
@@ -66,7 +65,7 @@ class TableView(PolyMeta):
 
 class ConfirmView(DetailView, FormMixin):
     model = Wide
-    template_name = 'confirm.html'
+    template_name = 'wide/confirm.html'
     form_class = Confirm_form
     
     def get_context_data(self, **kwargs):
@@ -78,20 +77,18 @@ class ConfirmView(DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
+        logger.debug(kwargs)
         name = self.request.POST.dict()['name'].lower()
-        
-        email = self.request.POST.dict()['email'].lower()
-        # test email sender = 'klaus8@mail.ru'
-        # email = 'klaus8@mail.ru'
-        
+        email = self.request.POST.dict()['email'].lower()  
         tel = self.request.POST.dict()['tel']
+        
         client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
         product = self.get_object().json_combine()
         product['type_production'] = self.get_order_type()
         order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
         
         send_email(email, order=order)
-        
+        logger.debug(order.id)
         return HttpResponseRedirect(reverse('wide:success', args=[order.id]))
     
     def get_order_type(self):

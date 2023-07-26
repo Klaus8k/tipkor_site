@@ -5,7 +5,7 @@
 {% block content %}
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'poly/css/poly.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'wide/css/wide.css' %}">
 </head>
 <br>
 <br>
@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div>
-                <form class="form-control-lg " action="{% url 'poly:confirm' order.id %}" method="post">
+                <form class="form-control-lg " action="{% url 'wide:confirm' order.id %}" method="post">
                     {% csrf_token %}
                     <div class="row border">
                         <div class="col border">{{ form.name }}<p>Имя</p>

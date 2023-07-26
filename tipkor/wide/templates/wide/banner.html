@@ -27,14 +27,14 @@
                 <form class="form-control-lg " action="{% url 'wide:banner' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{ calc_form.wide_size }}<p>Плотность бумаги</p>
+                        <div class="col">{{ calc_form.wide_size }}<p>Ширина баннера</p>
                         </div>
-                        <div class="col">{{ calc_form.heigth_size }}<p>Формат листовки</p>
+                        <div class="col">{{ calc_form.heigth_size }}<p>Высота баннера</p>
                         </div>
                     </div>
 
                     <div class="row pt-4">
-                        <div class="col">{{ calc_form.material_print }}<p>4+4/4+0:</p>
+                        <div class="col">{{ calc_form.material_print }}<p>Материал</p>
                         </div>
                         <!-- <div class="col">{{ calc_form.pressrun }}<p>тираж(шт):</p> -->
                         <!-- </div> -->
@@ -42,7 +42,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <div class="col">{{ calc_form.post_obr }}<p>Тип буклета</p>
+                            <div class="col">{{ calc_form.post_obr }}<p>про люверсы</p>
                             </div>
                             <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
                             <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->

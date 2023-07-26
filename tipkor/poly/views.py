@@ -62,7 +62,7 @@ class BookletView(PolyMeta):
 
 class ConfirmView(DetailView, FormMixin):
     model = Poly
-    template_name = 'confirm.html'
+    template_name = 'poly/confirm.html'
     form_class = Confirm_form
     
     def get_context_data(self, **kwargs):
