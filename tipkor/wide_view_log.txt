@@ -39,3 +39,12 @@
 2023-07-26 17:53:51.826 | DEBUG    | wide.views:post:25 - {'wide_size': '1', 'heigth_size': '1', 'material_print': '2', 'post_obr': '2'}
 2023-07-26 17:55:53.902 | DEBUG    | wide.views:post:25 - {'wide_size': '1', 'heigth_size': '1', 'material_print': '2', 'post_obr': '2'}
 2023-07-26 17:56:23.766 | DEBUG    | wide.views:post:25 - {'wide_size': '1', 'heigth_size': '1', 'material_print': '2', 'post_obr': '2'}
+2023-07-26 22:53:55.536 | DEBUG    | wide.views:post:25 - {'wide_size': '1', 'heigth_size': '1', 'material_print': '1', 'post_obr': '1'}
+2023-07-26 23:09:33.860 | DEBUG    | wide.views:post:25 - {'wide_size': '1', 'heigth_size': '1', 'material_print': '2', 'post_obr': '4'}
+2023-07-26 23:17:33.336 | DEBUG    | wide.views:post:25 - {'wide_size': '1', 'heigth_size': '1', 'material_print': '2', 'post_obr': '4'}
+2023-07-26 23:17:52.653 | DEBUG    | wide.views:post:25 - {'wide_size': '1', 'heigth_size': '1', 'material_print': '2', 'post_obr': '4'}
+2023-07-26 23:20:24.038 | DEBUG    | wide.views:post:80 - {'pk': '1'}
+2023-07-26 23:29:33.108 | DEBUG    | wide.views:post:80 - {'pk': '1'}
+2023-07-26 23:30:12.932 | DEBUG    | wide.views:post:80 - {'pk': '1'}
+2023-07-26 23:31:45.060 | DEBUG    | wide.views:post:80 - {'pk': '1'}
+2023-07-26 23:31:46.169 | DEBUG    | wide.views:post:91 - 4

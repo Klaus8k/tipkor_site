@@ -23,7 +23,7 @@ class WideMeta(TemplateView, FormMixin):
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
         logger.debug(self.data_form)
-        self.result = Wide.get_cost(self.data_form)
+        self.result = Wide.get_wide_object(self.data_form)
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)

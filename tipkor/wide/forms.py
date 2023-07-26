@@ -5,7 +5,7 @@ from django.forms import ModelForm
 
 
 from .constants import POST_OBR
-from .models import Material, Wide
+from .models import Material, Wide, Post_obr
 
 
 class Banner_Form(ModelForm):
@@ -13,7 +13,7 @@ class Banner_Form(ModelForm):
 
     class Meta:
         model = Wide
-        fields = ['wide_size', 'heigth_size', 'post_obr']
+        fields = ['wide_size', 'heigth_size']
     
     
     def __init__(self, *args, **kwargs):
@@ -22,7 +22,10 @@ class Banner_Form(ModelForm):
                                 queryset=Material.objects.filter(material=self.MATERIAL),
                                 empty_label=None
                                 ) 
-        self.fields['post_obr'] = forms.ChoiceField(initial='0', choices=POST_OBR)
+        self.fields['post_obr'] = forms.ModelChoiceField(
+                                queryset=Post_obr.objects.filter(type_wide_production='banner'),
+                                empty_label=None
+                                )
 
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
