@@ -15,7 +15,7 @@ logger.add('wide_view_log.txt')
 
 # Делаем 3 отдельными классами пока
 
-class PolyMeta(TemplateView, FormMixin):
+class WideMeta(TemplateView, FormMixin):
     form_class = None
     template_name = ''
     model_class = None
@@ -49,16 +49,16 @@ class PolyMeta(TemplateView, FormMixin):
         abstract = True
 
 
-class BannerView(PolyMeta):
+class BannerView(WideMeta):
     form_class = Banner_Form
     template_name = 'banner.html'
     # default_calc = {'paper': '300', 'format_p': '1', 'duplex': 'True', 'pressrun': '1000'}
     
-class StickerView(PolyMeta):
+class StickerView(WideMeta):
     form_class = Sticker_Form
     template_name = 'sticker.html'
     
-class TableView(PolyMeta):
+class TableView(WideMeta):
     form_class = Table_Form
     template_name = 'table.html'
 

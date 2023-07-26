@@ -15,7 +15,7 @@
     <div class="card_text">
         <p>-----------------</p>
     </div>
-    <h1 class="title_text">Буклеты</h1>
+    <h1 class="title_text">Баннеры</h1>
 </div>
 
 <!-- Форма -->
@@ -27,22 +27,21 @@
                 <form class="form-control-lg " action="{% url 'wide:banner' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{ calc_form.wide_size }}<p>Ширина баннера</p>
+                        <div class="col" >{{ calc_form.wide_size }}<p>Ширина баннера (м)</p>
                         </div>
-                        <div class="col">{{ calc_form.heigth_size }}<p>Высота баннера</p>
+                        <div class="col">{{ calc_form.heigth_size }}<p>Высота баннера (м)</p>
                         </div>
                     </div>
 
+                    <!-- Выбор материала баннера -->
                     <div class="row pt-4">
                         <div class="col">{{ calc_form.material_print }}<p>Материал</p>
                         </div>
-                        <!-- <div class="col">{{ calc_form.pressrun }}<p>тираж(шт):</p> -->
-                        <!-- </div> -->
                     </div>
 
                     <div class="row">
                         <div class="col">
-                            <div class="col">{{ calc_form.post_obr }}<p>про люверсы</p>
+                            <div class="col">{{ calc_form.post_obr }}<p>Обработка и люверсы</p>
                             </div>
                             <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
                             <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
@@ -52,7 +51,7 @@
             </div>
 
             <div class="card_img col">
-                картинка листовки
+                Про баннеры
             </div>
         </div>
         <!-- Результат -->
@@ -66,11 +65,9 @@
             <div class="col col-xl-3">
                 {% if result.id %}
                 <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
-                <h5>Формат: {{ result.format_p }}</h5>
-                <h5>Материал: {{ result.paper }} г/м</h5>
-                <h5>Двухсторонняя печать: {{ result.duplex|yesno:"Да,Нет" }}</h5>
-                <h5>Типо буклета: {{ result.post_obr }}</h5>
-                <h5>Тираж: {{ result.pressrun }} штук.</h5>
+                <h5>Размер: {{ result.wide_size }}х{{ result.heigth_size }}</h5>
+                <h5>Материал: {{ result.material_print }}</h5>
+                <h5>Обработка: {{ result.post_obr }}</h5>
             </div>
             <div class="col">
                 <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>
@@ -97,7 +94,7 @@
     <div class="bottom_text pt-4"></div>
     <div class="row px-3">
         <div class="col">
-            <h5>Буклеты</h5>
+            <h5>Баннер</h5>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
                 minus

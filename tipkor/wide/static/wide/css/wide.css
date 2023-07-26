@@ -7,7 +7,7 @@
     background-color: rgb(210, 210, 210);
 }
 
-#id_paper, #id_format_p, #id_duplex, #id_pressrun, #id_post_obr  {
+#id_wide_size, #id_heigth_size, #id_material_print, #id_post_obr  {
     height: 40px;
     width: 200px;
 }

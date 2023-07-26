@@ -9,22 +9,20 @@ from .models import Material, Wide
 
 
 class Banner_Form(ModelForm):
+    MATERIAL = 'Баннер'
 
     class Meta:
         model = Wide
-        fields = ['wide_size', 'heigth_size', 'material_print']
-
-        # fields = ['format_p', 'paper', 'pressrun', 'duplex' ]
-        
-
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['format_p'] = forms.ModelChoiceField(
-    #                             queryset=Formats.objects.filter(format_p=self.FORMAT),
-    #                             empty_label=None
-    #                             ) 
-    #     self.fields['paper'] = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
-    #     self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
+        fields = ['wide_size', 'heigth_size', 'post_obr']
+    
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['material_print'] = forms.ModelChoiceField(
+                                queryset=Material.objects.filter(material=self.MATERIAL),
+                                empty_label=None
+                                ) 
+        self.fields['post_obr'] = forms.ChoiceField(initial='0', choices=POST_OBR)
 
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться

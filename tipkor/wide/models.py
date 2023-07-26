@@ -16,7 +16,7 @@ class Material(models.Model):
     cost_per_m = models.IntegerField()
     
     def __str__(self):
-        return f'{self.material} - {self.cost_per_m} руб.'
+        return f'{self.material}'
     
     
 class Wide(models.Model):
@@ -34,10 +34,10 @@ class Wide(models.Model):
         x = float(form_data['wide_size'])
         y = float(form_data['heigth_size'])
         material = Material.objects.get(id=int(form_data['material_print']))
-        
+        post_obr = form_data['post_obr']
         # get_or_create
         try:
-            result = Wide.objects.get(wide_size=x,heigth_size=y, material_print=material)
+            result = Wide.objects.get(wide_size=x,heigth_size=y, material_print=material, post_obr=post_obr)
             return result
         except ObjectDoesNotExist:
             # new_wide_object = Wide.objects.create(wide_size=x,heigth_size=y, material_print=material)
