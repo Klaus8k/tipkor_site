@@ -9,7 +9,7 @@ from .models import Material, Wide, Post_obr
 
 
 class Banner_Form(ModelForm):
-    MATERIAL = 'Баннер'
+    MATERIAL = 'banner'
 
     class Meta:
         model = Wide
@@ -19,7 +19,7 @@ class Banner_Form(ModelForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['material_print'] = forms.ModelChoiceField(
-                                queryset=Material.objects.filter(material=self.MATERIAL),
+                                queryset=Material.objects.filter(type_material=self.MATERIAL),
                                 empty_label=None
                                 ) 
         self.fields['post_obr'] = forms.ModelChoiceField(
@@ -30,20 +30,27 @@ class Banner_Form(ModelForm):
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
 class Sticker_Form(ModelForm):
-    pass
-    # class Meta:
-    #     model = Wide
+    MATERIAL = 'sticker'
+    
+    class Meta:
+        model = Wide
+        fields = ['wide_size', 'heigth_size']
+    
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['material_print'] = forms.ModelChoiceField(
+                                queryset=Material.objects.filter(type_material=self.MATERIAL),
+                                empty_label=None
+                                ) 
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     # self.fields['format_p'] = forms.ChoiceField(choices=FORMAT)
-    #     self.fields['format_p'] = forms.ModelChoiceField(
-    #                     queryset=Formats.objects.all(),
-    #                     empty_label=None, initial=Formats.objects.get(format_p=self.FORMAT),
-    #                     ) 
+        self.fields['post_obr'] = forms.ModelChoiceField(
+                                queryset=Post_obr.objects.filter(type_wide_production='sticker'),
+                                empty_label=None
+                                )
         
-    #     self.fields['paper'] = forms.ChoiceField(initial='130', choices=PAPER_CHOICE)
-    #     self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
+        
+        
         
 class Table_Form(ModelForm):
     # FORMAT = 'A4' # Выбор только форматов с именем 'Визитка'

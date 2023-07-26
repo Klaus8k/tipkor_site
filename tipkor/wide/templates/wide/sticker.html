@@ -5,7 +5,7 @@
 {% block content %}
 
 <head>
-    <link rel="stylesheet" type="text/css" href="{% static 'poly/css/poly.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'wide/css/wide.css' %}">
 </head>
 <br>
 
@@ -15,7 +15,7 @@
     <div class="card_text">
         <p>-----------------</p>
     </div>
-    <h1 class="title_text">Визитки</h1>
+    <h1 class="title_text">Наклейки</h1>
 </div>
 
 <!-- Форма -->
@@ -24,24 +24,25 @@
         <div class="row">
 
             <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
-                <form class="form-control-lg " action="{% url 'poly:card' %}" method="post">
+                <form class="form-control-lg " action="{% url 'wide:sticker' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{ calc_form.paper }}<p>Плотность бумаги</p>
+                        <div class="col" >{{ calc_form.wide_size }}<p>Ширина наклейки (м)</p>
                         </div>
-                        <div class="col">{{ calc_form.format_p }}<p>Размер визитки</p>
+                        <div class="col">{{ calc_form.heigth_size }}<p>Высота наклейки (м)</p>
                         </div>
                     </div>
 
+                    <!-- Выбор материала баннера -->
                     <div class="row pt-4">
-                        <div class="col">{{ calc_form.duplex }}<p>4+4/4+0:</p>
-                        </div>
-                        <div class="col">{{ calc_form.pressrun }}<p>тираж(шт):</p>
+                        <div class="col">{{ calc_form.material_print }}<p>Материал</p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
+                            <div class="col">{{ calc_form.post_obr }}<p>Обработка и люверсы (убрать обработку)</p>
+                            </div>
                             <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
                             <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
                         </div>
@@ -50,7 +51,7 @@
             </div>
 
             <div class="card_img col">
-                картинка визитки
+                Про Наклейки
             </div>
         </div>
         <!-- Результат -->
@@ -64,10 +65,9 @@
             <div class="col col-xl-3">
                 {% if result.id %}
                 <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
-                <h5>Формат: {{ result.format_p }}</h5>
-                <h5>Материал: {{ result.paper }} г/м</h5>
-                <h5>Двухсторонняя печать: {{ result.duplex|yesno:"Да,Нет" }}</h5>
-                <h5>Тираж: {{ result.pressrun }} штук.</h5>
+                <h5>Размер: {{ result.wide_size }}х{{ result.heigth_size }}</h5>
+                <h5>Материал: {{ result.material_print }}</h5>
+                <!-- <h5>Обработка: {{ result.post_obr }}</h5> -->
             </div>
             <div class="col">
                 <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>
@@ -94,7 +94,7 @@
     <div class="bottom_text pt-4"></div>
     <div class="row px-3">
         <div class="col">
-            <h5>Визитки</h5>
+            <h5>Баннер</h5>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
                 minus
@@ -107,7 +107,5 @@
 
 
 <br><br>
-
-
 
 {% endblock %}

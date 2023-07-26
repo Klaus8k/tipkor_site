@@ -13,10 +13,12 @@ def valid(value):
 
 class Material(models.Model):
     material = models.CharField(max_length=30)
+    type_material = models.CharField(max_length=30, null=True)
     cost_per_m = models.IntegerField()
     
     def __str__(self):
-        return f'{self.material} {self.cost_per_m}'
+        return f'{self.material}'
+
     
 class Post_obr(models.Model):
     type_wide_production = models.CharField(max_length=30)
@@ -65,4 +67,4 @@ class Wide(models.Model):
 
 
 def calc_cost(*args):
-    return 100000
+    return 123465

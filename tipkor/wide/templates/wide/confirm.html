@@ -21,11 +21,10 @@
                 <div class="col">
                     <h2>{{ type_production }}</h2>
 
-                    <h5 style="color: rgb(93, 3, 131);">Формат: {{ order.format_p }}</h5>
-                    <h5 style="color: rgb(93, 3, 131);">Материал: {{ order.paper }} г/м</h5>
-                    <h5 style="color: rgb(93, 3, 131);">Двухсторонняя печать: {{ order.duplex|yesno:"Да,Нет" }}</h5>
-                    <h5 style="color: rgb(93, 3, 131);">Тираж: {{ order.pressrun }} штук.</h5>
-                    <h2 style="color: rgb(145, 1, 30);">Стоимость: {{ order.cost|default:"Сделайте расчет" }} руб.</h2>
+                    <h5 style="color: rgb(93, 3, 131);">Размер: {{ order.wide_size }}х{{ order.heigth_size }}</h5>
+                    <h5 style="color: rgb(93, 3, 131);">Материал: {{ order.material_print }}</h5>
+                    <h5 style="color: rgb(93, 3, 131);">Обработка: {{ order.post_obr }}</h5>
+                    <h2 style="color: rgb(145, 1, 30);">Стоимость: {{ order.cost }} руб.</h2>
 
                 </div>
                 <div class="col">
