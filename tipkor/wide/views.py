@@ -1,18 +1,18 @@
-from django.shortcuts import render
-
-
-# Create your views here.
+from loguru import logger
 
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect, reverse
+from django.shortcuts import redirect, render, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
-from .forms import Banner_Form, Sticker_Form, Table_Form, Confirm_form
+from .forms import Banner_Form, Confirm_form, Sticker_Form, Table_Form
 from .models import Wide
+
+logger.add('wide_view_log.txt')
+
 
 # Делаем 3 отдельными классами пока
 
@@ -21,10 +21,10 @@ class PolyMeta(TemplateView, FormMixin):
     template_name = ''
     model_class = None
     
-
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
-        self.result = Poly.objects.get(**self.data_form) #TODO get_or_404 
+        logger.debug(self.data_form)
+        self.result = Wide.get_cost(self.data_form)
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)

@@ -1,6 +1,6 @@
 import json
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 from order.models import Orders
 
@@ -29,7 +29,22 @@ class Wide(models.Model):
     def __str__(self):
         return f'{self.wide_size}x{self.heigth_size}_{self.material_print}_{self.post_obr}--{self.cost}'
 
-
+    @staticmethod
+    def get_cost(form_data):
+        x = float(form_data['wide_size'])
+        y = float(form_data['heigth_size'])
+        material = Material.objects.get(id=int(form_data['material_print']))
+        try:
+            result = Wide.objects.get(wide_size=x,heigth_size=y, material_print=material)
+            return result
+        except ObjectDoesNotExist:
+            # new_wide_object = Wide.objects.create(wide_size=x,heigth_size=y, material_print=material)
+            form_data['material_print'] = Material.objects.get(id=form_data['material_print'])
+            cost = x*y*material.cost_per_m
+            new_wide_object = Wide(**form_data, cost=cost)
+            new_wide_object.save()
+            return new_wide_object
+        
     # def json_combine(self):
     #     json_dict = {'id': self.id,
     #                  'format_p': self.format_p.__str__(),
