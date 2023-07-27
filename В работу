@@ -95,6 +95,19 @@
         Таблица оснасток: id, form, size_x, size_y, price
         Таблица печати: id, form, x, y, count, snap(fk - snap_table)
 
+-----------------------------------------
 
+        Перенести на новый сервер evak24-7.ru и старый tipkor.ru
+            - For it I need create .conf in nginx/site-avialible and simlink to nginx/site-enable
+            - Copy dir with index.html file to path in .conf
+            - Change DNS note in reg.ru
+            - Get SSL sert from sslbot. and check redirect in .conf files nginx.
+
+        Prepare for deploy new tipkor.ru site
+            - Copy from sokolol/deploy
+            - Change correct values
+            - Put simlink from /deploy to nginx/site-enable
+        
+        
 
         
