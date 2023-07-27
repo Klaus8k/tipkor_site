@@ -58,10 +58,14 @@ class BannerView(WideMeta):
 class StickerView(WideMeta):
     form_class = Sticker_Form
     template_name = 'sticker.html'
+    type_production = 'sticker'
+    
     
 class TableView(WideMeta):
     form_class = Table_Form
     template_name = 'table.html'
+    type_production = 'table'
+    
 
 
 class ConfirmView(DetailView, FormMixin):

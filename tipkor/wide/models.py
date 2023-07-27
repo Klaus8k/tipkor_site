@@ -53,7 +53,7 @@ class Wide(models.Model):
             result = Wide.objects.get(wide_size=x,heigth_size=y, material_print=material, post_obr=post_obr)
             return result
         except ObjectDoesNotExist:
-            cost = calc_cost(x,y,material,post_obr, type_production)
+            cost = calc_cost(x, y, material, post_obr.price, type_production)
             new_wide_object = Wide(wide_size=x,heigth_size=y, material_print=material, post_obr=post_obr, cost=cost)
             new_wide_object.save()
             return new_wide_object
@@ -71,5 +71,23 @@ class Wide(models.Model):
 
 
 def calc_cost(x,y,material,post_obr, type_production):
-    logger.debug(type_production)
-    return 123465
+    print_cost = x * y * material.cost_per_m
+    if type_production == 'sticker':
+        return print_cost
+    elif type_production == 'banner':
+        square = x * y
+        perimeter = 2 * (x + y)
+        if post_obr == 0:
+            return print_cost
+        elif post_obr == 1:
+            return print_cost + (perimeter * 30)
+        elif post_obr == 2:
+            return print_cost + (perimeter * 30) + 120
+        elif post_obr == 3:
+            luvers_value = perimeter // 0.5
+            return print_cost + (perimeter * 30) + luvers_value * 30
+        elif post_obr == 4:
+            luvers_value = perimeter // 0.3
+            return print_cost + (perimeter * 30) + luvers_value * 30   
+    elif type_production == 'table':
+        return print_cost
