@@ -32,7 +32,7 @@ def date_to_ready():
     """
     work_time = 1
     time_create = datetime.datetime.now()
-    print(time_create.hour)
+    # print('часов -', time_create.hour)
     if time_create.hour >= 15 or time_create.hour <= 9: # если заказ после 15-00 то +1 день на работу
         work_time += 1
     time_ready = time_create + datetime.timedelta(days=work_time)

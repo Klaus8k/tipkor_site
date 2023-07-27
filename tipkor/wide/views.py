@@ -10,7 +10,7 @@ from order.sender import send_email
 from .forms import Banner_Form, Confirm_form, Sticker_Form, Table_Form
 from .models import Wide
 
-logger.add('wide_view_log.txt')
+# logger.add('wide_view_log.txt')
 
 
 # Делаем 3 отдельными классами пока
@@ -19,10 +19,10 @@ class WideMeta(TemplateView, FormMixin):
     form_class = None
     template_name = ''
     model_class = None
+    type_production = None
     
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
-        logger.debug(self.data_form)
         self.result = Wide.get_wide_object(self.data_form)
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
@@ -33,7 +33,6 @@ class WideMeta(TemplateView, FormMixin):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
             context.update({'calc_form': self.form_class(self.data_form)})       
-            print(self.data_form)     
         else:
             context.update({'calc_form': self.form_class()})
         return context
@@ -41,6 +40,7 @@ class WideMeta(TemplateView, FormMixin):
     
     def get_form_dict(self):
         form_dict = self.request.POST.copy().dict()
+        form_dict.update({'type_production':self.type_production})
         del form_dict['csrfmiddlewaretoken']
         del form_dict['calc_form']
         return form_dict
@@ -52,6 +52,7 @@ class WideMeta(TemplateView, FormMixin):
 class BannerView(WideMeta):
     form_class = Banner_Form
     template_name = 'banner.html'
+    type_production = 'banner'
     # default_calc = {'paper': '300', 'format_p': '1', 'duplex': 'True', 'pressrun': '1000'}
     
 class StickerView(WideMeta):
@@ -77,7 +78,6 @@ class ConfirmView(DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
-        logger.debug(kwargs)
         name = self.request.POST.dict()['name'].lower()
         email = self.request.POST.dict()['email'].lower()  
         tel = self.request.POST.dict()['tel']
@@ -88,7 +88,6 @@ class ConfirmView(DetailView, FormMixin):
         order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
         
         send_email(email, order=order)
-        logger.debug(order.id)
         return HttpResponseRedirect(reverse('wide:success', args=[order.id]))
     
     def get_order_type(self):

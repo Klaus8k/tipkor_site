@@ -4,6 +4,8 @@ from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from order.models import Orders
 
+from loguru import logger
+
 from .constants import POST_OBR
 
 
@@ -30,6 +32,7 @@ class Post_obr(models.Model):
     
     
 class Wide(models.Model):
+    type_production = models.CharField(max_length=30, null=True)
     wide_size = models.FloatField()
     heigth_size = models.FloatField()
     material_print = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
@@ -45,11 +48,12 @@ class Wide(models.Model):
         y = float(form_data['heigth_size'])
         material = Material.objects.get(id=int(form_data['material_print']))
         post_obr = Post_obr.objects.get(id=int(form_data['post_obr'])) 
+        type_production = form_data['type_production']
         try:
             result = Wide.objects.get(wide_size=x,heigth_size=y, material_print=material, post_obr=post_obr)
             return result
         except ObjectDoesNotExist:
-            cost = calc_cost(x,y,material,post_obr)
+            cost = calc_cost(x,y,material,post_obr, type_production)
             new_wide_object = Wide(wide_size=x,heigth_size=y, material_print=material, post_obr=post_obr, cost=cost)
             new_wide_object.save()
             return new_wide_object
@@ -66,5 +70,6 @@ class Wide(models.Model):
 
 
 
-def calc_cost(*args):
+def calc_cost(x,y,material,post_obr, type_production):
+    logger.debug(type_production)
     return 123465
