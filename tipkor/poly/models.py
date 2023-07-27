@@ -1,10 +1,10 @@
 import json
 
-from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from order.models import Orders
 
-from .constants import DUPLEX, PAPER_CHOICE, BOOKLETS
+from .constants import BOOKLETS, DUPLEX, PAPER_CHOICE
 
 
 def valid(value):

@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
-from .constants import FORMAT, PAPER_CHOICE, PRESSRUN_OFFSET, BOOKLETS
+from .constants import BOOKLETS, FORMAT, PAPER_CHOICE, PRESSRUN_OFFSET
 from .models import Formats, Poly
 
 
@@ -20,7 +20,7 @@ class Card_Form(ModelForm):
                                 queryset=Formats.objects.filter(format_p=self.FORMAT),
                                 empty_label=None
                                 ) 
-        self.fields['paper'] = forms.ChoiceField(initial='300', choices=PAPER_CHOICE)
+        self.fields['paper'] = forms.ChoiceField(initial='300', choices=[("300", "300 г/м")])
         self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
 
 
