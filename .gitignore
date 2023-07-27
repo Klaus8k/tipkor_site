@@ -167,3 +167,4 @@ cython_debug/
 #.idea/
 env_for_windows
 db_csv_tipkor/*
+*.csv
