@@ -167,4 +167,3 @@ cython_debug/
 #.idea/
 env_for_windows
 db_csv_tipkor/*
-db_csv_tipkor/wide_material_202307271148.csv
