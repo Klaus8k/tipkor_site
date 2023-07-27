@@ -53,23 +53,24 @@ class Sticker_Form(ModelForm):
         
         
 class Table_Form(ModelForm):
-    # FORMAT = 'A4' # Выбор только форматов с именем 'Визитка'
-    pass
-    # class Meta:
-    #     model = Wide
-    # #     fields = ['format_p', 'paper', 'pressrun', 'duplex', ]
+    MATERIAL = 'table'
+    
+    class Meta:
+        model = Wide
+        fields = ['wide_size', 'heigth_size']
+    
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['material_print'] = forms.ModelChoiceField(
+                                queryset=Material.objects.filter(type_material=self.MATERIAL),
+                                empty_label=None
+                                ) 
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     # self.fields['format_p'] = forms.ChoiceField(choices=FORMAT)
-    #     self.fields['format_p'] = forms.ModelChoiceField(
-    #                     queryset=Formats.objects.filter(format_p=self.FORMAT),
-    #                     empty_label=None
-    #                     ) 
-        
-    #     self.fields['paper'] = forms.ChoiceField(initial='130', choices=PAPER_CHOICE)
-    #     self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
-    #     self.fields['post_obr'] = forms.ChoiceField(initial='eurobucket', choices=BOOKLETS)
+        self.fields['post_obr'] = forms.ModelChoiceField(
+                                queryset=Post_obr.objects.filter(type_wide_production='table'),
+                                empty_label=None
+                                )
         
 
 class Confirm_form(forms.Form):

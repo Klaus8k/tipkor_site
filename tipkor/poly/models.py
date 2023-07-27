@@ -1,6 +1,6 @@
 import json
 
-from django.core.exceptions import ValidationError
+from django.core.exceptions import ValidationError, ObjectDoesNotExist
 from django.db import models
 from order.models import Orders
 
@@ -35,6 +35,15 @@ class Poly(models.Model):
 
     def __str__(self):
         return f'{self.format_p}, {self.paper}г/м ,{self.pressrun}шт.,4+4 - {self.duplex}, post:{self.post_obr} = {self.cost}руб.'
+    
+    @staticmethod
+    def get_poly_object(data_form):
+        try:
+            result = Poly.objects.get(**data_form)
+            return result
+        except: #TODO Нет строки в бд, попробовать с парсера (это на потом)
+
+            return {'cost': 'Неверные параметры расчета'}
 
     def json_combine(self):
         json_dict = {'id': self.id,

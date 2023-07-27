@@ -1,4 +1,3 @@
-
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, reverse
 from django.views.generic.base import TemplateView
@@ -20,7 +19,9 @@ class PolyMeta(TemplateView, FormMixin):
 
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
-        self.result = Poly.objects.get(**self.data_form) #TODO get_or_404 
+        self.result = Poly.get_poly_object(self.data_form) #TODO get_or_404 
+        
+        # self.result = Poly.objects.get(**self.data_form) #TODO get_or_404 
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)
@@ -29,8 +30,7 @@ class PolyMeta(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            context.update({'calc_form': self.form_class(self.data_form)})       
-            print(self.data_form)     
+            context.update({'calc_form': self.form_class(self.data_form)})            
         else:
             context.update({'calc_form': self.form_class()})
         return context
