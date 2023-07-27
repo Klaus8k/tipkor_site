@@ -7,7 +7,7 @@ from .models import Formats, Poly
 
 
 class Card_Form(ModelForm):
-    FORMAT = 'Визитка' # Выбор только форматов с именем 'Визитка'
+    FORMAT = 'Визитка' # По русски!
 
     class Meta:
         model = Poly
@@ -24,9 +24,8 @@ class Card_Form(ModelForm):
         self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
 
 
-# Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
 class Leaflet_Form(ModelForm):
-    FORMAT = 'A6' # Выбор только форматов с именем 'Визитка'
+    FORMAT = 'А6' # По русски!
 
     class Meta:
         model = Poly
@@ -44,15 +43,14 @@ class Leaflet_Form(ModelForm):
         self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
         
 class Booklet_Form(ModelForm):
-    FORMAT = 'A4' # Выбор только форматов с именем 'Визитка'
-
+    FORMAT = 'А4' # По русски!
+    
     class Meta:
         model = Poly
         fields = ['format_p', 'paper', 'pressrun', 'duplex', ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # self.fields['format_p'] = forms.ChoiceField(choices=FORMAT)
         self.fields['format_p'] = forms.ModelChoiceField(
                         queryset=Formats.objects.filter(format_p=self.FORMAT),
                         empty_label=None

@@ -40,6 +40,7 @@ class Poly(models.Model):
     def get_poly_object(data_form):
         try:
             result = Poly.objects.get(**data_form)
+            result.cost = multiply_cost(result.cost, result.pressrun)
             return result
         except: #TODO Нет строки в бд, попробовать с парсера (это на потом)
 
@@ -58,3 +59,16 @@ class Poly(models.Model):
 
 
 
+def multiply_cost(cost: int, pressrun: int):
+    if pressrun < 500:
+        marge = 400
+        return ((cost + marge) // 10 + 1) * 10
+    elif pressrun == 500:
+        marge = 1000
+        return ((cost + marge) // 10 + 1) * 10
+    elif pressrun == 1000:
+        marge = 1200
+        return ((cost + marge) // 10 + 1) * 10
+    else:
+        return ((cost * 1.46) // 10 + 1) * 10
+        
