@@ -20,8 +20,6 @@ class PolyMeta(TemplateView, FormMixin):
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
         self.result = Poly.get_poly_object(self.data_form) #TODO get_or_404 
-        
-        # self.result = Poly.objects.get(**self.data_form) #TODO get_or_404 
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)
