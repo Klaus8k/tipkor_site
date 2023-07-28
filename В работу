@@ -98,13 +98,13 @@
 -----------------------------------------
 
         Перенести на новый сервер evak24-7.ru и старый tipkor.ru
-            - For it I need create .conf in nginx/site-avialible and simlink to nginx/site-enable
-            - Copy dir with index.html file to path in .conf
-            - Change DNS note in reg.ru
-            - Get SSL sert from sslbot. and check redirect in .conf files nginx.
+            x For it I need create .conf in nginx/site-avialible and simlink to nginx/site-enable
+            x Copy dir with index.html file to path in .conf
+            x Change DNS note in reg.ru
+            x Get SSL sert from sslbot. and check redirect in .conf files nginx.
 
         Prepare for deploy new tipkor.ru site
-            - Copy from sokolol/deploy
+            x Copy from sokolol/deploy
             - Change correct values
             - Put simlink from /deploy to nginx/site-enable
         

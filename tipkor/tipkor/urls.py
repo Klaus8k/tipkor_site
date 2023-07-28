@@ -8,6 +8,6 @@ urlpatterns = [
     path('',TemplateView.as_view(template_name='tipkor.html')),
     path('wide/', include('wide.urls')),
     path('poly/', include('poly.urls')),
-    
+    path('stamp/', include('stamp.urls')),
     path('expirement/', TemplateView.as_view(template_name='expirement.html')),
 ]

@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'order',
     'poly',
     'wide',
+    'stamp',
 ]
 
 MIDDLEWARE = [
@@ -66,6 +67,7 @@ TEMPLATES = [
             BASE_DIR / 'tipkor/templates/tipkor', # path to templates files
             BASE_DIR / 'poly/templates/poly', # path to templates files
             BASE_DIR / 'wide/templates/wide', # path to templates files
+            BASE_DIR / 'stamp/templates/stamp', # path to templates files
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -138,7 +140,8 @@ STATIC_ROOT = BASE_DIR / 'static'
 STATICFILES_DIRS = [  # dirs of static files
     BASE_DIR / "tipkor/static",  # for index page
     BASE_DIR / "poly/static",  # for poly app
-    BASE_DIR / "wide/static",  # for poly app
+    BASE_DIR / "wide/static",  # for wide app
+    BASE_DIR / "stamp/static",  # for stamp app
 
 ]
 
