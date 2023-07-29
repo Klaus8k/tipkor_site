@@ -24,7 +24,7 @@ class Snap_item(models.Model):
 class Stamp(models.Model):
     type_stamp = models.ForeignKey(Stamp_type, on_delete=models.DO_NOTHING)
     express = models.BooleanField()
-    file = models.FileField()
+    file = models.FileField(upload_to='orders')
     comment = models.TextField(blank=True, max_length=100)
     snap = models.ForeignKey(Snap_item, on_delete=models.DO_NOTHING)
     count = models.IntegerField()
