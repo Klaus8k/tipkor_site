@@ -10,7 +10,7 @@ class C_stamp_Form(ModelForm):
 
     class Meta:
         model = Stamp
-        fields = ['express', 'file', 'comment', 'snap_type', 'count' ]
+        fields = ['express', 'file', 'comment', 'snap', 'count' ]
         
 
     # def __init__(self, *args, **kwargs):
