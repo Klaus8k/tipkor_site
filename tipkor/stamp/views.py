@@ -19,8 +19,8 @@ class StampMeta(TemplateView, FormMixin):
 
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
-        self.result = Stamp.get(self.data_form)
-        # self.result = Poly.get_poly_object(self.data_form) #TODO get_or_404 
+        self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
+        self.result = Stamp.get_stamp_object(self.data_form)
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
         return self.get(*args, **kwargs)
