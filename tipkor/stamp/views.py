@@ -3,10 +3,9 @@ from django.shortcuts import redirect, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
+from loguru import logger
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
-
-from loguru import logger
 
 from .forms import C_stamp_Form, Confirm_form, R_stamp_Form
 from .models import Stamp
@@ -73,17 +72,22 @@ class ConfirmView(DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
+        logger.debug(self.request.FILES)
         name = self.request.POST.dict()['name'].lower()
-        
         email = self.request.POST.dict()['email'].lower()
-        # test email sender = 'klaus8@mail.ru'
-        # email = 'klaus8@mail.ru'
-        
+        comment = self.request.POST.dict()['comment'].lower()
+        # file = self.request.POST.dict()['file'].lower()
+        # delivery = self.request.POST.dict()['delivery'].lower()
         tel = self.request.POST.dict()['tel']
         client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
         product = self.get_object().json_combine()
         product['type_production'] = self.get_order_type()
-        order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
+        order = Orders.objects.create(client=client[0],
+                                      product=product,
+                                      ready_date=date_to_ready(),
+                                      comment=comment,)
+                                    #   file=file)
+                                    #   delivery=delivery)
         
         send_email(email, order=order)
         

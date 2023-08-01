@@ -9,7 +9,7 @@ class C_stamp_Form(ModelForm):
 
     class Meta:
         model = Stamp
-        fields = ['express', 'comment', 'count', 'new_or_no']
+        fields = ['express', 'count', 'new_or_no']
         widgets = {'new_or_no': forms.RadioSelect()}
         
     def __init__(self, *args, **kwargs):
@@ -38,5 +38,7 @@ class Confirm_form(forms.Form):
     name = forms.CharField(max_length=20, required=False)
     email = forms.EmailField()
     tel = forms.CharField(max_length=15)
+    comment = forms.CharField(widget=forms.Textarea(attrs = {'cols': '30', 'rows': '3'}))
     file = forms.FileField(required=False)
+    # delivery = forms.CharField(max_length=100, required=False)
 

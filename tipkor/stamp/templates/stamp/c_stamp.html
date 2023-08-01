@@ -33,8 +33,7 @@
                     </div>
 
                     <div class="row pt-4">
-                        <div class="col">{{ calc_form.comment }}<p>ИНН (если есть)</p>
-                        </div>
+
                         <div class="col">{{ calc_form.snap }}<p>Оснастка</p>
                         </div>
                     </div>
@@ -83,36 +82,42 @@
 
             <div>
                 <form class="form-control-lg " action="{% url 'stamp:confirm' result.id %}" method="post">
-                    {% csrf_token %}
+
                     <div class="row border">
+                        {% csrf_token %}
+                        <div class="col-3"><input type="file">{{ form.comment }}<p>ИНН (если есть)</p>
+                        </div>
+                        <div class="col-3 border">{{ form.file }}<p>макет</p>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col border">{{ form.name }}<p>Имя</p>
                         </div>tipkor@mail.ru
                         <div class="col border">{{ form.email }}<p>почта</p>
                         </div>
                         <div class="col border">{{ form.tel }}<p>телефон</p>
                         </div>
-                        <div class="col border">{{ form.file }}<p>макет</p>
-                        </div>
                     </div>
-
-
-                    <div class="row">
-                        <div class="col border">
-                            <button style="width: 200px;" type="submit" class="yes_button btn btn-primary"
-                                name="form">заказать</button>
-                            <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
-                        </div>
-                    </div>
-                </form>
-
             </div>
-            {% else %}
-            <h4>{{ result.cost }}</h4>
-            <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
 
-            {% endif %}
+
+            <div class="row">
+                <div class="col border">
+                    <button style="width: 200px;" type="submit" class="yes_button btn btn-primary"
+                        name="form">заказать</button>
+                    <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                </div>
+            </div>
+            </form>
+
         </div>
+        {% else %}
+        <h4>{{ result.cost }}</h4>
+        <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
+
+        {% endif %}
     </div>
+</div>
 
 </div>
 

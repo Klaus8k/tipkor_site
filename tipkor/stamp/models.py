@@ -34,8 +34,6 @@ class Stamp(models.Model):
     type_stamp = models.ForeignKey(Stamp_type, on_delete=models.DO_NOTHING)
     new_or_no = models.CharField(max_length=30, choices=NEW_CHOICE, default='1')
     express = models.BooleanField(default=False)
-    # file = models.FileField(upload_to='orders', null=True, blank=True)
-    comment = models.CharField(blank=True, max_length=20)
     snap= models.ForeignKey(Snap_item, blank=True, null=True, on_delete=models.DO_NOTHING)
     count = models.IntegerField(default=1)
     cost = models.IntegerField()
@@ -45,9 +43,7 @@ class Stamp(models.Model):
     
     @staticmethod
     def get_stamp_object(form_data):
-        # file = form_data['file']       
         express = 'express' in form_data.keys()
-        comment = form_data['comment']
         snap = Snap_item.objects.get(id=form_data['snap'])
         count = int(form_data['count'])
         type_stamp = Stamp_type.objects.get(type_stamp=form_data['type_stamp'])
@@ -69,7 +65,6 @@ class Stamp(models.Model):
     def json_combine(self):
         json_dict = {'id': self.id,
                      'express': self.express,
-                     'comment': self.comment,
                      'snap': self.snap.__str__(),
                      'count': self.count,
                      'cost': self.cost

@@ -145,7 +145,7 @@ STATICFILES_DIRS = [  # dirs of static files
 
 ]
 
-MEDIA_ROOT = 'media/'
+MEDIA_ROOT = BASE_DIR / 'media/'
 
 STATIC_URL = 'static/'
 
