@@ -142,10 +142,12 @@ STATICFILES_DIRS = [  # dirs of static files
     BASE_DIR / "poly/static",  # for poly app
     BASE_DIR / "wide/static",  # for wide app
     BASE_DIR / "stamp/static",  # for stamp app
+    BASE_DIR / "order/static",  # for stamp app
 
 ]
 
-MEDIA_ROOT = BASE_DIR / 'media/'
+MEDIA_ROOT = BASE_DIR / 'media'
+print(type(MEDIA_ROOT))
 
 STATIC_URL = 'static/'
 

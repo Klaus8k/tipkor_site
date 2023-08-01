@@ -85,9 +85,9 @@
 
                     <div class="row border">
                         {% csrf_token %}
-                        <div class="col-3"><input type="file">{{ form.comment }}<p>ИНН (если есть)</p>
+                        <div class="col">{{ form.comment }}<p>ИНН (если есть)</p>
                         </div>
-                        <div class="col-3 border">{{ form.file }}<p>макет</p>
+                        <div class="col border">{{ form.file }}<p>макет</p>
                         </div>
                     </div>
                     <div class="row">
