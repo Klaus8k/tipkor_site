@@ -28,7 +28,11 @@ class Snap_item(models.Model):
         return self.title
     
 class Stamp(models.Model):
+    NEW_CHOICE = (('1', 'Новая'),
+                        ('0', 'По оттиску'))
+    
     type_stamp = models.ForeignKey(Stamp_type, on_delete=models.DO_NOTHING)
+    new_or_no = models.CharField(max_length=30, choices=NEW_CHOICE, default='1')
     express = models.BooleanField(default=False)
     # file = models.FileField(upload_to='orders', null=True, blank=True)
     comment = models.CharField(blank=True, max_length=20)

@@ -8,7 +8,7 @@ from order.sender import send_email
 
 from loguru import logger
 
-from .forms import C_stamp_Form, Confirm_form
+from .forms import C_stamp_Form, Confirm_form, R_stamp_Form
 from .models import Stamp
 
 # Делаем 3 отдельными классами пока
@@ -32,7 +32,7 @@ class StampMeta(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            context.update({'calc_form': self.form_class(self.data_form)})            
+            context.update({'calc_form': self.form_class(self.data_form), 'form': Confirm_form})            
         else:
             context.update({'calc_form': self.form_class()})
         return context
@@ -51,6 +51,10 @@ class StampMeta(TemplateView, FormMixin):
 class CstampView(StampMeta):
     form_class = C_stamp_Form
     template_name = 'c_stamp.html'
+    
+class RstampView(StampMeta):
+    form_class = R_stamp_Form
+    template_name = 'R_stamp.html'
     
 
 

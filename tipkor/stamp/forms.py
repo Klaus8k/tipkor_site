@@ -6,20 +6,29 @@ from .models import Snap_item, Snap_type, Stamp, Stamp_type
 
 
 class C_stamp_Form(ModelForm):
-    # FORMAT = 'Визитка' # По русски!
 
     class Meta:
         model = Stamp
-        fields = ['express', 'comment', 'count' ]
+        fields = ['express', 'comment', 'count', 'new_or_no']
+        widgets = {'new_or_no': forms.RadioSelect()}
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['snap'] = forms.ModelChoiceField(
                                 queryset=Snap_item.objects.filter(type_stamp=Stamp_type.objects.get(type_stamp='c_stamp')),
-                                empty_label=None, initial=Snap_item.objects.get(snap_type=Snap_type.objects.get(snap_type='norm'))
-                                ) 
+                                empty_label=None, initial=Snap_item.objects.get(snap_type=Snap_type.objects.get(snap_type='norm'))) 
 
-    
+class R_stamp_Form(ModelForm):
+
+    class Meta:
+        model = Stamp
+        fields = ['express', 'count' ]
+        
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['snap'] = forms.ModelChoiceField(
+                                queryset=Snap_item.objects.filter(type_stamp=Stamp_type.objects.get(type_stamp='r_stamp')),
+                                empty_label=None, initial=Snap_item.objects.get(snap_type=Snap_type.objects.get(snap_type='norm')))
 
 
 

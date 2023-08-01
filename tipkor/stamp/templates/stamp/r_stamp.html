@@ -15,7 +15,7 @@
     <div class="card_text">
         <p>-----------------</p>
     </div>
-    <h1 class="title_text">Печати</h1>
+    <h1 class="title_text">Штампы</h1>
 </div>
 
 <!-- Форма -->
@@ -24,11 +24,11 @@
         <div class="row">
 
             <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
-                <form class="form-control-lg " action="{% url 'stamp:c_stamp' %}" method="post">
+                <form class="form-control-lg " action="{% url 'stamp:r_stamp' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{calc_form.new_or_no}}</div>
                         <div class="col">{{ calc_form.express }}<p>Срочно (+500 руб.)</p>
+                        
                         </div>
                     </div>
 
@@ -74,37 +74,11 @@
                 <p>При заказе сегодня до 15:00</p>
             </div>
 
-            <!-- <div class="pt-4">
+            <div class="pt-4">
                 <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}"> заказать</a>
-            </div> -->
+            </div>
             <div class="more_info">
                 <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
-            </div>
-
-            <div>
-                <form class="form-control-lg " action="{% url 'stamp:confirm' result.id %}" method="post">
-                    {% csrf_token %}
-                    <div class="row border">
-                        <div class="col border">{{ form.name }}<p>Имя</p>
-                        </div>tipkor@mail.ru
-                        <div class="col border">{{ form.email }}<p>почта</p>
-                        </div>
-                        <div class="col border">{{ form.tel }}<p>телефон</p>
-                        </div>
-                        <div class="col border">{{ form.file }}<p>макет</p>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col border">
-                            <button style="width: 200px;" type="submit" class="yes_button btn btn-primary"
-                                name="form">заказать</button>
-                            <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
-                        </div>
-                    </div>
-                </form>
-
             </div>
             {% else %}
             <h4>{{ result.cost }}</h4>
