@@ -17,7 +17,7 @@ class Orders(models.Model):
     product = models.JSONField(null=True, blank=True)
     ready_date = models.DateField(null=True, blank=True)
     pay_info = models.BooleanField(null=True, blank=True)
-    file = models.FileField(null=True, blank=True)
+    file = models.FileField(upload_to='orders', null=True, blank=True)
     
     def __str__(self):
         return f'{self.client} - {self.create_date}'

@@ -6,6 +6,8 @@ from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
+from loguru import logger
+
 from .forms import C_stamp_Form, Confirm_form
 from .models import Stamp
 
@@ -20,6 +22,7 @@ class StampMeta(TemplateView, FormMixin):
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
         self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
+        logger.debug(self.data_form)
         self.result = Stamp.get_stamp_object(self.data_form)
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
@@ -80,19 +83,16 @@ class ConfirmView(DetailView, FormMixin):
         
         send_email(email, order=order)
         
-        return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
+        return HttpResponseRedirect(reverse('stamp:success', args=[order.id]))
     
     def get_order_type(self):
         order_type = self.request.path.split('/')[2]
-        if order_type == 'card':
-            return 'Визитки'
-        elif order_type == 'leaflet':
-            return 'Листовки'
-        elif order_type == 'booklet':
-            return 'Буклеты'
+        if order_type == 'c_stamp':
+            return 'Печать'
+        elif order_type == 'r_stamp':
+            return 'Штамп'
         else: return 'Изделие не определено'
         
-    
     
 class SuccessView(DetailView):
     model = Orders

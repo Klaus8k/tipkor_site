@@ -27,14 +27,13 @@
                 <form class="form-control-lg " action="{% url 'stamp:c_stamp' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{ calc_form.express }}<p>Срочность</p>
-                        </div>
-                        <div class="col">{{ calc_form.file }}<p>Файл</p>
+                        <div class="col">{{ calc_form.express }}<p>Срочно (+500 руб.)</p>
+                        
                         </div>
                     </div>
 
                     <div class="row pt-4">
-                        <div class="col">{{ calc_form.comment }}<p>Комментарий</p>
+                        <div class="col">{{ calc_form.comment }}<p>ИНН (если есть)</p>
                         </div>
                         <div class="col">{{ calc_form.snap }}<p>Оснастка</p>
                         </div>
@@ -66,11 +65,9 @@
             <div class="col col-xl-3">
                 {% if result.id %}
                 <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
-                <h5>Формат: {{ result.format_p }}</h5>
-                <h5>Материал: {{ result.paper }} г/м</h5>
-                <h5>Двухсторонняя печать: {{ result.duplex|yesno:"Да,Нет" }}</h5>
-                <h5>Типо буклета: {{ result.post_obr }}</h5>
-                <h5>Тираж: {{ result.pressrun }} штук.</h5>
+                <h5>Срочно: {{ result.express|yesno:"Да,Нет" }}</h5>
+                <h5>Оснастка: {{ result.snap }}</h5>
+                <h5>Количество: {{ result.count }} штук.</h5>
             </div>
             <div class="col">
                 <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>

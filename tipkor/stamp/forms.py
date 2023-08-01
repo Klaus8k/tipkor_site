@@ -2,7 +2,7 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
-from .models import Stamp
+from .models import Snap_item, Snap_type, Stamp, Stamp_type
 
 
 class C_stamp_Form(ModelForm):
@@ -10,17 +10,17 @@ class C_stamp_Form(ModelForm):
 
     class Meta:
         model = Stamp
-        fields = ['express', 'file', 'comment', 'snap', 'count' ]
+        fields = ['express', 'comment', 'count' ]
         
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields['snap'] = forms.ModelChoiceField(
+                                queryset=Snap_item.objects.filter(type_stamp=Stamp_type.objects.get(type_stamp='c_stamp')),
+                                empty_label=None, initial=Snap_item.objects.get(snap_type=Snap_type.objects.get(snap_type='norm'))
+                                ) 
 
-    # def __init__(self, *args, **kwargs):
-    #     super().__init__(*args, **kwargs)
-    #     self.fields['format_p'] = forms.ModelChoiceField(
-    #                             queryset=Formats.objects.filter(format_p=self.FORMAT),
-    #                             empty_label=None
-    #                             ) 
-    #     self.fields['paper'] = forms.ChoiceField(initial='300', choices=[("300", "300 г/м")])
-    #     self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
+    
+
 
 
         
