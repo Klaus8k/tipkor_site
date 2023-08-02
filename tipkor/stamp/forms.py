@@ -10,7 +10,7 @@ class C_stamp_Form(ModelForm):
 
     class Meta:
         model = Stamp
-        fields = ['express', 'count', 'new_or_no']
+        fields = ['express', 'count', 'new_or_no', 'snap']
         widgets = {'new_or_no': forms.RadioSelect()}
 
         

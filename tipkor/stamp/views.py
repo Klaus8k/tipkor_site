@@ -10,40 +10,39 @@ from order.sender import send_email
 from .forms import C_stamp_Form, Confirm_form, R_stamp_Form
 from .models import Stamp
 
-# Делаем 3 отдельными классами пока
-
-
 
 class StampMeta(TemplateView, FormMixin):
     form_class = None
     template_name = ''
     model_class = None
-    
-    
         
     def get_context_data(self, **kwargs):
-
+        logger.debug(f'get_request: {kwargs}')
+        
         
         context = super().get_context_data(**kwargs)
         if 'pk' in kwargs.keys():
-            stamp_obj = kwargs['pk']
-            logger.debug(context['form'].is_bound)
-            context.update({'form': self.form_class()}) #TODO Надо заполнить форму теми параметрами которые в объекте 
-            context['form'].fields['id_stamp_obj'] = stamp_obj #TODO Передать в поле ид объекта штампа
-            context.update({'confirm_form': Confirm_form})
-            context.update({'result': Stamp.objects.get(id=stamp_obj)})
+            stamp_obj = Stamp.objects.get(id=kwargs['pk'])
+            context.update({'form': self.form_class(instance=stamp_obj)}) #TODO Надо заполнить форму теми параметрами которые в объекте 
+            
+            confirm_form = Confirm_form(initial={'id_stamp_obj': kwargs['pk']})
+            context.update({'confirm_form': confirm_form})
+            
+            context.update({'result': Stamp.objects.get(id=kwargs['pk'])})
         else:
             context.update({'form': self.form_class()})
         return context
     
     def post(self, *args, **kwargs):
+        logger.debug(f'post_request: {self.request.POST}')
+        
         self.data_form = self.get_form_dict()
-        logger.debug(self.data_form)
         self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
+
         self.result = Stamp.get_stamp_object(self.data_form)
+        # kwargs.update({'form': self.get_form(**kwargs)})
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
-        logger.debug(self.result.id)
         return HttpResponseRedirect(reverse('stamp:c_stamp', args=[self.result.id]))
         
         # return self.get(*args, **kwargs)
@@ -106,12 +105,6 @@ class CstampView(StampMeta):
     template_name = 'c_stamp.html'
     
     
-# class RstampView(StampMeta):
-#     form_class = R_stamp_Form
-#     template_name = 'r_stamp.html'
-    
-
-
 
 class ConfirmView(DetailView):
     model = Stamp
@@ -128,15 +121,19 @@ class ConfirmView(DetailView):
     
     def post(self, *args, **kwargs):
         logger.debug(self.request.POST.dict())
-        name = self.request.POST.dict()['name'].lower()
-        email = self.request.POST.dict()['email'].lower()
-        comment = self.request.POST.dict()['comment'].lower()
-        file = self.request.POST.dict()['file']
+        name = self.request.POST.dict()['confirm_form-name'].lower()
+        email = self.request.POST.dict()['confirm_form-email'].lower()
+        comment = self.request.POST.dict()['confirm_form-comment'].lower()
+        file = self.request.POST.dict()['confirm_form-file']
         # delivery = self.request.POST.dict()['delivery'].lower()
-        tel = self.request.POST.dict()['tel']
+        tel = self.request.POST.dict()['confirm_form-tel']
+        
+        stamp_obj_pk = self.request.POST.dict()['confirm_form-id_stamp_obj']
         client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
-        product = self.get_object().json_combine()
+        
+        product = Stamp.objects.get(id=stamp_obj_pk).json_combine()
         product['type_production'] = self.get_order_type()
+        
         order = Orders.objects.create(client=client[0],
                                       product=product,
                                       ready_date=date_to_ready(),
@@ -144,7 +141,7 @@ class ConfirmView(DetailView):
                                       file=file)
                                     #   delivery=delivery)
         
-        # send_email(email, order=order)
+        send_email(email, order=order)
         
         return HttpResponseRedirect(reverse('stamp:success', args=[order.id]))
     

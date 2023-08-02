@@ -86,6 +86,7 @@
 
                     <div class="row border">
                         {% csrf_token %}
+                        {{ confirm_form.id_stamp_obj }}
                         <div class="col">{{ confirm_form.comment }}<p>ИНН (если есть)</p>
                         </div>
                         <div class="col border">{{ confirm_form.file }}<p>макет</p>
