@@ -16,12 +16,12 @@ class StampMeta(TemplateView, FormMixin):
     form_class = None
     template_name = ''
     model_class = None
+    confirm_form = Confirm_form
     
 
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
         self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
-        logger.debug(self.data_form)
         self.result = Stamp.get_stamp_object(self.data_form)
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
@@ -31,10 +31,13 @@ class StampMeta(TemplateView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            context.update({'calc_form': self.form_class(self.data_form), 'form': Confirm_form})            
+            context.update({'calc_form': self.form_class(self.data_form), 'confirm_form': self.confirm_form})         
         else:
             context.update({'calc_form': self.form_class()})
+
         return context
+    
+        
     
     
     def get_form_dict(self):
@@ -53,7 +56,7 @@ class CstampView(StampMeta):
     
 class RstampView(StampMeta):
     form_class = R_stamp_Form
-    template_name = 'R_stamp.html'
+    template_name = 'r_stamp.html'
     
 
 
@@ -69,14 +72,14 @@ class ConfirmView(DetailView, FormMixin):
         context['ready_date'] =  date_to_ready()
         context['type_production'] = self.get_order_type()
         
+        
         return context
     
     def post(self, *args, **kwargs):
-        logger.debug(self.request.FILES)
         name = self.request.POST.dict()['name'].lower()
         email = self.request.POST.dict()['email'].lower()
         comment = self.request.POST.dict()['comment'].lower()
-        # file = self.request.POST.dict()['file'].lower()
+        file = self.request.POST.dict()['file']
         # delivery = self.request.POST.dict()['delivery'].lower()
         tel = self.request.POST.dict()['tel']
         client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
@@ -85,11 +88,11 @@ class ConfirmView(DetailView, FormMixin):
         order = Orders.objects.create(client=client[0],
                                       product=product,
                                       ready_date=date_to_ready(),
-                                      comment=comment,)
-                                    #   file=file)
+                                      comment=comment,
+                                      file=file)
                                     #   delivery=delivery)
         
-        send_email(email, order=order)
+        # send_email(email, order=order)
         
         return HttpResponseRedirect(reverse('stamp:success', args=[order.id]))
     

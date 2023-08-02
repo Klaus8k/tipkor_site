@@ -23,7 +23,7 @@
                 <h5 style="color: rgb(93, 3, 131);">Формат: {{ order.product.format_p }}</h5>
                 <h5 style="color: rgb(93, 3, 131);">Материал: {{ order.product.paper }} г/м</h5>
                 <h5 style="color: rgb(93, 3, 131);">Двухсторонняя печать: {{ order.product.duplex|yesno:"Да,Нет" }}</h5>
-                <h5 style="color: rgb(93, 3, 131);">Тираж: {{ order.product.pressrun }} штук.</h5>
+                <h5 style="color: rgb(93, 3, 131);">Тираж: {{ order.type_production }} штук.</h5>
             </div>
             <div class="col">
                 <h2 style="color: rgb(1, 58, 124);">Готовность: {{ order.ready_date|date:"d.m.Y" }}г.</h2>
