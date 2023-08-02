@@ -43,21 +43,29 @@ class Stamp(models.Model):
     
     @staticmethod
     def get_stamp_object(form_data):
-        express = 'express' in form_data.keys()
-        snap = Snap_item.objects.get(id=form_data['snap'])
-        count = int(form_data['count'])
+        # logger.debug(form_data)
+        express = 'form-express' in form_data.keys()
+        new_or_no = form_data['form-new_or_no']
+        snap = Snap_item.objects.get(id=form_data['form-snap'])
+        count = int(form_data['form-count'])
         type_stamp = Stamp_type.objects.get(type_stamp=form_data['type_stamp'])
         try:
             result = Stamp.objects.get(type_stamp=type_stamp, snap=snap, count=count, express=express)
             return result
         except ObjectDoesNotExist:            
             if express:
-                cost = (Snap_item.objects.get(id=form_data['snap']).price + 1000) * count
+                cost = (Snap_item.objects.get(id=form_data['form-snap']).price + 1000) * count
             else:       
-                cost = (Snap_item.objects.get(id=form_data['snap']).price + 500) * count
+                cost = (Snap_item.objects.get(id=form_data['form-snap']).price + 500) * count
             form_data.update({'cost': cost, 'type_stamp': type_stamp, 'express': express})
             form_data['snap'] = snap
-            new_stamp_object = Stamp(**form_data)
+            new_stamp_object = Stamp(type_stamp=type_stamp,
+                                     new_or_no=new_or_no,
+                                     express=express,
+                                     snap=snap,
+                                     count=count,
+                                     cost=cost                                     
+                                     )
             new_stamp_object.save()
             return new_stamp_object
         

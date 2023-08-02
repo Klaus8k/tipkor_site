@@ -12,11 +12,65 @@ from .models import Stamp
 
 # Делаем 3 отдельными классами пока
 
+
+
 class StampMeta(TemplateView, FormMixin):
     form_class = None
     template_name = ''
     model_class = None
+    
+    
+        
+    def get_context_data(self, **kwargs):
+
+        
+        context = super().get_context_data(**kwargs)
+        if 'pk' in kwargs.keys():
+            stamp_obj = kwargs['pk']
+            logger.debug(context['form'].is_bound)
+            context.update({'form': self.form_class()}) #TODO Надо заполнить форму теми параметрами которые в объекте 
+            context['form'].fields['id_stamp_obj'] = stamp_obj #TODO Передать в поле ид объекта штампа
+            context.update({'confirm_form': Confirm_form})
+            context.update({'result': Stamp.objects.get(id=stamp_obj)})
+        else:
+            context.update({'form': self.form_class()})
+        return context
+    
+    def post(self, *args, **kwargs):
+        self.data_form = self.get_form_dict()
+        logger.debug(self.data_form)
+        self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
+        self.result = Stamp.get_stamp_object(self.data_form)
+        kwargs.update({'result': self.result})
+        kwargs.update({'ready_date': date_to_ready()})
+        logger.debug(self.result.id)
+        return HttpResponseRedirect(reverse('stamp:c_stamp', args=[self.result.id]))
+        
+        # return self.get(*args, **kwargs)
+        # if self.get_form().is_bound:
+        #     self.data_form = self.get_form_dict()
+        #     self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
+        #     self.result = Stamp.get_stamp_object(self.data_form)
+        #     kwargs.update({'result': self.result})
+        #     kwargs.update({'ready_date': date_to_ready()})
+        #     return self.get(*args, **kwargs)
+        
+        
+        
+    def get_form_dict(self):
+        form_dict = self.request.POST.copy().dict()
+        del form_dict['csrfmiddlewaretoken']
+        # del form_dict['form']
+        return form_dict
+
+
+
+
+class _StampMeta(TemplateView, FormMixin):
+    form_class = None
     confirm_form = Confirm_form
+    template_name = ''
+    model_class = None
     
 
     def post(self, *args, **kwargs):
@@ -25,25 +79,22 @@ class StampMeta(TemplateView, FormMixin):
         self.result = Stamp.get_stamp_object(self.data_form)
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
+        
         return self.get(*args, **kwargs)
     
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            context.update({'calc_form': self.form_class(self.data_form), 'confirm_form': self.confirm_form})         
+            context.update({'form': self.form_class(self.data_form), 'confirm_form': self.confirm_form})         
         else:
-            context.update({'calc_form': self.form_class()})
-
+            context.update({'form': self.form_class()})
         return context
-    
-        
-    
     
     def get_form_dict(self):
         form_dict = self.request.POST.copy().dict()
         del form_dict['csrfmiddlewaretoken']
-        del form_dict['calc_form']
+        # del form_dict['calc_form']
         return form_dict
         
     class Meta:
@@ -54,18 +105,18 @@ class CstampView(StampMeta):
     form_class = C_stamp_Form
     template_name = 'c_stamp.html'
     
-class RstampView(StampMeta):
-    form_class = R_stamp_Form
-    template_name = 'r_stamp.html'
+    
+# class RstampView(StampMeta):
+#     form_class = R_stamp_Form
+#     template_name = 'r_stamp.html'
     
 
 
 
-class ConfirmView(DetailView, FormMixin):
+class ConfirmView(DetailView):
     model = Stamp
     template_name = 'stamp/confirm.html'
-    form_class = Confirm_form
-    
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
@@ -76,6 +127,7 @@ class ConfirmView(DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
+        logger.debug(self.request.POST.dict())
         name = self.request.POST.dict()['name'].lower()
         email = self.request.POST.dict()['email'].lower()
         comment = self.request.POST.dict()['comment'].lower()

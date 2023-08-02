@@ -27,22 +27,23 @@
                 <form class="form-control-lg " action="{% url 'stamp:c_stamp' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{calc_form.new_or_no}}</div>
-                        <div class="col">{{ calc_form.express }}<p>Срочно (+500 руб.)</p>
+                        <div class="col">{{ form.new_or_no}}</div>
+                        <div class="col">{{ form.express }}<p>Срочно (+500 руб.)</p>
                         </div>
                     </div>
 
                     <div class="row pt-4">
 
-                        <div class="col">{{ calc_form.snap }}<p>Оснастка</p>
+                        <div class="col">{{ form.snap }}<p>Оснастка</p>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col">
-                            <div class="col">{{ calc_form.count }}<p>Количество</p>
+                            <div class="col">{{ form.count }}<p>Количество</p>
                             </div>
-                            <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
+                            <button type="submit" class="calc_button btn btn-primary"
+                                name="{{ form.prefix }}">Расчет</button>
                             <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
                         </div>
                     </div>
@@ -81,7 +82,7 @@
             </div>
 
             <div>
-                <form class="form-control-lg " action="{% url 'stamp:c_stamp'%}" method="post">
+                <form class="form-control-lg " action="{% url 'stamp:confirm' %}" method="post">
 
                     <div class="row border">
                         {% csrf_token %}
@@ -104,7 +105,7 @@
             <div class="row">
                 <div class="col border">
                     <button style="width: 200px;" type="submit" class="yes_button btn btn-primary"
-                        name="form">заказать</button>
+                        name="{{ confirm_form.prefix }}">заказать</button>
                     <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
                 </div>
             </div>

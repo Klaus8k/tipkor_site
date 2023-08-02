@@ -6,11 +6,13 @@ from .models import Snap_item, Snap_type, Stamp, Stamp_type
 
 
 class C_stamp_Form(ModelForm):
+    prefix = 'form'
 
     class Meta:
         model = Stamp
         fields = ['express', 'count', 'new_or_no']
         widgets = {'new_or_no': forms.RadioSelect()}
+
         
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -35,6 +37,9 @@ class R_stamp_Form(ModelForm):
         
 
 class Confirm_form(forms.Form):
+    prefix = 'confirm_form'
+    
+    id_stamp_obj = forms.IntegerField(widget=forms.HiddenInput())
     name = forms.CharField(max_length=20, required=False)
     email = forms.EmailField()
     tel = forms.CharField(max_length=15)
