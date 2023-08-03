@@ -43,7 +43,6 @@ class Stamp(models.Model):
     
     @staticmethod
     def get_stamp_object(form_data):
-        # logger.debug(form_data)
         express = 'form-express' in form_data.keys()
         new_or_no = form_data['form-new_or_no']
         snap = Snap_item.objects.get(id=form_data['form-snap'])

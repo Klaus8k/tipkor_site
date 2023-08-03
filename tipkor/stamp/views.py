@@ -23,7 +23,7 @@ class StampMeta(TemplateView, FormMixin):
         context = super().get_context_data(**kwargs)
         if 'pk' in kwargs.keys():
             stamp_obj = Stamp.objects.get(id=kwargs['pk'])
-            context.update({'form': self.form_class(instance=stamp_obj)}) #TODO Надо заполнить форму теми параметрами которые в объекте 
+            context.update({'form': self.form_class(instance=stamp_obj)})
             
             confirm_form = Confirm_form(initial={'id_stamp_obj': kwargs['pk']})
             context.update({'confirm_form': confirm_form})
@@ -40,29 +40,16 @@ class StampMeta(TemplateView, FormMixin):
         self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
 
         self.result = Stamp.get_stamp_object(self.data_form)
-        # kwargs.update({'form': self.get_form(**kwargs)})
+
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready()})
         return HttpResponseRedirect(reverse('stamp:c_stamp', args=[self.result.id]))
-        
-        # return self.get(*args, **kwargs)
-        # if self.get_form().is_bound:
-        #     self.data_form = self.get_form_dict()
-        #     self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
-        #     self.result = Stamp.get_stamp_object(self.data_form)
-        #     kwargs.update({'result': self.result})
-        #     kwargs.update({'ready_date': date_to_ready()})
-        #     return self.get(*args, **kwargs)
-        
         
         
     def get_form_dict(self):
         form_dict = self.request.POST.copy().dict()
         del form_dict['csrfmiddlewaretoken']
-        # del form_dict['form']
         return form_dict
-
-
 
 
 class _StampMeta(TemplateView, FormMixin):
@@ -93,7 +80,6 @@ class _StampMeta(TemplateView, FormMixin):
     def get_form_dict(self):
         form_dict = self.request.POST.copy().dict()
         del form_dict['csrfmiddlewaretoken']
-        # del form_dict['calc_form']
         return form_dict
         
     class Meta:
@@ -103,7 +89,6 @@ class _StampMeta(TemplateView, FormMixin):
 class CstampView(StampMeta):
     form_class = C_stamp_Form
     template_name = 'c_stamp.html'
-    
     
 
 class ConfirmView(DetailView):
@@ -120,11 +105,11 @@ class ConfirmView(DetailView):
         return context
     
     def post(self, *args, **kwargs):
-        logger.debug(self.request.POST.dict())
+        logger.debug(f'FILES - {self.request.FILES}')
         name = self.request.POST.dict()['confirm_form-name'].lower()
         email = self.request.POST.dict()['confirm_form-email'].lower()
         comment = self.request.POST.dict()['confirm_form-comment'].lower()
-        file = self.request.POST.dict()['confirm_form-file']
+        file = self.request.FILES['confirm_form-file']
         # delivery = self.request.POST.dict()['delivery'].lower()
         tel = self.request.POST.dict()['confirm_form-tel']
         

@@ -82,7 +82,7 @@
             </div>
 
             <div>
-                <form class="form-control-lg " action="{% url 'stamp:confirm' %}" method="post">
+                <form class="form-control-lg " action="{% url 'stamp:confirm' %}" method="post" enctype="multipart/form-data">
 
                     <div class="row border">
                         {% csrf_token %}
