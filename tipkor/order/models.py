@@ -23,7 +23,7 @@ class Orders(models.Model):
     
     def __str__(self):
         return f'{self.client} - {self.create_date}'
-    
+       
 
 def date_to_ready():
     """Расчитывает дату готовности. Если после 15-00 и до 9-00 то + 1 день.

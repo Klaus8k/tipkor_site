@@ -4,14 +4,16 @@ from django.forms import ModelForm
 
 from .models import Snap_item, Snap_type, Stamp, Stamp_type
 
+NEW_CHOICE = (('new', 'Новая'),
+            ('repeat', 'По оттиску'))
 
 class C_stamp_Form(ModelForm):
     prefix = 'form'
 
+
     class Meta:
         model = Stamp
-        fields = ['express', 'count', 'new_or_no', 'snap']
-        widgets = {'new_or_no': forms.RadioSelect()}
+        fields = ['count','snap','new_or_no','express']
 
         
     def __init__(self, *args, **kwargs):
@@ -19,6 +21,11 @@ class C_stamp_Form(ModelForm):
         self.fields['snap'] = forms.ModelChoiceField(
                                 queryset=Snap_item.objects.filter(type_stamp=Stamp_type.objects.get(type_stamp='c_stamp')),
                                 empty_label=None, initial=Snap_item.objects.get(snap_type=Snap_type.objects.get(snap_type='norm'))) 
+        self.fields['express'] = forms.BooleanField(required=False, initial=False, widget=forms.CheckboxInput())
+        self.fields['new_or_no'] = forms.ChoiceField(choices=NEW_CHOICE, required=False, initial='new', widget=forms.RadioSelect())
+
+
+
 
 class R_stamp_Form(ModelForm):
 
@@ -41,9 +48,9 @@ class Confirm_form(forms.Form):
     
     id_stamp_obj = forms.IntegerField(widget=forms.HiddenInput())
     name = forms.CharField(max_length=20, required=False)
-    email = forms.EmailField()
-    tel = forms.CharField(max_length=15)
-    comment = forms.CharField(widget=forms.Textarea(attrs = {'cols': '30', 'rows': '3'}))
+    email = forms.EmailField(required=False)
+    tel = forms.CharField(max_length=20)
+    comment = forms.CharField(required=False, widget=forms.Textarea(attrs = {'cols': '30', 'rows': '3'}))
     file = forms.FileField(required=False)
     # delivery = forms.CharField(max_length=100, required=False)
 

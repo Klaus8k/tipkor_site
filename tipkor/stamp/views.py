@@ -17,24 +17,23 @@ class StampMeta(TemplateView, FormMixin):
     model_class = None
         
     def get_context_data(self, **kwargs):
-        logger.debug(f'get_request: {kwargs}')
-        
         
         context = super().get_context_data(**kwargs)
         if 'pk' in kwargs.keys():
             stamp_obj = Stamp.objects.get(id=kwargs['pk'])
+
             context.update({'form': self.form_class(instance=stamp_obj)})
             
             confirm_form = Confirm_form(initial={'id_stamp_obj': kwargs['pk']})
+            if stamp_obj.new_or_no == 'repeat':
+                confirm_form.file.required = True #TODO поле файла обязательным сделать
             context.update({'confirm_form': confirm_form})
-            
             context.update({'result': Stamp.objects.get(id=kwargs['pk'])})
         else:
             context.update({'form': self.form_class()})
         return context
     
     def post(self, *args, **kwargs):
-        logger.debug(f'post_request: {self.request.POST}')
         
         self.data_form = self.get_form_dict()
         self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
@@ -90,40 +89,46 @@ class CstampView(StampMeta):
     form_class = C_stamp_Form
     template_name = 'c_stamp.html'
     
+class RstampView(StampMeta):
+    form_class = R_stamp_Form
+    template_name = 'r_stamp.html'
+    
 
 class ConfirmView(DetailView):
     model = Stamp
-    template_name = 'stamp/confirm.html'
+    # template_name = 'stamp/confirm.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
         context['ready_date'] =  date_to_ready()
         context['type_production'] = self.get_order_type()
-        
-        
         return context
     
     def post(self, *args, **kwargs):
-        logger.debug(f'FILES - {self.request.FILES}')
+        id_stamp = self.request.POST.dict()['confirm_form-id_stamp_obj']
+        client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
+        stamp_obj = Stamp.objects.get(id=stamp_obj_pk)
+
         name = self.request.POST.dict()['confirm_form-name'].lower()
         email = self.request.POST.dict()['confirm_form-email'].lower()
-        comment = self.request.POST.dict()['confirm_form-comment'].lower()
-        file = self.request.FILES['confirm_form-file']
+        comment = self.request.POST.dict()['confirm_form-comment']
+
+        
+        if 'confirm_form-file' in self.request.FILES:
+            file = self.request.FILES['confirm_form-file']
+            
         # delivery = self.request.POST.dict()['delivery'].lower()
         tel = self.request.POST.dict()['confirm_form-tel']
         
-        stamp_obj_pk = self.request.POST.dict()['confirm_form-id_stamp_obj']
-        client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
-        
-        product = Stamp.objects.get(id=stamp_obj_pk).json_combine()
+        product = stamp_obj.json_combine()
         product['type_production'] = self.get_order_type()
         
         order = Orders.objects.create(client=client[0],
                                       product=product,
                                       ready_date=date_to_ready(),
                                       comment=comment,
-                                      file=file)
+                                      file=None)
                                     #   delivery=delivery)
         
         send_email(email, order=order)

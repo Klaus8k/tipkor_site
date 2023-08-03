@@ -28,18 +28,21 @@ class Snap_item(models.Model):
         return self.title
     
 class Stamp(models.Model):
-    NEW_CHOICE = (('1', 'Новая'),
-                        ('0', 'По оттиску'))
+    NEW_CHOICE = (('new', 'Новая'),
+                  ('repeat', 'По оттиску'))
+    EXPRESS_CHOICE = ((True, 'Срочно'),
+                      (False, 'Стандарт'))
+    
     
     type_stamp = models.ForeignKey(Stamp_type, on_delete=models.DO_NOTHING)
-    new_or_no = models.CharField(max_length=30, choices=NEW_CHOICE, default='1')
-    express = models.BooleanField(default=False)
+    new_or_no = models.CharField(choices=NEW_CHOICE, default='new', max_length=20)
+    express = models.BooleanField(choices=EXPRESS_CHOICE, default=False)
     snap= models.ForeignKey(Snap_item, blank=True, null=True, on_delete=models.DO_NOTHING)
     count = models.IntegerField(default=1)
     cost = models.IntegerField()
     
     def __str__(self):
-        return f'{self.type_stamp.type_stamp} {self.snap.title} {self.count}'
+        return f'{self.type_stamp.type_stamp} {self.snap.title} {self.count} {self.new_or_no}'
     
     @staticmethod
     def get_stamp_object(form_data):
