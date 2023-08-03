@@ -52,7 +52,7 @@ class Stamp(models.Model):
         count = int(form_data['form-count'])
         type_stamp = Stamp_type.objects.get(type_stamp=form_data['type_stamp'])
         try:
-            result = Stamp.objects.get(type_stamp=type_stamp, snap=snap, count=count, express=express)
+            result = Stamp.objects.get(type_stamp=type_stamp,  new_or_no=new_or_no, snap=snap, count=count, express=express)
             return result
         except ObjectDoesNotExist:            
             if express:

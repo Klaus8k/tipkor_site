@@ -25,8 +25,8 @@ class StampMeta(TemplateView, FormMixin):
             context.update({'form': self.form_class(instance=stamp_obj)})
             
             confirm_form = Confirm_form(initial={'id_stamp_obj': kwargs['pk']})
-            if stamp_obj.new_or_no == 'repeat':
-                confirm_form.file.required = True #TODO поле файла обязательным сделать
+            if stamp_obj.new_or_no != 'new':
+                confirm_form.fields['file'].required = True #TODO поле файла обязательным сделать
             context.update({'confirm_form': confirm_form})
             context.update({'result': Stamp.objects.get(id=kwargs['pk'])})
         else:

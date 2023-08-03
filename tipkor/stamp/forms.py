@@ -17,6 +17,7 @@ class C_stamp_Form(ModelForm):
 
         
     def __init__(self, *args, **kwargs):
+        print('090000000000000000000', kwargs)
         super().__init__(*args, **kwargs)
         self.fields['snap'] = forms.ModelChoiceField(
                                 queryset=Snap_item.objects.filter(type_stamp=Stamp_type.objects.get(type_stamp='c_stamp')),
