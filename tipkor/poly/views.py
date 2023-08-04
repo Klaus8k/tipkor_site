@@ -3,10 +3,9 @@ from django.shortcuts import redirect, reverse
 from django.views.generic.base import TemplateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
+from loguru import logger
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
-
-from loguru import logger
 
 from .forms import Booklet_Form, Card_Form, Confirm_form, Leaflet_Form
 from .models import Poly
@@ -72,8 +71,8 @@ class ConfirmView(DetailView, FormMixin):
         context['ready_date'] =  date_to_ready()
         
         type_production = self.request.META.get('HTTP_REFERER').split('/')[-2]
+        context['type_production'] = type_production
         context['form'] = self.form_class(initial={'type_production': type_production})
-        
         
         return context
     

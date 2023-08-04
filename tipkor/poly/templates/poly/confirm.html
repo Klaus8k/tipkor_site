@@ -36,49 +36,50 @@
 
             <div>
                 <form class="form-control-lg border border-2" action="{% url 'poly:confirm' order.id %}" method="post"
-                enctype="multipart/form-data">
+                    enctype="multipart/form-data">
 
-                <div class="row">
-                    {% csrf_token %}
-                {{ form.type_production }}
-
-
-                    <div class="pb-4">
-                        <p>Прикрепите файл: </p>{{ form.file }}
-                    </div>
-
-                    <div class="">
-                        <p>Kомментарий к заказу:</p>
-                        {{ form.comment }}
-                    </div>
-                </div>
-
-                <!-- Данные клиента -->
-                <br>
-                <div class="row py-3 mx-1 border border-primary border-2 rounded">
-                    <h3>Контактные данные:</h3>
-                    <div class="col">
-                        <p>Имя: </p>{{ form.name }}
-                    </div>
-                    <div class="col">
-                        <p>E-mail: </p>{{ form.email }}
-                    </div>
-                    <div class="col">
-                        <p>Телефон: </p>{{ form.tel }}
-                    </div>
-                </div>
+                    <div class="row">
+                        {% csrf_token %}
+                        {{ form.type_production }}
 
 
-                <div class="row pt-4">
-                    <div class="col ">
-                        <button style="width: 200px;" type="submit" class="yes_button btn btn-primary">заказать</button>
-                        <div class="more_info">
-                            <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
+                        <div class="pb-4">
+                            <p>Прикрепите файл: </p>{{ form.file }}
                         </div>
-                        <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+
+                        <div class="">
+                            <p>Kомментарий к заказу:</p>
+                            {{ form.comment }}
+                        </div>
                     </div>
-                </div>
-            </form>
+
+                    <!-- Данные клиента -->
+                    <br>
+                    <div class="row py-3 mx-1 border border-primary border-2 rounded">
+                        <h3>Контактные данные:</h3>
+                        <div class="col">
+                            <p>Имя: </p>{{ form.name }}
+                        </div>
+                        <div class="col">
+                            <p>E-mail: </p>{{ form.email }}
+                        </div>
+                        <div class="col">
+                            <p>Телефон: </p>{{ form.tel }}
+                        </div>
+                    </div>
+
+
+                    <div class="row pt-4">
+                        <div class="col ">
+                            <button style="width: 200px;" type="submit"
+                                class="yes_button btn btn-primary">заказать</button>
+                            <div class="more_info">
+                                <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
+                            </div>
+                            <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                        </div>
+                    </div>
+                </form>
 
             </div>
         </div>

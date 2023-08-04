@@ -53,8 +53,7 @@ class BannerView(WideMeta):
     form_class = Banner_Form
     template_name = 'banner.html'
     type_production = 'banner'
-    # default_calc = {'paper': '300', 'format_p': '1', 'duplex': 'True', 'pressrun': '1000'}
-    
+
 class StickerView(WideMeta):
     form_class = Sticker_Form
     template_name = 'sticker.html'
@@ -77,25 +76,44 @@ class ConfirmView(DetailView, FormMixin):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
         context['ready_date'] =  date_to_ready()
-        context['type_production'] = self.get_order_type()
+        
+        type_production = self.request.META.get('HTTP_REFERER').split('/')[-2]
+        context['type_production'] = self.get_order_type(type_production)
+        context['form'] = self.form_class(initial={'type_production': type_production})
         
         return context
     
     def post(self, *args, **kwargs):
-        name = self.request.POST.dict()['name'].lower()
-        email = self.request.POST.dict()['email'].lower()  
-        tel = self.request.POST.dict()['tel']
+        confirm_dict = self.request.POST.dict()
         
-        client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
+        name = confirm_dict['name'].lower()
+        email = confirm_dict['email'].lower()
+        tel = confirm_dict['tel']
+        client = Clients.get_client_obj(name=name,email=email,tel=tel)
+        
+        comment = confirm_dict['comment']
+        if 'file' in self.request.FILES:
+            file = self.request.FILES['file']
+            
+        # delivery = self.request.POST.dict()['delivery'].lower()
+            
         product = self.get_object().json_combine()
-        product['type_production'] = self.get_order_type()
-        order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
+        product['type_production'] = confirm_dict['type_production']
         
-        send_email(email, order=order)
+        order = Orders.objects.create(client=client,
+                                      product=product,
+                                      ready_date=date_to_ready(),
+                                      comment=comment,
+                                      file=None)
+        
+        if email:
+            send_email(email, order=order)
         return HttpResponseRedirect(reverse('wide:success', args=[order.id]))
     
-    def get_order_type(self):
-        order_type = self.request.path.split('/')[2]
+    
+    
+    @staticmethod
+    def get_order_type(order_type):
         if order_type == 'banner':
             return 'Баннер'
         elif order_type == 'sticker':

@@ -32,7 +32,7 @@ class Post_obr(models.Model):
     
     
 class Wide(models.Model):
-    type_production = models.CharField(max_length=30, null=True)
+    type_production = models.CharField(max_length=30, null=True, blank=True)
     wide_size = models.FloatField()
     heigth_size = models.FloatField()
     material_print = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
