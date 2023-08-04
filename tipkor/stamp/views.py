@@ -124,6 +124,7 @@ class ConfirmView(DetailView):
         # If 
         if 'confirm_form-file' in self.request.FILES:
             file = self.request.FILES['confirm_form-file']
+        else: file = None
             
         # delivery = self.request.POST.dict()['delivery'].lower()
         
@@ -134,7 +135,7 @@ class ConfirmView(DetailView):
                                       product=product,
                                       ready_date=stamp_ready_time(stamp_obj.express),
                                       comment=comment,
-                                      file=None)
+                                      file=file)
                                     #   delivery=delivery)
         if email:
             send_email(email, order=order)

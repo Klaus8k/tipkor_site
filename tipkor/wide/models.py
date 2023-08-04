@@ -2,9 +2,8 @@ import json
 
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
-from order.models import Orders
-
 from loguru import logger
+from order.models import Orders
 
 from .constants import POST_OBR
 

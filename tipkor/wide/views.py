@@ -94,6 +94,7 @@ class ConfirmView(DetailView, FormMixin):
         comment = confirm_dict['comment']
         if 'file' in self.request.FILES:
             file = self.request.FILES['file']
+        else: file = None
             
         # delivery = self.request.POST.dict()['delivery'].lower()
             
@@ -104,7 +105,7 @@ class ConfirmView(DetailView, FormMixin):
                                       product=product,
                                       ready_date=date_to_ready(),
                                       comment=comment,
-                                      file=None)
+                                      file=file)
         
         if email:
             send_email(email, order=order)
