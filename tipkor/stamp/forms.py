@@ -17,16 +17,12 @@ class C_stamp_Form(ModelForm):
 
         
     def __init__(self, *args, **kwargs):
-        print('090000000000000000000', kwargs)
         super().__init__(*args, **kwargs)
         self.fields['snap'] = forms.ModelChoiceField(
                                 queryset=Snap_item.objects.filter(type_stamp=Stamp_type.objects.get(type_stamp='c_stamp')),
                                 empty_label=None, initial=Snap_item.objects.get(snap_type=Snap_type.objects.get(snap_type='norm'))) 
         self.fields['express'] = forms.BooleanField(required=False, initial=False, widget=forms.CheckboxInput())
         self.fields['new_or_no'] = forms.ChoiceField(choices=NEW_CHOICE, required=False, initial='new', widget=forms.RadioSelect())
-
-
-
 
 class R_stamp_Form(ModelForm):
 

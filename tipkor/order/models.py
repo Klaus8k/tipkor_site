@@ -4,25 +4,36 @@ from django.db import models
 
 
 class Clients(models.Model):
-    name = models.CharField(max_length=50)
-    email = models.EmailField()
-    tel = models.CharField(max_length=15)
+    name = models.CharField(max_length=50, blank=True, default='anon')
+    email = models.EmailField(blank=True)
+    tel = models.CharField(max_length=15, blank=True)
     
     def __str__(self):
         return f'{self.name} - e-mail:{self.email} tel: {self.tel}'
+    
+    @staticmethod
+    def get_client_obj(**data: dict):
+        try:
+            client_obj = Clients.objects.get(**data)
+            return client_obj
+        except: 
+            new_client = Clients(**data)
+            new_client.save()
+            return new_client
+        
 
 class Orders(models.Model):
-    client = models.ForeignKey(Clients, on_delete=models.DO_NOTHING)
+    client = models.ForeignKey(Clients, on_delete=models.CASCADE)
     create_date = models.DateTimeField(auto_now=True)
-    product = models.JSONField(null=True, blank=True)
-    comment = models.TextField(max_length=200, blank=True, null=True)
+    product = models.JSONField(blank=True)
+    comment = models.TextField(max_length=200, blank=True)
     delivery = models.CharField(max_length=100, blank=True, default='no')
-    ready_date = models.DateField(null=True, blank=True)
-    pay_info = models.BooleanField(null=True, blank=True)
-    file = models.FileField(upload_to='orders/', null=True, blank=True)
+    ready_date = models.DateField(blank=True)
+    pay_info = models.BooleanField(blank=True)
+    file = models.FileField(upload_to='orders/', blank=True)
     
     def __str__(self):
-        return f'{self.client} - {self.create_date}'
+        return f'client: {self.client}, prof: {self.product} date: {self.create_date}'
        
 
 def date_to_ready():

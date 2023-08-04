@@ -19,9 +19,9 @@ class Stamp_type(models.Model):
     
 class Snap_item(models.Model):
     title = models.CharField(max_length=30)
-    type_stamp = models.ForeignKey(Stamp_type, on_delete=models.DO_NOTHING)
-    snap_type = models.ForeignKey(Snap_type, on_delete=models.DO_NOTHING)
-    snap_img = models.ImageField(blank=True, null=True,)
+    type_stamp = models.ForeignKey(Stamp_type, on_delete=models.CASCADE)
+    snap_type = models.ForeignKey(Snap_type, on_delete=models.CASCADE)
+    snap_img = models.ImageField(blank=True)
     price = models.IntegerField()
     
     def __str__(self):
@@ -34,10 +34,10 @@ class Stamp(models.Model):
                       (False, 'Стандарт'))
     
     
-    type_stamp = models.ForeignKey(Stamp_type, on_delete=models.DO_NOTHING)
+    type_stamp = models.ForeignKey(Stamp_type, on_delete=models.CASCADE)
     new_or_no = models.CharField(choices=NEW_CHOICE, default='new', max_length=20)
     express = models.BooleanField(choices=EXPRESS_CHOICE, default=False)
-    snap= models.ForeignKey(Snap_item, blank=True, null=True, on_delete=models.DO_NOTHING)
+    snap= models.ForeignKey(Snap_item, blank=True, null=True, on_delete=models.CASCADE)
     count = models.IntegerField(default=1)
     cost = models.IntegerField()
     
@@ -74,6 +74,7 @@ class Stamp(models.Model):
         
     def json_combine(self):
         json_dict = {'id': self.id,
+                     'new_or_no': self.new_or_no,
                      'express': self.express,
                      'snap': self.snap.__str__(),
                      'count': self.count,
