@@ -29,7 +29,7 @@ class Orders(models.Model):
     comment = models.TextField(max_length=200, blank=True)
     delivery = models.CharField(max_length=100, blank=True, default='no')
     ready_date = models.DateField(blank=True)
-    pay_info = models.BooleanField(blank=True)
+    pay_info = models.BooleanField(blank=True, default=False)
     file = models.FileField(upload_to='orders/', blank=True)
     
     def __str__(self):

@@ -46,7 +46,7 @@ class StampMeta(TemplateView, FormMixin):
 
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': stamp_ready_time(self.result.express)})
-        return HttpResponseRedirect(reverse('stamp:c_stamp', args=[self.result.id]))
+        return HttpResponseRedirect(reverse(f"stamp:{self.data_form['type_stamp']}", args=[self.result.id]))
         
         
     def get_form_dict(self):
