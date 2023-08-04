@@ -6,6 +6,8 @@ from django.views.generic.edit import FormMixin
 from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
+from loguru import logger
+
 from .forms import Booklet_Form, Card_Form, Confirm_form, Leaflet_Form
 from .models import Poly
 
@@ -72,24 +74,39 @@ class ConfirmView(DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
-        name = self.request.POST.dict()['name'].lower()
+        confirm_dict = self.request.POST.dict()
         
-        email = self.request.POST.dict()['email'].lower()
-        # test email sender = 'klaus8@mail.ru'
-        # email = 'klaus8@mail.ru'
+        name = confirm_dict['name'].lower()
+        email = confirm_dict['email'].lower()
+        tel = confirm_dict['tel']
+        client = Clients.get_client_obj(name=name,email=email,tel=tel)
         
-        tel = self.request.POST.dict()['tel']
-        client = Clients.objects.get_or_create(name=name,email=email,tel=tel)
+        comment = confirm_dict['comment']
+        if 'file' in self.request.FILES:
+            file = self.request.FILES['file']
+            
+        # delivery = self.request.POST.dict()['delivery'].lower()
+            
         product = self.get_object().json_combine()
         product['type_production'] = self.get_order_type()
-        order = Orders.objects.create(client=client[0], product=product, ready_date=date_to_ready())
         
-        send_email(email, order=order)
+        order = Orders.objects.create(client=client,
+                                      product=product,
+                                      ready_date=date_to_ready(),
+                                      comment=comment,
+                                      file=None)
+        
+        if email:
+            send_email(email, order=order)
         
         return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
     
     def get_order_type(self):
+        
+        logger.debug(self.request.path)
         order_type = self.request.path.split('/')[2]
+        logger.debug(order_type)
+        
         if order_type == 'card':
             return 'Визитки'
         elif order_type == 'leaflet':
