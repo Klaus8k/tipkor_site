@@ -62,8 +62,11 @@ class Booklet_Form(ModelForm):
         
 
 class Confirm_form(forms.Form):
+    
     name = forms.CharField(max_length=20, required=False)
-    email = forms.EmailField()
-    tel = forms.CharField(max_length=15)
+    email = forms.EmailField(required=False)
+    tel = forms.CharField(max_length=20)
+    comment = forms.CharField(required=False, widget=forms.Textarea(attrs = {'cols': '50', 'rows': '4'}))
     file = forms.FileField(required=False)
+    
 

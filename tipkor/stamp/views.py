@@ -1,3 +1,5 @@
+import datetime
+
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, reverse
 from django.views.generic.base import TemplateView
@@ -6,9 +8,6 @@ from django.views.generic.edit import FormMixin
 from loguru import logger
 from order.models import Clients, Orders
 from order.sender import send_email
-
-import datetime
-
 
 from .forms import C_stamp_Form, Confirm_form, R_stamp_Form
 from .models import Stamp
