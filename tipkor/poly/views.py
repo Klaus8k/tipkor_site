@@ -49,7 +49,8 @@ class PolyMeta(TemplateView, FormMixin):
 class CardView(PolyMeta):
     form_class = Card_Form
     template_name = 'card.html'
-    # default_calc = {'paper': '300', 'format_p': '1', 'duplex': 'True', 'pressrun': '1000'}
+    
+
     
 class LeafletView(PolyMeta):
     form_class = Leaflet_Form
@@ -69,11 +70,15 @@ class ConfirmView(DetailView, FormMixin):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
         context['ready_date'] =  date_to_ready()
-        context['type_production'] = self.get_order_type()
+        
+        type_production = self.request.META.get('HTTP_REFERER').split('/')[-2]
+        context['form'] = self.form_class(initial={'type_production': type_production})
+        
         
         return context
     
     def post(self, *args, **kwargs):
+        
         confirm_dict = self.request.POST.dict()
         
         name = confirm_dict['name'].lower()
@@ -88,7 +93,7 @@ class ConfirmView(DetailView, FormMixin):
         # delivery = self.request.POST.dict()['delivery'].lower()
             
         product = self.get_object().json_combine()
-        product['type_production'] = self.get_order_type()
+        product['type_production'] = confirm_dict['type_production']
         
         order = Orders.objects.create(client=client,
                                       product=product,
@@ -103,9 +108,7 @@ class ConfirmView(DetailView, FormMixin):
     
     def get_order_type(self):
         
-        logger.debug(self.request.path)
         order_type = self.request.path.split('/')[2]
-        logger.debug(order_type)
         
         if order_type == 'card':
             return 'Визитки'

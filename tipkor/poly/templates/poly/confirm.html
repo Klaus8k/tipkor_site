@@ -40,6 +40,9 @@
 
                 <div class="row">
                     {% csrf_token %}
+                {{ form.type_production }}
+
+
                     <div class="pb-4">
                         <p>Прикрепите файл: </p>{{ form.file }}
                     </div>

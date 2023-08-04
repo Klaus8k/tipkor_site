@@ -63,6 +63,7 @@ class Booklet_Form(ModelForm):
 
 class Confirm_form(forms.Form):
     
+    type_production = forms.CharField(max_length=20, widget=forms.HiddenInput())
     name = forms.CharField(max_length=20, required=False)
     email = forms.EmailField(required=False)
     tel = forms.CharField(max_length=20)
