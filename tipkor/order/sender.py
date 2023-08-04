@@ -36,7 +36,7 @@ def get_order_dict(order):
     comment = order.comment
     create_date = order.create_date
     ready_date = order.ready_date
-    return 'Клиент: {} {} \nЗаказано: {} \nСоздан: {} \nГотовность: {}\n Комментарий:'.format(client, tel, product, create_date, ready_date, comment)
+    return 'Клиент: {} {} \nЗаказано: {} \nСоздан: {} \nГотовность: {}\n Комментарий:{}'.format(client, tel, product, create_date, ready_date, comment)
     
 
 

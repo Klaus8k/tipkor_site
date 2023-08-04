@@ -8,13 +8,9 @@ from order.models import Orders
 from .constants import POST_OBR
 
 
-def valid(value):
-    if isinstance(value % 1000, int):
-        raise ValidationError('должно быть кратно 1000')
-
 class Material(models.Model):
     material = models.CharField(max_length=30)
-    type_material = models.CharField(max_length=30, null=True)
+    type_material = models.CharField(max_length=30)
     cost_per_m = models.IntegerField()
     
     def __str__(self):
@@ -31,11 +27,11 @@ class Post_obr(models.Model):
     
     
 class Wide(models.Model):
-    type_production = models.CharField(max_length=30, null=True, blank=True)
-    wide_size = models.FloatField()
-    heigth_size = models.FloatField()
-    material_print = models.ForeignKey(Material, on_delete=models.DO_NOTHING)
-    post_obr = models.ForeignKey(Post_obr, on_delete=models.DO_NOTHING, null=True)
+    type_production = models.CharField(max_length=30, blank=True)
+    wide_size = models.FloatField(max_length=5)
+    heigth_size = models.FloatField(max_length=5)
+    material_print = models.ForeignKey(Material, on_delete=models.CASCADE)
+    post_obr = models.ForeignKey(Post_obr, on_delete=models.CASCADE, blank=True)
     cost = models.IntegerField()
     
     def __str__(self):

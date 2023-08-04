@@ -1,23 +1,29 @@
 import json
 
+
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
 from order.models import Orders
+from django.utils.translation import gettext_lazy
 
 from .constants import BOOKLETS, DUPLEX, PAPER_CHOICE
 
+def validate_int_size(value):
+    if value < 30 or value > 630:
+        raise ValidationError(
+            gettext_lazy('%(value) размер должен быть больше 30мм и меньше 630мм'),
+                    params={'value': value},
+                        )
 
-def valid(value):
-    if isinstance(value % 1000, int):
-        raise ValidationError('должно быть кратно 1000')
+
 
 class Formats(models.Model):
     """" Класс форматов бумаги
     Атрибуты: Название, ширина, высота бумаги
     """
     format_p = models.CharField(max_length=20, null=True, blank=True)
-    x = models.IntegerField()
-    y = models.IntegerField()
+    x = models.IntegerField(validators=[validate_int_size])
+    y = models.IntegerField(validators=[validate_int_size])
 
     def __str__(self):
         if self.format_p:
@@ -26,11 +32,11 @@ class Formats(models.Model):
             return '{}x{}'.format(self.x, self.y)
 
 class Poly(models.Model):
-    format_p = models.ForeignKey(Formats,on_delete=models.DO_NOTHING)
+    format_p = models.ForeignKey(Formats,on_delete=models.CASCADE)
     paper = models.CharField(choices=PAPER_CHOICE, max_length=20)
     pressrun = models.IntegerField()
     duplex = models.BooleanField(choices=DUPLEX, max_length=50, default=True)
-    post_obr = models.CharField(null=True, blank=True, choices=BOOKLETS, max_length=20)
+    post_obr = models.CharField(choices=BOOKLETS, blank=True, null=True, max_length=20)
     cost = models.IntegerField()
 
     def __str__(self):
