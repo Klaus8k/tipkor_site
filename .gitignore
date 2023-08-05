@@ -169,5 +169,5 @@ env_for_windows
 db_csv_tipkor/*
 *.csv
 *.pdf
-deploy/
-media/
+deploy/*
+media/*
