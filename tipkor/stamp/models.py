@@ -81,3 +81,34 @@ class Stamp(models.Model):
                      'cost': self.cost
                      }
         return json_dict 
+    
+def stamp_ready_time(express: bool):
+    if express:
+        return datetime.datetime.now()
+    return datetime.datetime.now() + datetime.timedelta(days=3)
+
+
+    time_create = datetime.datetime.now()
+    # print('часов -', time_create.hour)
+    if time_create.hour >= 15 or time_create.hour <= 9 or time_create.weekday() >= 5:
+        start_time = time_create + datetime.timedelta(days=1)
+        if start_time.weekday() >= 5:
+            while start_time.weekday() != 0:
+                start_time += datetime.timedelta(days=1)
+                
+    logger.debug(start_time)
+    time_ready = start_time + datetime.timedelta(days=work_time)
+    if time_ready.weekday() >= 5: # если на субботу или воскресенье попадает - переносится на понедельник готовность.
+        while time_ready.weekday() != 0:
+            time_ready += datetime.timedelta(days=work_time)
+    return time_ready
+
+
+# если сейчас больше 15 и меньше 9
+#     старт должен быть на следующий день в 9
+#         если день выходной
+#             старт 9 утра в понедельник
+            
+# готовность = старт + рабочее время
+# если готовность на входной
+#     слудующий за выходным день.

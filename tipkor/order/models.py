@@ -1,7 +1,7 @@
 import datetime
-from loguru import logger
 
 from django.db import models
+from loguru import logger
 
 
 class Clients(models.Model):
