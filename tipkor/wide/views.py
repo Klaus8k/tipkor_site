@@ -21,7 +21,7 @@ class WideMeta(TemplateView, FormMixin):
         self.data_form = self.get_form_dict()
         self.result = Wide.get_wide_object(self.data_form)
         kwargs.update({'result': self.result})
-        kwargs.update({'ready_date': date_to_ready()})
+        kwargs.update({'ready_date': date_to_ready(self.template_name.split('.')[0])})
         return self.get(*args, **kwargs)
     
 
@@ -70,8 +70,9 @@ class ConfirmView(DetailView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
-        context['ready_date'] =  date_to_ready()
         context['form'] = self.form_class(initial={'type_production': self.get_order_type()})
+        context['ready_date'] =  date_to_ready(self.get_order_type())
+        
         return context
     
     def post(self, *args, **kwargs):
@@ -94,7 +95,7 @@ class ConfirmView(DetailView, FormMixin):
         
         order = Orders.objects.create(client=client,
                                       product=product,
-                                      ready_date=date_to_ready(),
+                                      ready_date=date_to_ready(confirm_dict['type_production']),
                                       comment=comment,
                                       file=file)
         
