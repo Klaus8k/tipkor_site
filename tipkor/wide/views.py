@@ -10,10 +10,6 @@ from order.sender import send_email
 from .forms import Banner_Form, Confirm_form, Sticker_Form, Table_Form
 from .models import Wide
 
-# logger.add('wide_view_log.txt')
-
-
-# Делаем 3 отдельными классами пока
 
 class WideMeta(TemplateView, FormMixin):
     form_class = None
@@ -65,8 +61,7 @@ class TableView(WideMeta):
     template_name = 'table.html'
     type_production = 'table'
     
-
-
+    
 class ConfirmView(DetailView, FormMixin):
     model = Wide
     template_name = 'wide/confirm.html'
@@ -76,11 +71,7 @@ class ConfirmView(DetailView, FormMixin):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
         context['ready_date'] =  date_to_ready()
-        
-        type_production = self.request.META.get('HTTP_REFERER').split('/')[-2]
-        context['type_production'] = self.get_order_type(type_production)
-        context['form'] = self.form_class(initial={'type_production': type_production})
-        
+        context['form'] = self.form_class(initial={'type_production': self.get_order_type()})
         return context
     
     def post(self, *args, **kwargs):
@@ -97,7 +88,7 @@ class ConfirmView(DetailView, FormMixin):
         else: file = None
             
         # delivery = self.request.POST.dict()['delivery'].lower()
-            
+  
         product = self.get_object().json_combine()
         product['type_production'] = confirm_dict['type_production']
         
@@ -112,9 +103,8 @@ class ConfirmView(DetailView, FormMixin):
         return HttpResponseRedirect(reverse('wide:success', args=[order.id]))
     
     
-    
-    @staticmethod
-    def get_order_type(order_type):
+    def get_order_type(self):
+        order_type = self.request.META.get('HTTP_REFERER').split('/')[-2]
         if order_type == 'banner':
             return 'Баннер'
         elif order_type == 'sticker':
@@ -123,7 +113,6 @@ class ConfirmView(DetailView, FormMixin):
             return 'Табличка'
         else: return 'Изделие не определено'
         
-    
     
 class SuccessView(DetailView):
     model = Orders

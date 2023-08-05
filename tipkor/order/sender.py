@@ -3,10 +3,16 @@ import smtplib
 from email.header import Header
 from email.mime.text import MIMEText
 
+import datetime
+
+from loguru import logger
+
+HI = 'Спасибо за заказ.\n\n'
+
 MAIL_HOST = 'smtp.mail.ru'
 MAIL_LOGIN = os.getenv('EMAIL_U')
 MAIL_PASS = os.getenv('EMAIL_PASS')
-print(MAIL_PASS)
+# print(MAIL_PASS)
 TO = 'tipkor@mail.ru'
 text = 'test message'
 
@@ -18,6 +24,7 @@ text = 'test message'
 def send_email(adress, order):
 
     body = get_order_dict(order)
+    
     msg = MIMEText(body, 'plain', 'utf-8')
     msg['Subject'] = Header(f'Заказ №{order.id}', 'utf-8')
     msg['From'] = MAIL_LOGIN
@@ -29,15 +36,73 @@ def send_email(adress, order):
     mail_sender.quit()
 
 def get_order_dict(order):
-    client = order.client.name
+    client_name = order.client.name
     tel = order.client.tel
     email = order.client.email
-    product = order.product
+    client_str = f'Имя: {client_name}\nТелефон: {tel}\nE-mail: {email}\n'
+        
     comment = order.comment
+    file = order.file
+       
     create_date = order.create_date
     ready_date = order.ready_date
-    return 'Клиент: {} {} \nЗаказано: {} \nСоздан: {} \nГотовность: {}\n Комментарий:{}'.format(client, tel, product, create_date, ready_date, comment)
     
+    product = get_product_str(order.product, order_id=order.id, dates=[create_date, ready_date])
+    
+    return HI + product # TODO вставить дату создания и дату готовности
+
+
+def get_product_str(product: object, order_id, dates: list):
+    product_str = ''
+    type_production = product['type_production']
+    cost = product['cost']
+    create_date = dates[0].strftime('%d %B %Y   %H:%M')
+    
+    if 'paper' in product.keys():
+        if product['duplex']:
+            duplex = 'Двухсторонняя печать'
+        else: duplex = 'Односторонняя печать'
+        
+        product_str += f"{type_production} \
+                            \rНомер заказа № {order_id} от {create_date} \
+                            \rФормат: {product['format_p']} \
+                            \rБумага: {product['paper']}г/м \
+                            \rТираж: {product['pressrun']}шт. \
+                            \r{duplex} \
+                            \rПостобработка: {product['post_obr']} \
+                            \r\rЦена тиража: {cost} руб."
+        return product_str
+    
+    elif 'material' in product.keys():
+        
+        product_str += f"{type_production} \
+                            \rНомер заказа № {order_id} от {create_date} \
+                            \rМатериал: {product['material']} \
+                            \rРазмер: {product['x']}х{product['x']}м \
+                            \rПостобработка: {product['post_obr']} \
+                            \r\rЦена тиража: {cost} руб."
+        return product_str
+    else:
+        if product['new_or_no'] == 'new':
+            new_or_no = 'Первичное изготовление'
+        else: new_or_no = 'Изготовление по оттиску'
+        if product['express']:
+            express = 'Срочное изготовление'
+        else: express = 'Стандартное изготовление'
+        
+        product_str += f"{type_production} \
+                            \rНомер заказа № {order_id} от {create_date} \
+                            \r{new_or_no} \
+                            \r{express} \
+                            \rОснастка: {product['snap']} \
+                            \rКоличество: {product['count']}шт. \
+                            \r\rЦена тиража: {cost} руб."
+        return product_str
+    
+# {'id': 107, 'new_or_no': 'repeat', 'express': True, 'snap': 'Д40 обычная', 'count': 1, 'cost': 1050, 'type_production': 'Штамп'}
+
+
+
 
 
 
@@ -49,3 +114,5 @@ PHONE_SEND = 'PAY SERVICE'
 TELEGRAM_SEND = 'throw tho bot'
 
 WhatsApp_SEND = 'WhatsApp_business_api'
+
+

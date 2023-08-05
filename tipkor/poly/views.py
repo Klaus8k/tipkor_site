@@ -50,7 +50,6 @@ class CardView(PolyMeta):
     template_name = 'card.html'
     
 
-    
 class LeafletView(PolyMeta):
     form_class = Leaflet_Form
     template_name = 'leaflet.html'
@@ -69,11 +68,7 @@ class ConfirmView(DetailView, FormMixin):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object() 
         context['ready_date'] =  date_to_ready()
-        
-        type_production = self.request.META.get('HTTP_REFERER').split('/')[-2]
-        context['type_production'] = type_production
-        context['form'] = self.form_class(initial={'type_production': type_production})
-        
+        context['form'] = self.form_class(initial={'type_production': self.get_order_type()})
         return context
     
     def post(self, *args, **kwargs):
@@ -93,7 +88,7 @@ class ConfirmView(DetailView, FormMixin):
             
         product = self.get_object().json_combine()
         product['type_production'] = confirm_dict['type_production']
-        
+
         order = Orders.objects.create(client=client,
                                       product=product,
                                       ready_date=date_to_ready(),
@@ -106,9 +101,7 @@ class ConfirmView(DetailView, FormMixin):
         return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
     
     def get_order_type(self):
-        
-        order_type = self.request.path.split('/')[2]
-        
+        order_type = self.request.META.get('HTTP_REFERER').split('/')[-2]
         if order_type == 'card':
             return 'Визитки'
         elif order_type == 'leaflet':
@@ -117,7 +110,6 @@ class ConfirmView(DetailView, FormMixin):
             return 'Буклеты'
         else: return 'Изделие не определено'
         
-    
     
 class SuccessView(DetailView):
     model = Orders

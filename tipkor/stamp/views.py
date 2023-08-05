@@ -40,7 +40,6 @@ class StampMeta(TemplateView, FormMixin):
         
         self.data_form = self.get_form_dict()
         self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
-
         self.result = Stamp.get_stamp_object(self.data_form)
 
         kwargs.update({'result': self.result})
@@ -54,40 +53,6 @@ class StampMeta(TemplateView, FormMixin):
         return form_dict
 
 
-class _StampMeta(TemplateView, FormMixin):
-    form_class = None
-    confirm_form = Confirm_form
-    template_name = ''
-    model_class = None
-    
-
-    def post(self, *args, **kwargs):
-        self.data_form = self.get_form_dict()
-        self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
-        self.result = Stamp.get_stamp_object(self.data_form)
-        kwargs.update({'result': self.result})
-        kwargs.update({'ready_date': stamp_ready_time(self.result.express)})
-        
-        return self.get(*args, **kwargs)
-    
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        if self.get_form().is_bound:
-            context.update({'form': self.form_class(self.data_form), 'confirm_form': self.confirm_form})         
-        else:
-            context.update({'form': self.form_class()})
-        return context
-    
-    def get_form_dict(self):
-        form_dict = self.request.POST.copy().dict()
-        del form_dict['csrfmiddlewaretoken']
-        return form_dict
-        
-    class Meta:
-        abstract = True
-
-
 class CstampView(StampMeta):
     form_class = C_stamp_Form
     template_name = 'c_stamp.html'
@@ -99,14 +64,12 @@ class RstampView(StampMeta):
 
 class ConfirmView(DetailView):
     model = Stamp
-    # template_name = 'stamp/confirm.html'
 
     def get_context_data(self, **kwargs):
         stamp_obj = self.get_object() 
         context = super().get_context_data(**kwargs)
         context['order'] =  stamp_obj
         context['ready_date'] =  stamp_ready_time(stamp_obj.express)
-        context['type_production'] = self.get_order_type()
         return context
     
     def post(self, *args, **kwargs):
@@ -121,7 +84,7 @@ class ConfirmView(DetailView):
         client = Clients.get_client_obj(name=name,email=email,tel=tel)
 
         comment = confirm_dict['confirm_form-comment']
-        # If 
+
         if 'confirm_form-file' in self.request.FILES:
             file = self.request.FILES['confirm_form-file']
         else: file = None
@@ -130,7 +93,6 @@ class ConfirmView(DetailView):
         
         product = stamp_obj.json_combine()
         product['type_production'] = self.get_order_type()
-        
         order = Orders.objects.create(client=client,
                                       product=product,
                                       ready_date=stamp_ready_time(stamp_obj.express),
@@ -143,7 +105,7 @@ class ConfirmView(DetailView):
         return HttpResponseRedirect(reverse('stamp:success', args=[order.id]))
     
     def get_order_type(self):
-        order_type = self.request.path.split('/')[2]
+        order_type = self.request.META.get('HTTP_REFERER').split('/')[-3]
         if order_type == 'c_stamp':
             return 'Печать'
         elif order_type == 'r_stamp':
