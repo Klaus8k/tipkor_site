@@ -170,4 +170,4 @@ db_csv_tipkor/*
 *.csv
 *.pdf
 deploy/*
-media/*
+media/*/*
