@@ -32,6 +32,7 @@ class StampMeta(TemplateView, FormMixin):
                 
             context.update({'confirm_form': confirm_form})
             context.update({'result': Stamp.objects.get(id=kwargs['pk'])})
+            context.update({'ready_date': stamp_ready_time(stamp_obj.express)})
         else:
             context.update({'form': self.form_class()})
         return context
@@ -42,9 +43,10 @@ class StampMeta(TemplateView, FormMixin):
         self.data_form.update({'type_stamp': self.template_name.split('.')[0]})
         self.result = Stamp.get_stamp_object(self.data_form)
 
-        kwargs.update({'result': self.result})
-        kwargs.update({'ready_date': stamp_ready_time(self.result.express)})
-        return HttpResponseRedirect(reverse(f"stamp:{self.data_form['type_stamp']}", args=[self.result.id]))
+        # kwargs.update({'result': self.result})
+        # kwargs.update({'ready_date': stamp_ready_time(self.result.express)})
+        return HttpResponseRedirect(reverse(f"stamp:{self.data_form['type_stamp']}",
+                                            args=[self.result.id]))
         
         
     def get_form_dict(self):

@@ -1,3 +1,5 @@
+import datetime as dt
+
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from loguru import logger
@@ -82,33 +84,30 @@ class Stamp(models.Model):
                      }
         return json_dict 
     
-def stamp_ready_time(express: bool):
+def stamp_ready_time(express):
+    time_create=dt.datetime.now()
+
+    if time_create.hour >= 13 and time_create.hour <= 17:
+        ready_time = time_create + dt.timedelta(days=1)
+        ready_time = ready_time.replace(hour=10, minute=00, second=0)
+    elif time_create.hour >= 0 and time_create.hour <= 12:
+        ready_time = time_create
+        ready_time = ready_time.replace(hour=15, minute=00, second=0)
+    else:
+        ready_time = time_create + dt.timedelta(days=1)
+        ready_time = ready_time.replace(hour=15, minute=00, second=0)
+
     if express:
-        return datetime.datetime.now()
-    return datetime.datetime.now() + datetime.timedelta(days=3)
+        if time_create.hour >= 10 and time_create.hour <= 17:
+            ready_time = time_create + dt.timedelta(hours=1)
+        elif time_create.hour >= 0 and time_create.hour <= 10:
+            ready_time = time_create.replace(hour=11, minute=00, second=0)
+        else:
+            ready_time = time_create + dt.timedelta(days=1)
+            ready_time = ready_time.replace(hour=10, minute=00, second=0)
+    
+    if ready_time.weekday() >= 5:
+        while ready_time.weekday() != 0:
+            ready_time += dt.timedelta(days=1)
 
-
-    time_create = datetime.datetime.now()
-    # print('часов -', time_create.hour)
-    if time_create.hour >= 15 or time_create.hour <= 9 or time_create.weekday() >= 5:
-        start_time = time_create + datetime.timedelta(days=1)
-        if start_time.weekday() >= 5:
-            while start_time.weekday() != 0:
-                start_time += datetime.timedelta(days=1)
-                
-    logger.debug(start_time)
-    time_ready = start_time + datetime.timedelta(days=work_time)
-    if time_ready.weekday() >= 5: # если на субботу или воскресенье попадает - переносится на понедельник готовность.
-        while time_ready.weekday() != 0:
-            time_ready += datetime.timedelta(days=work_time)
-    return time_ready
-
-
-# если сейчас больше 15 и меньше 9
-#     старт должен быть на следующий день в 9
-#         если день выходной
-#             старт 9 утра в понедельник
-            
-# готовность = старт + рабочее время
-# если готовность на входной
-#     слудующий за выходным день.
+    return ready_time
