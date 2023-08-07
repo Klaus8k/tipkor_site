@@ -60,9 +60,6 @@ input[type=radio] {
         display: none;
     }
 
-    .card_form {
-        flex-direction: row;
-    }
 }
 
 /* xs срабатывает меньше 576px */
@@ -71,10 +68,6 @@ input[type=radio] {
     .calc_button {
         height: 30px;
         width: 150px;
-    }
-
-    .card_form {
-        flex-direction: row;
     }
 
     .calc_img {

@@ -13,10 +13,9 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/tipkor.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/expirement.css' %}">
 
-	<script src="{% static 'tipkor/js/bootstrap.bundle.min.js' %}"></script>
+	<!-- <script src="{% static 'tipkor/js/bootstrap.bundle.min.js' %}"></script> -->
 	<script src="{% static 'tipkor/js/bootstrap.min.js' %}"></script>
 	<script src="{% static 'tipkor/js/tipkor.js' %}"></script>
-	<script src="{% static 'tipkor/js/bootstrap.js' %}"></script>
 </head>
 
 
@@ -57,22 +56,22 @@
 		</div>
 
 		<div class="row">
-			<div class="col col-6">
-				<div class="collapse" id="collapseExample">
-					<div class="card card-body">
-						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
-						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
-						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
+				<div class="col col-6">
+					<div class="collapse" id="collapseExample">
+						<div class="card card-body">
+							<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
+							<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
+							<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
+						</div>
 					</div>
 				</div>
-			</div>
 
 			<div class="col col-6">
 				<div class="collapse" id="collapseExample2">
 					<div class="card card-body">
-						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
-						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
-						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 1</a>
+						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 2</a>
+						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 2</a>
+						<a class="btn btn-danger mt-1" href="www.ya.ru" role="button">BUTTON 2</a>
 					</div>
 				</div>
 			</div>
@@ -81,40 +80,26 @@
 	</div>
 
 
-
 	<div class="container">
+		<button class="btn btn-primary mx-2 px-4" type="button" data-bs-toggle="collapse"
+			data-bs-target="#collapse_contacts" aria-expanded="false" aria-controls="collapse_contacts">
+			ПОСМОТРЕТЬ КОНТАКТЫ</button>
 
-		<div class="col border">
-			<a role="button" data-bs-toggle="collapse" href="#collapseExample3" role="button" aria-expanded="false"
-				aria-controls="collapseExample3">
-				Что такое оснастка?
-			</a>
-		</div>
-
-		<div class="row">
-			<div class="col-12">
-				<div class="collapse" id="collapseExample3">
-					<div class="card card-body">
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Et, consequatur, rerum sed accusamus
-							iste tempore ea nulla recusandae enim natus cumque aliquam aspernatur illo ab itaque ut sunt
-							sapiente delectus.</p>
-					</div>
-				</div>
+		<div class="collapse p-3" id="collapse_contacts">
+			<div class="card p-3">
+				телефон для связи 8 964 555 555 555 555
 			</div>
+		</div>
+	</div>
 
 
-
-
-
-
-
-			<!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" 2
+	<!-- <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" 2
 				aria-expanded="false" aria-controls="collapseExample">
 				Кнопка с data-target
 			</button> -->
 
 
-		</div>
+	</div>
 	</div>
 
 

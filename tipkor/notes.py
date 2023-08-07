@@ -3,7 +3,6 @@ import datetime as dt
 from loguru import logger
 
 TEST_TIMES = [dt.datetime(2023,8,11,10,25,0), dt.datetime(2023,8,11,16,14,0), dt.datetime(2023,8,11,23,59,0), dt.datetime(2023,8,11,6,8,0)]
-# for i in TEST_TIMES: print(i)
 
 
 

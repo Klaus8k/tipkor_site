@@ -12,7 +12,6 @@ HI = 'Спасибо за заказ.\n\n'
 MAIL_HOST = 'smtp.mail.ru'
 MAIL_LOGIN = os.getenv('EMAIL_U')
 MAIL_PASS = os.getenv('EMAIL_PASS')
-# print(MAIL_PASS)
 TO = 'tipkor@mail.ru'
 text = 'test message'
 

@@ -149,7 +149,6 @@ STATICFILES_DIRS = [  # dirs of static files
 ]
 
 MEDIA_ROOT = (BASE_DIR / 'media').__str__()
-# print(MEDIA_ROOT)
 MEDIA_URL = 'media/'
 
 STATIC_URL = 'static/'
