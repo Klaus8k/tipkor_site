@@ -62,7 +62,9 @@ class Confirm_form(forms.Form):
     name = forms.CharField(max_length=20, required=False)
     email = forms.EmailField(required=False)
     tel = forms.CharField(max_length=20)
-    comment = forms.CharField(required=False, widget=forms.Textarea(attrs = {'cols': '50', 'rows': '4'}))
+    # comment = forms.CharField(required=False, widget=forms.Textarea(attrs = {'cols': '50', 'rows': '4'}))
+    
+    comment = forms.CharField(required=False)
     file = forms.FileField(required=False)
     # delivery = forms.CharField(max_length=100, required=False)
 

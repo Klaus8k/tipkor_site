@@ -20,16 +20,16 @@
 
 <!-- Форма -->
 <div class="container">
-    <div class="card_form border shadow p-3">
+    <div class="card_form border shadow p-3 mt-4">
         <div class="row">
 
-            <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
+            <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12">
                 <form class="form-control-lg " action="{% url 'stamp:r_stamp' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col">{{ form.new_or_no }}</div>
+                        <div class="col px-2 ">{{ form.new_or_no }}</div>
 
-                        <div class="col form-check">{{ form.express }} Срочно (+500 руб.)</p>
+                        <div class="col mt-2 ">{{ form.express }}&nbsp;Срочно (+500 руб.)
                         </div>
                     </div>
 
@@ -49,8 +49,8 @@
                 </form>
             </div>
 
-            <div class="card_img col">
-                картинка Штампы
+            <div class="calc_img col ">
+                <img  class="img-fluid" src="{% static '/stamp/img/stamp.jpg' %}" alt="">
             </div>
         </div>
     </div>
@@ -58,75 +58,77 @@
 
 <br><br>
 <div class="container">
-    <div class="result_info p-3 border shadow">
-        <div class="row px-3">
+    <div class="result_info p-3 shadow">
+
+        <div class="row py-3 mx-1 border border-primary border-2 rounded">
             <div class="col">
                 {% if result.id %}
                 <h3>Стоимость будет указана в согласовании заказа.</h3>
                 {% if result.express == True %}
-                <h2 style="color: red;">Срочное изготовление (+500 руб.)</h2>
+                <h4 style="color: red;">Срочное изготовление (+500 руб.)</h4>
                 {% endif %}
                 <h5>Оснастка: {{ result.snap }}</h5>
                 <h5>Количество: {{ result.count }} штук.</h5>
             </div>
             <div class="col">
-                <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>
-                <p>При заказе сегодня до 15:00</p>
+                <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.time }}  {{ ready_date.date }}<span>
+            </div>
+        </div>
+
+        <form class="form-control-lg border border-2 mt-4" action="{% url 'stamp:confirm' %}" method="post"
+            enctype="multipart/form-data">
+
+            <div class="row">
+                {% csrf_token %}
+
+                {{ confirm_form.id_stamp_obj }}
+
+                <div class="pb-4">
+                    <p>Прикрепите файл: </p>{{ confirm_form.file }}
+                </div>
+
+                <div>
+                    <p>Текст для штампа и комментарий к заказу:</p>
+                    <p class="comment">
+                    {{ confirm_form.comment }}</p>
+                </div>
             </div>
 
-            <form class="form-control-lg border border-2" action="{% url 'stamp:confirm' %}" method="post"
-                enctype="multipart/form-data">
-
-                <div class="row">
-                    {% csrf_token %}
-
-                    {{ confirm_form.id_stamp_obj }}
-
-                    <div class="pb-4">
-                        <p>Прикрепите файл: </p>{{ confirm_form.file }}
-                    </div>
-
-                    <div class="">
-                        <p>Текст для штампа и комментарий к заказу:</p>
-                        {{ confirm_form.comment }}
-                    </div>
+            <!-- Данные клиента -->
+            <br>
+            <div class="row p-3 mx-1 border border-success border-2 rounded">
+                <h3>Контактные данны:</h3>
+                <div class="col">
+                    <p>Имя: </p>{{ confirm_form.name }}
                 </div>
-
-                <!-- Данные клиента -->
-                <br>
-                <div class="row py-3 mx-1 border border-primary border-2 rounded">
-                    <h3>Контактные данны:</h3>
-                    <div class="col">
-                        <p>Имя: </p>{{ confirm_form.name }}
-                    </div>
-                    <div class="col">
-                        <p>E-mail: </p>{{ confirm_form.email }}
-                    </div>
-                    <div class="col">
-                        <p>Телефон: </p>{{ confirm_form.tel }}
-                    </div>
+                <div class="col">
+                    <p>E-mail: </p>{{ confirm_form.email }}
                 </div>
-
-
-                <div class="row pt-4">
-                    <div class="col ">
-                        <button style="width: 200px;" type="submit" class="yes_button btn btn-primary"
-                            name="{{ confirm_form.prefix }}">заказать</button>
-                        <div class="more_info">
-                            <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
-                        </div>
-                        <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
-                    </div>
+                <div class="col">
+                    <p>Телефон: </p>{{ confirm_form.tel }}
                 </div>
-            </form>
+            </div>
 
-        </div>
-        {% else %}
-        <h4>{{ result.cost }}</h4>
-        <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
 
-        {% endif %}
+            <div class="row pt-4">
+                <div class="col ">
+                    <button style="width: 200px;" type="submit" class="yes_button btn btn-success  mx-1"
+                        name="{{ confirm_form.prefix }}">заказать</button>
+                    <div class="more_info">
+                        <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
+                    </div>
+                    <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                </div>
+            </div>
+        </form>
+
     </div>
+    {% else %}
+    <h4>{{ result.cost }}</h4>
+    <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
+
+    {% endif %}
+</div>
 </div>
 
 </div>
@@ -135,7 +137,7 @@
     <div class="bottom_text pt-4"></div>
     <div class="row px-3">
         <div class="col">
-            <h5>Буклеты</h5>
+            <h5>Штампы</h5>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
                 minus
@@ -144,7 +146,7 @@
                 tempora!</p>
         </div>
     </div>
-</div>tipkor@mail.ru
+</div>
 
 
 <br><br>
