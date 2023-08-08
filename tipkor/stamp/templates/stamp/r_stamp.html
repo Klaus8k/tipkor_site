@@ -10,32 +10,30 @@
 <br>
 
 
-
+<!-- Заголовок коллапс блока -->
 <div class="container">
     <div class="snap_block">
-
-
         <div class="container py-3">
             <a class="" data-bs-toggle="collapse" href="#snap_items_collapse" aria-expanded="true"
-                aria-controls="snap_items_collapse"><h5>Какую оснастку выбрать?</h5>
-                
+                aria-controls="snap_items_collapse">
+                <h5>Какую оснастку выбрать?</h5>
             </a>
+            <!-- Блок пояснений, коллапс -->
             <div class="collapse" id="snap_items_collapse">
-
                 <div class="row d-flex justify-content-start my-3">
-
-                    <div class="card text-center mx-3" style="width: 16rem;">
+                    <!-- карточка -->
+                    <div class="card text-center mx-3" style="width: 18rem;">
                         <h6 class="card-header">Обычная оснастка</h6>
-                        <img src="{% static '/tipkor/img/card.gif' %}" class="card-img-top" alt="...">
+                        <img src="{% static '/stamp/img/r_norm_snap.jpg' %}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <!-- <h5 class="card-title">Обычная оснастка</h5> -->
                             <p class="card-text">Оснастка пластиковая с крышкой, без подушки</p>
                         </div>
                     </div>
-
-                    <div class="card text-center mx-3" style="width: 16rem;">
+                    <!-- карточка -->
+                    <div class="card text-center mx-3" style="width: 18rem;">
                         <h6 class="card-header">Автоматическая оснастка</h6>
-                        <img src="{% static '/tipkor/img/card.gif' %}" class="card-img-top" alt="...">
+                        <img src="{% static '/stamp/img/r_norm_snap.jpg' %}" class="card-img-top" alt="...">
                         <div class="card-body">
                             <!-- <h5 class="card-title">Обычная оснастка</h5> -->
                             <p class="card-text">Оснастка с синей встроенной подушкой</p>
@@ -44,34 +42,28 @@
 
                 </div>
             </div>
-
-
-
         </div>
     </div>
 
     <!-- Форма -->
     <div class="container">
-        <h1 class="title_textp pt-3">Штампы</h1>
+        <h1 class="title_text pt-3">Штампы</h1>
 
-        <div class="card_form border shadow rounded p-3 mt-4 ">
+        <div class="calc_form border shadow rounded p-3 mt-4 ">
             <div class="row">
-
                 <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 ">
+
                     <form class="form-control-lg " action="{% url 'stamp:r_stamp' %}" method="post">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col px-2 ">{{ form.new_or_no }}</div>
-
                             <div class="col mt-2 ">{{ form.express }}&nbsp;Срочно (+500 руб.)
                             </div>
                         </div>
-
                         <div class="row pt-4">
                             <div class="col">{{ form.snap }}<p>Оснастка</p>
                             </div>
                         </div>
-
                         <div class="row">
                             <div class="col">
                                 <div class="col">{{ form.count }}<p>Количество</p>
@@ -81,11 +73,13 @@
                             </div>
                         </div>
                     </form>
-                </div>
 
+                </div>
+                <!-- Картника калькулятора -->
                 <div class="calc_img col ">
                     <img class="img-fluid" src="{% static '/stamp/img/stamp.jpg' %}" alt="">
                 </div>
+
             </div>
         </div>
     </div>
@@ -93,8 +87,8 @@
     <br><br>
     <div class="container">
         <div class="result_info p-3 shadow">
-
             <div class="row py-3 mx-1 border border-bg-secondary border-2 rounded bg-light">
+                <!-- Результаты расчета -->
                 <div class="col">
                     {% if result.id %}
                     <h3>Стоимость будет указана в согласовании заказа.</h3>
@@ -104,17 +98,18 @@
                     <h5>Оснастка: {{ result.snap }}</h5>
                     <h5>Количество: {{ result.count }} штук.</h5>
                 </div>
+
                 <div class="col">
                     <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.time }} {{ ready_date.date }}</h3>
                 </div>
             </div>
 
+            <!-- Форма отправки заказа -->
             <form class="form-control-lg border border-2 mt-4" action="{% url 'stamp:confirm' %}" method="post"
                 enctype="multipart/form-data">
 
                 <div class="row">
                     {% csrf_token %}
-
                     {{ confirm_form.id_stamp_obj }}
 
                     <div class="pb-4">
@@ -123,8 +118,7 @@
 
                     <div>
                         <p>Текст для штампа и комментарий к заказу:</p>
-                        <p class="comment">
-                            {{ confirm_form.comment }}</p>
+                        <p>{{ confirm_form.comment }}</p>
                     </div>
                 </div>
 
@@ -151,7 +145,6 @@
                         <div class="more_info">
                             <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
                         </div>
-                        <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
                     </div>
                 </div>
             </form>
@@ -160,13 +153,11 @@
         {% else %}
         <h4>{{ result.cost }}</h4>
         <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
-
         {% endif %}
     </div>
 </div>
 
-</div>
-
+<!-- Статья сопроводительная -->
 <div class="container">
     <div class="bottom_text pt-4"></div>
     <div class="row px-3">
@@ -182,7 +173,5 @@
     </div>
 </div>
 
-
-<br><br>
 
 {% endblock %}

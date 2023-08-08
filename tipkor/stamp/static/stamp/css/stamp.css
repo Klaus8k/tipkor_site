@@ -2,27 +2,15 @@
     font-weight: 800;
 }
 
-
-.calc_img {
-    display: flex;
-    width: 100%;
-    height: 280px;
-    justify-content: center;
-}
-
 input[type=radio] {
-    /* padding-left: 20px!important; */
     width: 20px;
     height: 20px;
 }
-
 
 #id_form-express {
-    /* padding-left: 0px!important; */
     height: 20px;
     width: 20px;
 }
-
 
 #id_form-snap,
 #id_form-count {
@@ -35,6 +23,13 @@ input[type=radio] {
     width: 200px;
 }
 
+.calc_img {
+    display: flex;
+    width: 100%;
+    height: 280px;
+    justify-content: center;
+}
+
 .confirm_button {
     height: 30px;
     width: 200px;
@@ -43,10 +38,9 @@ input[type=radio] {
 #id_confirm_form-comment {
     width: 50%;
     height: 100px;
-    /* box-sizing: border-box; */
 }
 
-
+/* Медиазапросы */
 /* md срабатывает меньше 992 */
 @media screen and (max-width: 992px) {
     .calc_img {
@@ -59,7 +53,6 @@ input[type=radio] {
     .calc_img {
         display: none;
     }
-
 }
 
 /* xs срабатывает меньше 576px */
@@ -77,6 +70,9 @@ input[type=radio] {
     #id_confirm_form-comment {
         width: 100%;
         height: 100px;
-        /* box-sizing: border-box; */
+    }
+
+    #id_confirm_form-name, #id_confirm_form-email, #id_confirm_form-tel {
+        width: 100%;
     }
 }
