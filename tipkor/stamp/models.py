@@ -47,7 +47,7 @@ class Stamp(models.Model):
     new_or_no = models.CharField(choices=NEW_CHOICE, default='new', max_length=20)
     express = models.BooleanField(choices=EXPRESS_CHOICE, default=False)
     snap= models.ForeignKey('stamp.Snap_item', blank=True, null=True, on_delete=models.CASCADE)
-    count = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(100)])
+    count = models.PositiveIntegerField(default=1)
     cost = models.IntegerField()
     
     def __str__(self):
