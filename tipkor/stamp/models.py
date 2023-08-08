@@ -1,7 +1,9 @@
 import datetime as dt
 
-from django.core.exceptions import ObjectDoesNotExist
+from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from loguru import logger
 
 
@@ -14,15 +16,20 @@ class Snap_type(models.Model):
         return self.title_stap_type
 
 class Stamp_type(models.Model):
-    type_stamp = models.CharField(choices=[('c_stamp', 'печать'),('r_stamp', 'штамп')], max_length=30)
+    
+    class Stam_choice(models.TextChoices):
+        C_STAMP = ('c_stamp', 'печать')
+        R_STAMP = ('r_stamp', 'штамп')
+        
+    type_stamp = models.CharField(choices=Stam_choice.choices, max_length=30)
     
     def __str__(self):
         return self.type_stamp
     
 class Snap_item(models.Model):
     title = models.CharField(max_length=30)
-    type_stamp = models.ForeignKey(Stamp_type, on_delete=models.CASCADE)
-    snap_type = models.ForeignKey(Snap_type, on_delete=models.CASCADE)
+    type_stamp = models.ForeignKey('stamp.Stamp_type', on_delete=models.CASCADE)
+    snap_type = models.ForeignKey('stamp.Snap_type', on_delete=models.CASCADE)
     snap_img = models.ImageField(blank=True)
     price = models.IntegerField()
     
@@ -36,11 +43,11 @@ class Stamp(models.Model):
                       (False, 'Стандарт'))
     
     
-    type_stamp = models.ForeignKey(Stamp_type, on_delete=models.CASCADE)
+    type_stamp = models.ForeignKey('stamp.Stamp_type', on_delete=models.CASCADE)
     new_or_no = models.CharField(choices=NEW_CHOICE, default='new', max_length=20)
     express = models.BooleanField(choices=EXPRESS_CHOICE, default=False)
-    snap= models.ForeignKey(Snap_item, blank=True, null=True, on_delete=models.CASCADE)
-    count = models.IntegerField(default=1)
+    snap= models.ForeignKey('stamp.Snap_item', blank=True, null=True, on_delete=models.CASCADE)
+    count = models.PositiveIntegerField(default=1, validators=[MinValueValidator(1), MaxValueValidator(100)])
     cost = models.IntegerField()
     
     def __str__(self):

@@ -24,7 +24,7 @@ class Clients(models.Model):
         
 
 class Orders(models.Model):
-    client = models.ForeignKey(Clients, on_delete=models.CASCADE)
+    client = models.ForeignKey(Clients, on_delete=models.CASCADE, related_name='client_orders')
     create_date = models.DateTimeField(auto_now=True)
     product = models.JSONField(blank=True)
     comment = models.TextField(max_length=200, blank=True)

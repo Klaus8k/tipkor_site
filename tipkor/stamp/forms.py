@@ -1,4 +1,5 @@
 from django import forms
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
@@ -30,6 +31,8 @@ class C_stamp_Form(ModelForm):
                                 
         self.fields['express'] = forms.BooleanField(required=False, initial=False, widget=forms.CheckboxInput())
         self.fields['new_or_no'] = forms.ChoiceField(choices=NEW_CHOICE, required=False, initial='new', widget=forms.RadioSelect())
+        
+
 
 class R_stamp_Form(ModelForm):
     prefix = 'form'
