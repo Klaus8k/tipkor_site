@@ -104,7 +104,8 @@ class ConfirmView(DetailView):
         if email:
             send_email(email, order=order)
         
-        return HttpResponseRedirect(reverse('stamp:success', args=[order.id]))
+        # return HttpResponseRedirect(reverse('stamp:success', args=[order.id] + '#success'))
+        return HttpResponseRedirect(reverse('stamp:success', kwargs={'pk': order.id}) + '#a_success')
     
     def get_order_type(self):
         order_type = self.request.META.get('HTTP_REFERER').split('/')[-3]
@@ -117,7 +118,7 @@ class ConfirmView(DetailView):
     
 class SuccessView(DetailView):
     model = Orders
-    template_name = 'success.html'
+    template_name = 'stamp/success.html'
     context_object_name = 'order'
 
     

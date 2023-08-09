@@ -11,119 +11,174 @@
 
 
 
+<!-- Заголовок коллапс блока -->
 <div class="container">
-    <div class="card_text">
-        <p>-----------------</p>
-    </div>
-    <h1 class="title_text">Печати</h1>
-</div>
+    <div class="snap_block">
+        <div class="container py-3">
+            <a class="" data-bs-toggle="collapse" href="#snap_items_collapse" aria-expanded="true"
+                aria-controls="snap_items_collapse">
+                <h4 class="how_snap">Какую оснастку выбрать?</h4>
+            </a>
+            <!-- Блок пояснений, коллапс -->
+            <div class="collapse" id="snap_items_collapse">
+                <div class="row d-flex justify-content-start my-2">
+                    <!-- карточка -->
+                    <div class="card text-center mx-3 mb-2" style="width: 19rem;">
+                        <h5 class="card-header">Обычная</h5>
+                        <img src="{% static '/stamp/img/c_norm_snap.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Оснастка пластиковая 40мм для печати с крышкой, без подушки</p>
+                            <h5>Цена: 50 руб.</h5>
+                        </div>
 
-<!-- Форма -->
-<div class="container">
-    <div class="card_form border shadow p-3">
-        <div class="row">
-
-            <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
-                <form class="form-control-lg " action="{% url 'stamp:c_stamp' %}" method="post">
-                    {% csrf_token %}
-                    <div class="row">
-                        <div class="col">{{ form.new_or_no }}</div>
-                        
-                        <div class="col form-check">{{ form.express }}   Срочно (+500 руб.)</p>
+                    </div>
+                    <!-- карточка -->
+                    <div class="card text-center mx-3 mb-2" style="width: 19rem;">
+                        <h5 class="card-header">Автомат</h5>
+                        <img src="{% static '/stamp/img/c_auto_snap.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Оснастка автомат с синей встроенной подушкой и крышкой</p>
+                            <h5>Цена: 300 руб.</h5>
+                        </div>
+                    </div>
+                    <!-- карточка -->
+                    <div class="card text-center mx-3 mb-2" style="width: 19rem;">
+                        <h5 class="card-header">Карманная</h5>
+                        <img src="{% static '/stamp/img/r_pocket_snap.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Компактная оснастка с подушкой</p>
+                            <h5>Цена: 400 руб.</h5>
                         </div>
                     </div>
 
-                    <div class="row pt-4">
-                        <div class="col">{{ form.snap }}<p>Оснастка</p>
-                        </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <div class="col">{{ form.count }}<p>Количество</p>
-                            </div>
-                            <button type="submit" class="calc_button btn btn-primary"
-                                name="{{ form.prefix }}">Расчет</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-
-            <div class="card_img col">
-                картинка печать
+                </div>
             </div>
         </div>
     </div>
-</div>
 
-<br><br>
-<div class="container">
-    <div class="result_info p-3 border shadow">
-        <div class="row px-3">
-            <div class="col col-xl-3">
-                {% if result.id %}
-                <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
-                <h5>Срочно: {{ result.express|yesno:"Да,Нет" }}</h5>
-                <h5>Оснастка: {{ result.snap }}</h5>
-                <h5>Количество: {{ result.count }} штук.</h5>
-            </div>
-            <div class="col">
-                <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>
-            </div>
+    <!-- Форма -->
+    <div class="container">
+        <hr width="100%" size="8" color="#0d6efd" />
 
-            <div>
-                <form class="form-control-lg " action="{% url 'stamp:confirm' %}" method="post"
-                    enctype="multipart/form-data">
+        <h1 id="after_calc" class="title_text pt-3">Изготовление печатей</h1>
 
-                    <div class="row border">
-                        {% csrf_token %}
-                        {{ confirm_form.id_stamp_obj }}
-                        <div class="col">{{ confirm_form.comment }}<p>ИНН (если есть)</p>
-                        </div>
-                        <div class="col border">{{ confirm_form.file }}<p>макет</p>
-                        </div>
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col border">{{ confirm_form.name }}<p>Имя</p>
-                        </div>tipkor@mail.ru
-                        <div class="col border">{{ confirm_form.email }}<p>почта</p>
-                        </div>
-                        <div class="col border">{{ confirm_form.tel }}<p>телефон</p>
-                        </div>
-                    </div>
-            </div>
-
-
+        <div class="calc_form border shadow rounded p-3 mt-4 ">
             <div class="row">
-                <div class="col border">
-                    <button style="width: 200px;" type="submit" class="yes_button btn btn-primary"
-                        name="{{ confirm_form.prefix }}">заказать</button>
-                    <div class="more_info">
-                        <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
-                    </div>
-                    <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 ">
+
+                    <form class="form-control-lg " action="{% url 'stamp:c_stamp' %}#after_calc" method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            <div class="col px-2 ">{{ form.new_or_no }}</div>
+                            <div class="col mt-2 ">{{ form.express }}&nbsp;Срочно (+500 руб.)
+                            </div>
+                        </div>
+                        <div class="row pt-4">
+                            <div class="col">{{ form.snap }}<p>Оснастка</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <div class="col">{{ form.count }}<p>Количество</p>
+                                </div>
+                                <button type="submit" class="calc_button btn btn-primary"
+                                    name="{{ form.prefix }}">Расчет</button>
+                                <div>
+                                    <h6>Нажмите "Расчет", что бы сформировать заказ</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                </div>
+                <!-- Картника калькулятора -->
+                <div class="calc_img col ">
+                    <img class="img-fluid" src="{% static '/stamp/img/seal.jpg' %}" alt="">
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <br><br>
+    <div class="container">
+        <div class="result_info p-3 shadow">
+            <div class="row py-3 mx-1 border border-bg-secondary border-2 rounded bg-light">
+                <!-- Результаты расчета -->
+                <div class="col">
+                    {% if result.id %}
+                    <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
+                    {% if result.express == True %}
+                    <h5 style="color: red;">Срочное изготовление (+500 руб.)</h5>
+                    {% endif %}
+                    <h5>Оснастка: {{ result.snap }}</h5>
+                    <h5>Количество: {{ result.count }} штук.</h5>
+                </div>
+
+                <div class="col">
+                    <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.time }}, {{ ready_date.date }}</h3>
                 </div>
             </div>
+
+            <!-- Форма отправки заказа -->
+            <form class="form-control-lg border border-2 mt-4" action="{% url 'stamp:confirm' %}" method="post"
+                enctype="multipart/form-data">
+
+                <div class="row">
+                    {% csrf_token %}
+                    {{ confirm_form.id_stamp_obj }}
+
+                    <div class="pb-4">
+                        <p>Прикрепите файл: </p>{{ confirm_form.file }}
+                    </div>
+
+                    <div>
+                        <p>Текст для штампа и комментарий к заказу:</p>
+                        <p>{{ confirm_form.comment }}</p>
+                    </div>
+                </div>
+
+                <!-- Данные клиента -->
+                <br>
+                <div class="row p-3 mx-1 border border-success border-2 rounded ">
+                    <h3>Контактные данные для обратной связи:</h3>
+                    <div class="col">
+                        <p>Имя: </p>{{ confirm_form.name }}
+                    </div>
+                    <div class="col">
+                        <p>E-mail: </p>{{ confirm_form.email }}
+                    </div>
+                    <div class="col">
+                        <p>Телефон: </p>{{ confirm_form.tel }}
+                    </div>
+                </div>
+
+
+                <div class="row pt-4">
+                    <div class="col ">
+                        <button style="width: 200px;" type="submit" class="yes_button btn btn-success  mx-1"
+                            name="{{ confirm_form.prefix }}">Заказать</button>
+                        <div>
+                            <h6 style="padding-left: 5px;">Нажмите "заказать", что бы отправить нам заказ.</h6>
+                        </div>
+                    </div>
+                </div>
             </form>
 
         </div>
         {% else %}
         <h4>{{ result.cost }}</h4>
         <h2 style="color: rgb(145, 1, 30);">Выбирете параметры и нажмите "Расчет".</h2>
-
         {% endif %}
     </div>
 </div>
 
-</div>
-
+<!-- Статья сопроводительная -->
 <div class="container">
     <div class="bottom_text pt-4"></div>
     <div class="row px-3">
         <div class="col">
-            <h5>Буклеты</h5>
+            <h5>Штампы</h5>
             <p>
                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
                 minus
@@ -134,7 +189,5 @@
     </div>
 </div>
 
-
-<br><br>
 
 {% endblock %}

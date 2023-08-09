@@ -16,21 +16,39 @@
     <div class="confirm_order border shadow p-3">
         <div class="row">
 
-        <h1>Заказ размещен № {{ order.id }} от {{ order.create_date }}</h1>
-        <div>
-            <div class="col">
-                <h2 style="color: rgb(145, 1, 30);">Стоимость: {{ order.product.cost|default:"Сделайте расчет" }} руб.</h2>
-                <h5 style="color: rgb(93, 3, 131);">Формат: {{ order.product.format_p }}</h5>
-                <h5 style="color: rgb(93, 3, 131);">Материал: {{ order.product.paper }} г/м</h5>
-                <h5 style="color: rgb(93, 3, 131);">Двухсторонняя печать: {{ order.product.duplex|yesno:"Да,Нет" }}</h5>
-                <h5 style="color: rgb(93, 3, 131);">Тираж: {{ order.type_production }} штук.</h5>
-            </div>
-            <div class="col">
-                <h2 style="color: rgb(1, 58, 124);">Готовность: {{ order.ready_date|date:"d.m.Y" }}г.</h2>
-                <p>По готовности сообщим по e-mail и номеру телефона</p>
+            <h2 id="a_success">Заказ №{{ order.id }} размещен от {{ order.create_date }}</h2>
+            <div>
+                <div class="col">
+                    {% if order.product.cost %}
+                        <h4>Стоимость: {{ order.product.cost }} руб.</h4>
+                    {% else %}
+                        <h4>Стоимость будет указана в согласовании заказа.</h4><br>
+                    {% endif %}
+
+                    <h5>Продукция: {{ order.product.type_production }}</h5>
+
+                    {% if order.product.express == True %}
+                        {% if order.product.type_production == 'Печать' %}
+                            <h5 style="color: red;">Срочное изготовление</h5>
+                        {% else %}
+                            <h5 style="color: red;">Срочное изготовление (+ 500 руб.)</h5>
+                        {% endif %}
+                    {% endif %}
+                    
+                    <h5>Оснастка: {{ order.product.snap }}</h5>
+                    <h5>Количество: {{ order.product.count }} штук.</h5>
+                </div>
+
+                <div class="col">
+                    <h3 style="color: rgb(1, 58, 124);">Готовность: {{ order.ready_date.time }}, {{ order.ready_date.date }}</h3>
+                </div>
+
+                <div class="col">
+                    <h5>После проверки заказа, свяжемся с вами.</h5>
+                </div>
             </div>
         </div>
-       
+
     </div>
 
     <a href="/" type="button">На главную</a>

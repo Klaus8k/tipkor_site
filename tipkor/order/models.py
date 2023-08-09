@@ -29,7 +29,7 @@ class Orders(models.Model):
     product = models.JSONField(blank=True)
     comment = models.TextField(max_length=200, blank=True)
     delivery = models.CharField(max_length=100, blank=True, default='no')
-    ready_date = models.DateField(blank=True)
+    ready_date = models.DateTimeField(blank=True)
     pay_info = models.BooleanField(blank=True, default=False)
     file = models.FileField(upload_to='orders/', blank=True)
     
@@ -51,7 +51,7 @@ def date_to_ready(type_production):
             while start_time.weekday() != 0:
                 start_time += datetime.timedelta(days=1)
                 
-    time_ready = start_time + datetime.timedelta(days=work_time)
+    time_ready = time_create + datetime.timedelta(days=work_time)
     if time_ready.weekday() >= 5: # Перенос готовности на понедельник, если выпадает на выходные
         while time_ready.weekday() != 0:
             time_ready += datetime.timedelta(days=work_time)

@@ -16,27 +16,28 @@
         <div class="container py-3">
             <a class="" data-bs-toggle="collapse" href="#snap_items_collapse" aria-expanded="true"
                 aria-controls="snap_items_collapse">
-                <h5>Какую оснастку выбрать?</h5>
+                <h4 class="how_snap">Какую оснастку выбрать?</h4>
             </a>
             <!-- Блок пояснений, коллапс -->
             <div class="collapse" id="snap_items_collapse">
-                <div class="row d-flex justify-content-start my-3">
+                <div class="row d-flex justify-content-start my-2">
                     <!-- карточка -->
-                    <div class="card text-center mx-3" style="width: 18rem;">
-                        <h6 class="card-header">Обычная оснастка</h6>
+                    <div class="card text-center mx-3 mb-2" style="width: 19rem;">
+                        <h5 class="card-header">Обычная</h5>
                         <img src="{% static '/stamp/img/r_norm_snap.jpg' %}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <!-- <h5 class="card-title">Обычная оснастка</h5> -->
-                            <p class="card-text">Оснастка пластиковая с крышкой, без подушки</p>
+                            <p class="card-text">Оснастка пластиковая для штампа, без подушки</p>
+                            <h5>Цена: 50 руб.</h5>
                         </div>
+
                     </div>
                     <!-- карточка -->
-                    <div class="card text-center mx-3" style="width: 18rem;">
-                        <h6 class="card-header">Автоматическая оснастка</h6>
-                        <img src="{% static '/stamp/img/r_norm_snap.jpg' %}" class="card-img-top" alt="...">
+                    <div class="card text-center mx-3 mb-2" style="width: 19rem;">
+                        <h5 class="card-header">Автомат</h5>
+                        <img src="{% static '/stamp/img/r_auto_snap.jpg' %}" class="card-img-top" alt="...">
                         <div class="card-body">
-                            <!-- <h5 class="card-title">Обычная оснастка</h5> -->
                             <p class="card-text">Оснастка с синей встроенной подушкой</p>
+                            <h5>Цена зависит от размера</h5>
                         </div>
                     </div>
 
@@ -47,13 +48,15 @@
 
     <!-- Форма -->
     <div class="container">
-        <h1 class="title_text pt-3">Штампы</h1>
+        <hr width="100%" size="8" color="#0d6efd" />
+
+        <h1 id="after_calc" class="title_text pt-3">Изготовление штампов</h1>
 
         <div class="calc_form border shadow rounded p-3 mt-4 ">
             <div class="row">
                 <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 ">
 
-                    <form class="form-control-lg " action="{% url 'stamp:r_stamp' %}" method="post">
+                    <form class="form-control-lg " action="{% url 'stamp:r_stamp' %}#after_calc" method="post">
                         {% csrf_token %}
                         <div class="row">
                             <div class="col px-2 ">{{ form.new_or_no }}</div>
@@ -70,6 +73,9 @@
                                 </div>
                                 <button type="submit" class="calc_button btn btn-primary"
                                     name="{{ form.prefix }}">Расчет</button>
+                                <div>
+                                    <h6>Нажмите "Расчет", что бы сформировать заказ</h6>
+                                </div>
                             </div>
                         </div>
                     </form>
@@ -93,14 +99,14 @@
                     {% if result.id %}
                     <h3>Стоимость будет указана в согласовании заказа.</h3>
                     {% if result.express == True %}
-                    <h4 style="color: red;">Срочное изготовление (+500 руб.)</h4>
+                    <h5 style="color: red;">Срочное изготовление (+500 руб.)</h5>
                     {% endif %}
                     <h5>Оснастка: {{ result.snap }}</h5>
                     <h5>Количество: {{ result.count }} штук.</h5>
                 </div>
 
                 <div class="col">
-                    <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.time }} {{ ready_date.date }}</h3>
+                    <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.time }},  {{ ready_date.date }}</h3>
                 </div>
             </div>
 
@@ -124,8 +130,8 @@
 
                 <!-- Данные клиента -->
                 <br>
-                <div class="row p-3 mx-1 border border-success border-2 rounded">
-                    <h3>Контактные данны:</h3>
+                <div class="row p-3 mx-1 border border-success border-2 rounded ">
+                    <h3>Контактные данные для обратной связи:</h3>
                     <div class="col">
                         <p>Имя: </p>{{ confirm_form.name }}
                     </div>
@@ -141,9 +147,9 @@
                 <div class="row pt-4">
                     <div class="col ">
                         <button style="width: 200px;" type="submit" class="yes_button btn btn-success  mx-1"
-                            name="{{ confirm_form.prefix }}">заказать</button>
-                        <div class="more_info">
-                            <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
+                            name="{{ confirm_form.prefix }}">Заказать</button>
+                        <div>
+                            <h6 style="padding-left: 5px;">Нажмите "заказать", что бы отправить нам заказ.</h6>
                         </div>
                     </div>
                 </div>

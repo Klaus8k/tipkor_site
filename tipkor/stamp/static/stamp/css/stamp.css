@@ -1,3 +1,20 @@
+.how_snap {
+    color: #0d6efd;
+    font-weight: 800;
+
+}
+
+.card-header {
+    color: rgb(13, 110, 253);
+    font-weight: 800;
+    background-color: rgba(13, 110, 253, 0.05);
+    border-bottom: 0px;
+}
+.card-header-tabs {
+    margin-right: 0;
+    margin-left: 0;
+  }
+
 .title_text {
     font-weight: 800;
 }
@@ -53,6 +70,7 @@ input[type=radio] {
     .calc_img {
         display: none;
     }
+
 }
 
 /* xs срабатывает меньше 576px */
@@ -72,7 +90,9 @@ input[type=radio] {
         height: 100px;
     }
 
-    #id_confirm_form-name, #id_confirm_form-email, #id_confirm_form-tel {
+    #id_confirm_form-name,
+    #id_confirm_form-email,
+    #id_confirm_form-tel {
         width: 100%;
     }
 }
