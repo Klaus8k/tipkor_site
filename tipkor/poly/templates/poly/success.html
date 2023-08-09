@@ -13,35 +13,34 @@
 
 
 <div class="container">
-    <div class="confirm_order border shadow p-3">
+    <div class="confirm_order border shadow rounded p-3">
         <div class="row">
 
-        <h1>Заказ размещен № {{ order.id }} от {{ order.create_date }}</h1>
-        <div>
-            <div class="col">
-                <h2 style="color: rgb(145, 1, 30);">Стоимость: {{ order.product.cost|default:"Сделайте расчет" }} руб.</h2>
-                <h5 style="color: rgb(93, 3, 131);">Формат: {{ order.product.format_p }}</h5>
-                <h5 style="color: rgb(93, 3, 131);">Материал: {{ order.product.paper }} г/м</h5>
-                <h5 style="color: rgb(93, 3, 131);">Двухсторонняя печать: {{ order.product.duplex|yesno:"Да,Нет" }}</h5>
-                <h5 style="color: rgb(93, 3, 131);">Тираж: {{ order.product.pressrun }} штук.</h5>
-            </div>
-            <div class="col">
-                <h2 style="color: rgb(1, 58, 124);">Готовность: {{ order.ready_date|date:"d.m.Y" }}г.</h2>
-                <p>По готовности сообщим по e-mail и номеру телефона</p>
+            <h2 id="a_success">Заказ №{{ order.id }} размещен от {{ order.create_date }}</h2>
+
+            <div>
+
+                <div class="col">
+                    <h4>Стоимость: {{ order.product.cost }} руб.</h4>
+                    <h5>Формат: {{ order.product.format_p }}</h5>
+                    <h5>Материал: {{ order.product.paper }} г/м</h5>
+                    <h5>Двухсторонняя печать: {{ order.product.duplex|yesno:"Да,Нет" }}</h5>
+                    <h5>Тираж: {{ order.product.pressrun }} штук.</h5>
+
+                    <div class="col">
+                        <h3 style="color: rgb(1, 58, 124);">Готовность: {{ order.ready_date.time }}</h3>
+                    </div>
+                    <div class="col">
+                        <h5>После проверки заказа, свяжемся с вами.</h5>
+                    </div>
+                </div>
             </div>
         </div>
-       
+        <a href="/" type="button">На главную</a>
     </div>
-
-    <a href="/" type="button">На главную</a>
-
-
-
-
 </div>
-
-<br><br>
-
+    <br><br>
 
 
-{% endblock %}
+
+    {% endblock %}

@@ -23,15 +23,19 @@
 }
 
 
-
 /* md срабатывает меньше 992 */
 @media screen and (max-width: 992px) {
-
+    .calc_img {
+        display: none;
+    }
 }
 
 /* sm срабатывает меньше 768 */
 @media screen and (max-width: 768px) {
 
+    .calc_img {
+        display: none;
+    }
     .card_form {
         flex-direction: row;
     }        

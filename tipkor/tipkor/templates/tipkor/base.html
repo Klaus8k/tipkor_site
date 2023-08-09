@@ -18,18 +18,26 @@
 	<!-- Верхняя строка -->
 	<div class="container pt-4">
 		<div class="top_line row d-flex justify-content-center align-items-center shadow border rounded  p-3">
-			<div class="col d-flex justify-content-center ">
+			<div class="col">
 				<a href="/">
 					<img class="main_logo" src="{% static '/tipkor/img/logo.svg' %}" alt="">
 				</a>
 			</div>
-			<div class="hi_telefon col  ">
+			<!-- телефон -->
+			<div class="col hi_telefon">
 				<p class="fs-3 mb-0"><strong>8 (964) 571-65-51</strong></p>
 			</div>
+			<!-- график работы -->
 			<div class="hi_grafic col " style="text-align: center;">
 				<p class="fs-4  mb-0">пн-пт 10:00-18:00</p>
-
 			</div>
+			<!-- кнопка на страницу контактов -->
+			<div class="hi_contacts col-1 " style="text-align: center;">
+				<a class="btn btn-primary" href="#contacts" role="button">
+					Контакты
+				</a>
+			</div>
+
 			<div class="hi_watssap col-md-2 ">
 				<div class="img_mess">
 					<a href="https://wa.me/79645716551?text=" target="_blank">
@@ -50,63 +58,51 @@
 		</div>
 	</div>
 
-
-
-
-
-
 	<!-- Навигация -->
 	<div class="container pt-4">
 		<div class="top_buttons d-flex justify-content-center">
 
 			<!-- Топ кнопки с выпадающим меню -->
 			<div class="dropdown d-flex flex-fill">
-				<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#poly" role="button"
+				<a class="btn btn-primary flex-fill btn-lg m-1 dropdown-toggle" href="#poly" role="button"
 					id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-					Полиграфия
+					Полиграфия (офсет)
 				</a>
 				<ul class="dropdown-menu dropdown-menu-dark">
-					<li><a class="dropdown-item" href="/poly/card">визитки</a></li>
-					<li><a class="dropdown-item" href="/poly/leaflet">листовки</a></li>
-					<li><a class="dropdown-item" href="/poly/booklet">буклеты</a></li>
+					<li><a class="dropdown-item" href="/poly/card">Визитки</a></li>
+					<li><a class="dropdown-item" href="/poly/leaflet">Листовки</a></li>
+					<li><a class="dropdown-item" href="/poly/booklet">Буклеты</a></li>
 				</ul>
 			</div>
 
 			<div class="dropdown d-flex flex-fill">
-				<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#wide" role="button"
+				<a class="btn btn-primary flex-fill btn-lg m-1 dropdown-toggle" href="#wide" role="button"
 					id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
 					Широкоформатная печать
 				</a>
 				<ul class="dropdown-menu dropdown-menu-dark">
-					<li><a class="dropdown-item" href="/wide/banner">баннеры</a></li>
-					<li><a class="dropdown-item" href="/wide/sticker">наклейки</a></li>
-					<li><a class="dropdown-item" href="/wide/table">таблички</a></li>
+					<li><a class="dropdown-item" href="/wide/banner">Баннеры</a></li>
+					<li><a class="dropdown-item" href="/wide/sticker">Наклейки</a></li>
+					<li><a class="dropdown-item" href="/wide/table">Таблички</a></li>
 				</ul>
 			</div>
 
 			<div class="dropdown d-flex flex-fill">
-				<a class="btn btn-primary flex-fill btn-lg  m-1 dropdown-toggle" href="#stamp" role="button"
+				<a class="btn btn-primary flex-fill btn-lg m-1 dropdown-toggle" href="#stamp" role="button"
 					id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-					Печати
+					Печати и штампы
 				</a>
 				<ul class="dropdown-menu dropdown-menu-dark">
-					<li><a class="dropdown-item" href="/stamp/c_stamp">печати</a></li>
-					<li><a class="dropdown-item" href="/stamp/r_stamp">штампы</a></li>
-					<li><a class="dropdown-item" href="#">пустое</a></li>
+					<li><a class="dropdown-item" href="/stamp/c_stamp">Печати</a></li>
+					<li><a class="dropdown-item" href="/stamp/r_stamp">Штампы</a></li>
 				</ul>
 			</div>
-
-
-			<!-- Кноки с сворачивающиеся надо сделать -->
-
 		</div>
-	</div>
 	</div>
 
 
 	{% block content %}
 	{% endblock %}
-
 
 
 	<!-- FOOTER -->

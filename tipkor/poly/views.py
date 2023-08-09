@@ -66,9 +66,11 @@ class ConfirmView(DetailView, FormMixin):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['order'] =  self.get_object() 
-        context['form'] = self.form_class(initial={'type_production': self.get_order_type()})
-        context['ready_date'] =  date_to_ready(self.get_order_type())
+        context['order'] =  self.get_object()
+        type_production =  self.get_order_type()
+        context['form'] = self.form_class(initial={'type_production': type_production})
+        context['ready_date'] =  date_to_ready(type_production)
+        context['type_production'] = type_production
         
         return context
     

@@ -11,20 +11,41 @@
 
 
 
+<!-- Заголовок коллапс блока -->
 <div class="container">
-    <div class="card_text">
-        <p>-----------------</p>
+    <div class="card_collapse_block">
+        <div class="container py-3">
+            <a class="" data-bs-toggle="collapse" href="#snap_items_collapse" aria-expanded="true"
+                aria-controls="snap_items_collapse">
+                <h4 class="how_snap">Какие будут визитки?</h4>
+            </a>
+            <!-- Блок пояснений, коллапс -->
+            <div class="collapse" id="snap_items_collapse">
+                <div class="row d-flex justify-content-start my-2">
+                    <!-- карточка -->
+                    <div class="card text-center mx-3 mb-2" style="width: 30rem;">
+                        <h5 class="card-header">Обычная</h5>
+                        <img src="{% static '/stamp/img/c_norm_snap.jpg' %}" class="card-img-top" alt="...">
+                        <div class="card-body">
+                            <p class="card-text">Описание с картинками Возможно карточки (картон, офсет, тиражи)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <h1 class="title_text">Визитки</h1>
 </div>
+
 
 <!-- Форма -->
 <div class="container">
-    <div class="card_form border shadow p-3">
-        <div class="row">
+    <hr width="100%" size="8" color="#0d6efd" />
+    <h1 id="after_calc" class="title_text pt-3">Печать визиток</h1>
 
-            <div class="col-xl-5 col-lg-7 col-md-8 col-sm-6">
-                <form class="form-control-lg " action="{% url 'poly:card' %}" method="post">
+    <div class="calc_form border shadow rounded p-3 mt-4">
+        <div class="row">
+            <div class="col-xl-6 col-lg-6 col-md-10 col-sm-12 ">
+                <form class="form-control-lg " action="{% url 'poly:card' %}#after_calc" method="post">
                     {% csrf_token %}
                     <div class="row">
                         <div class="col">{{ calc_form.paper }}<p>Плотность бумаги</p>
@@ -36,31 +57,29 @@
                     <div class="row pt-4">
                         <div class="col">{{ calc_form.duplex }}<p>4+4/4+0:</p>
                         </div>
-                        <div class="col">{{ calc_form.pressrun }}<p>тираж(шт):</p>
+                        <div class="col">{{ calc_form.pressrun }}<p>тираж</p>
                         </div>
-                    </div>
-
-                    <div class="row">
-                        <div class="col">
-                            <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
-                            <!-- <button href="{% url 'poly:card' %}" class="reset_button btn btn-danger" value="Сброс">Сброс</button> -->
+                        <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
+                        <div style="padding-left: 0px;">
+                            <h6>Нажмите "Расчет", что бы сформировать заказ</h6>
                         </div>
                     </div>
                 </form>
             </div>
-
-            <div class="card_img col">
-                картинка визитки
+            <div class="calc_img col ">
+                <img class="img-fluid" src="{% static '/poly/img/card.jpg' %}" alt="">
             </div>
         </div>
-        <!-- Результат -->
     </div>
+</div>
+<!-- Результат -->
+</div>
 </div>
 
 <br><br>
 <div class="container">
-    <div class="result_info p-3 border shadow">
-        <div class="row px-3">
+    <div class="result_info p-3 shadow border rounded">
+        <div class="row py-3 mx-1 border border-bg-secondary border-2 rounded bg-light">
             <div class="col col-xl-3">
                 {% if result.id %}
                 <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
@@ -70,15 +89,15 @@
                 <h5>Тираж: {{ result.pressrun }} штук.</h5>
             </div>
             <div class="col">
-                <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}</h3>
+                <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.date }} После 14:00</h3>
                 <p>При заказе сегодня до 15:00</p>
             </div>
 
             <div class="pt-4">
-                <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}"> заказать</a>
+                <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}">Оформить заказ</a>
             </div>
             <div class="more_info">
-                <h6>Нажмите "заказать", что бы отправить нам заказ.</h6>
+                <h6>Нажмите "Оформить заказ" для продолжения.</h6>
             </div>
             {% else %}
             <h4>{{ result.cost }}</h4>
@@ -97,7 +116,8 @@
         <div class="col">
             <h5>Визитки</h5>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga repellat
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat voluptatem commodi dicta, fuga
+                repellat
                 minus
                 mollitia eveniet perferendis, incidunt alias quod a tempore quis magni numquam laboriosam, illo
                 provident
