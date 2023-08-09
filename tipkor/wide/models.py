@@ -1,6 +1,7 @@
 import json
 
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from loguru import logger
 from order.models import Orders
@@ -28,8 +29,8 @@ class Post_obr(models.Model):
     
 class Wide(models.Model):
     # type_production = models.CharField(max_length=30, blank=True, null=True)
-    wide_size = models.FloatField(max_length=5)
-    heigth_size = models.FloatField(max_length=5)
+    wide_size = models.FloatField(validators=[MinValueValidator(0.05), MaxValueValidator(5)])
+    heigth_size = models.FloatField(validators=[MinValueValidator(0.05), MaxValueValidator(5)])
     material_print = models.ForeignKey(Material, on_delete=models.CASCADE)
     post_obr = models.ForeignKey(Post_obr, on_delete=models.CASCADE, blank=True)
     cost = models.IntegerField()

@@ -2,10 +2,8 @@ from django import forms
 from django.core.exceptions import ValidationError
 from django.forms import ModelForm
 
-
-
 from .constants import POST_OBR
-from .models import Material, Wide, Post_obr
+from .models import Material, Post_obr, Wide
 
 
 class Banner_Form(ModelForm):

@@ -25,6 +25,9 @@
                     <h5>Формат: {{ order.product.format_p }}</h5>
                     <h5>Материал: {{ order.product.paper }} г/м</h5>
                     <h5>Двухсторонняя печать: {{ order.product.duplex|yesno:"Да,Нет" }}</h5>
+                    {% if order.product.post_obr %}
+                    <h5>Тип буклета: {{ order.product.post_obr }}</h5>
+                    {% endif %}
                     <h5>Тираж: {{ order.product.pressrun }} штук.</h5>
 
                     <div class="col">
