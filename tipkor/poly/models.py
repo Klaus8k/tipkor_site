@@ -1,12 +1,12 @@
 import json
 
-
 from django.core.exceptions import ObjectDoesNotExist, ValidationError
 from django.db import models
-from order.models import Orders
 from django.utils.translation import gettext_lazy
+from order.models import Orders
 
 from .constants import BOOKLETS, DUPLEX, PAPER_CHOICE
+
 
 def validate_int_size(value):
     if value < 30 or value > 630:
@@ -36,7 +36,7 @@ class Poly(models.Model):
     paper = models.CharField(choices=PAPER_CHOICE, max_length=20)
     pressrun = models.IntegerField()
     duplex = models.BooleanField(choices=DUPLEX, max_length=50, default=True)
-    post_obr = models.CharField(choices=BOOKLETS, blank=True, null=True, max_length=20)
+    post_obr = models.CharField(choices=BOOKLETS, blank=True, max_length=20)
     cost = models.IntegerField()
 
     def __str__(self):
@@ -44,6 +44,8 @@ class Poly(models.Model):
     
     @staticmethod
     def get_poly_object(data_form):
+        if not 'post_obr' in data_form:
+            data_form['post_obr'] = ''
         try:
             result = Poly.objects.get(**data_form)
             result.cost = multiply_cost(result.cost, result.pressrun)

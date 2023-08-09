@@ -22,6 +22,11 @@
     width: 200px;
 }
 
+#id_comment {
+    width: 50%;
+    height: 100px;
+}
+
 
 /* md срабатывает меньше 992 */
 @media screen and (max-width: 992px) {
@@ -55,5 +60,16 @@
 
     .card_img {
         display: none;        
+    }
+
+    #id_comment {
+        width: 100%;
+        height: 100px;
+    }
+
+    #id_name,
+    #id_email,
+    #id_tel {
+        width: 100%;
     }
 }

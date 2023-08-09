@@ -29,7 +29,7 @@ class Leaflet_Form(ModelForm):
 
     class Meta:
         model = Poly
-        fields = ['format_p', 'paper', 'pressrun', 'duplex' ]
+        fields = ['post_obr','format_p', 'paper', 'pressrun', 'duplex' ]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -59,6 +59,7 @@ class Booklet_Form(ModelForm):
         self.fields['paper'] = forms.ChoiceField(initial='130', choices=PAPER_CHOICE)
         self.fields['pressrun'] = forms.ChoiceField(initial=1000, choices=PRESSRUN_OFFSET)
         self.fields['post_obr'] = forms.ChoiceField(initial='eurobucket', choices=BOOKLETS)
+        self.fields['duplex'] = forms.ChoiceField(initial=True, choices=[(True, 'Двухсторонняя печать')])
         
 
 class Confirm_form(forms.Form):

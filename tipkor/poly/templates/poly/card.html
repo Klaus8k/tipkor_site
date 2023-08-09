@@ -59,23 +59,22 @@
                         </div>
                         <div class="col">{{ calc_form.pressrun }}<p>тираж</p>
                         </div>
-                        <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
-                        <div style="padding-left: 0px;">
+                        <div>
+                            <button type="submit" class="calc_button btn btn-primary" name="calc_form">Расчет</button>
                             <h6>Нажмите "Расчет", что бы сформировать заказ</h6>
                         </div>
                     </div>
                 </form>
             </div>
+
             <div class="calc_img col ">
                 <img class="img-fluid" src="{% static '/poly/img/card.jpg' %}" alt="">
             </div>
         </div>
     </div>
 </div>
-<!-- Результат -->
-</div>
-</div>
 
+<!-- Результат -->
 <br><br>
 <div class="container">
     <div class="result_info p-3 shadow border rounded">
@@ -90,11 +89,11 @@
             </div>
             <div class="col">
                 <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.date }} После 14:00</h3>
-                <p>При заказе сегодня до 15:00</p>
+                <p>При согласовании сегодня до 15:00</p>
             </div>
 
             <div class="pt-4">
-                <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}">Оформить заказ</a>
+                <a class="confirm_button btn btn-success" href="confirm/{{ result.id }}#a_confirm">Оформить заказ</a>
             </div>
             <div class="more_info">
                 <h6>Нажмите "Оформить заказ" для продолжения.</h6>

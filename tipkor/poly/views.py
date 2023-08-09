@@ -20,6 +20,7 @@ class PolyMeta(TemplateView, FormMixin):
 
     def post(self, *args, **kwargs):
         self.data_form = self.get_form_dict()
+        logger.debug(self.data_form)
         self.result = Poly.get_poly_object(self.data_form) #TODO get_or_404 
         kwargs.update({'result': self.result})
         kwargs.update({'ready_date': date_to_ready(self.template_name.split('.')[0])})
@@ -101,7 +102,7 @@ class ConfirmView(DetailView, FormMixin):
         if email:
             send_email(email, order=order)
         
-        return HttpResponseRedirect(reverse('poly:success', args=[order.id]))
+        return HttpResponseRedirect(reverse('poly:success', kwargs={'pk': order.id}) + '#a_success')
     
     def get_order_type(self):
         order_type = self.request.META.get('HTTP_REFERER').split('/')[-2]

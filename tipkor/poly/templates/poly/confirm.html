@@ -16,7 +16,7 @@
         <div class="row py-3 mx-1 border border-bg-secondary border-2 rounded bg-light">
 
             <div class="row px-3">
-                <h1>Подтверждение заказа</h1>
+                <h1 id="a_confirm">Подтверждение заказа</h1>
                 <h2>{{ type_production }}</h2>
                 <div class="col col-xl-3">
                     <h3>Стоимость: {{ order.cost }} руб.</h3>
@@ -30,77 +30,54 @@
                     <p>При заказе сегодня до 15:00</p>
                 </div>
             </div>
-
         </div>
 
+        <form class="form-control-lg border border-2 rounded mt-4" action="{% url 'poly:confirm' order.id %}"
+            method="post" enctype="multipart/form-data">
 
+            <div class="row">
+                {% csrf_token %}
+                {{ form.type_production }}
 
+                <div class="pb-4">
+                    <p>Прикрепите файл: </p>{{ form.file }}
+                </div>
 
+                <div>
+                    <p>Kомментарий к заказу:</p>
+                    <p>{{ form.comment }}</p>
+                </div>
+            </div>
 
-
-
-        <!-- <div>
+            <!-- Данные клиента -->
+            <br>
+            <div class="row p-3 mx-1 border border-success border-2 rounded">
+                <h3>Контактные данные:</h3>
                 <div class="col">
-                    <h2>{{ type_production }}</h2>
-
-                    <h5 style="color: rgb(93, 3, 131);">Формат: {{ order.format_p }}</h5>
-                    <h5 style="color: rgb(93, 3, 131);">Материал: {{ order.paper }} г/м</h5>
-                    <h5 style="color: rgb(93, 3, 131);">Двухсторонняя печать: {{ order.duplex|yesno:"Да,Нет" }}</h5>
-                    <h5 style="color: rgb(93, 3, 131);">Тираж: {{ order.pressrun }} штук.</h5>
-                    <h2 style="color: rgb(145, 1, 30);">Стоимость: {{ order.cost|default:"Сделайте расчет" }} руб.</h2>
-
+                    <p>Имя: </p>{{ form.name }}
                 </div>
                 <div class="col">
-                    <h2 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date|date:"d.m.Y" }}г.</h2>
-                    <p>При заказе сегодня до 15:00</p>
+                    <p>E-mail: </p>{{ form.email }}
                 </div>
-            </div> -->
-            <form class="form-control-lg border border-2 rounded mt-4" action="{% url 'poly:confirm' order.id %}"
-                method="post" enctype="multipart/form-data">
+                <div class="col">
+                    <p>Телефон: </p>{{ form.tel }}
+                </div>
+            </div>
 
-                <div class="row">
-                    {% csrf_token %}
-                    {{ form.type_production }}
 
-                    <div class="pb-4">
-                        <p>Прикрепите файл: </p>{{ form.file }}
-                    </div>
-
-                    <div class="">
-                        <p>Kомментарий к заказу:</p>
-                        {{ form.comment }}
+            <div class="row pt-4">
+                <div class="col ">
+                    <button style="width: 200px;" type="submit"
+                        class="yes_button btn btn-success  mx-1">Заказать</button>
+                    <div>
+                        <h6 style="padding-left: 5px;">Нажмите "заказать", что бы отправить нам заказ.</h6>
                     </div>
                 </div>
+            </div>
+        </form>
 
-                <!-- Данные клиента -->
-                <br>
-                <div class="row p-3 mx-1 border border-success border-2 rounded">
-                    <h3>Контактные данные:</h3>
-                    <div class="col">
-                        <p>Имя: </p>{{ form.name }}
-                    </div>
-                    <div class="col">
-                        <p>E-mail: </p>{{ form.email }}
-                    </div>
-                    <div class="col">
-                        <p>Телефон: </p>{{ form.tel }}
-                    </div>
-                </div>
-
-
-                <div class="row pt-4">
-                    <div class="col ">
-                        <button style="width: 200px;" type="submit"
-                            class="yes_button btn btn-success  mx-1">Заказать</button>
-                        <div>
-                            <h6 style="padding-left: 5px;">Нажмите "заказать", что бы отправить нам заказ.</h6>
-                        </div>
-                    </div>
-                </div>
-            </form>
-
-        </div>
     </div>
+</div>
 
 
 
