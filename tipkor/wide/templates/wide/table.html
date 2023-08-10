@@ -27,9 +27,26 @@
                 <form class="form-control-lg " action="{% url 'wide:table' %}" method="post">
                     {% csrf_token %}
                     <div class="row">
-                        <div class="col" >{{ calc_form.wide_size }}<p>Ширина таблички (м)</p>
+                        <div class="col">
+                            {% if form.errors %}
+                            {% for error in form.errors.as_data.values %}
+                            {% for data in error.0 %}
+                            <h6 style="color: rgb(156, 60, 60);">{{ data }}</h6>
+                            {% endfor %}
+                            {% endfor %}
+                            {% endif %}
+                            {{ calc_form.wide_size }}<p>Ширина таблички (м)</p>
                         </div>
-                        <div class="col">{{ calc_form.heigth_size }}<p>Высота таблички (м)</p>
+
+                        <div class="col">
+                            {% if form.errors %}
+                            {% for error in form.errors.as_data.values %}
+                            {% for data in error.0 %}
+                            <h6 style="color: rgb(156, 60, 60);">{{ data }}</h6>
+                            {% endfor %}
+                            {% endfor %}
+                            {% endif %}
+                            {{ calc_form.heigth_size }}<p>Высота таблички (м)</p>
                         </div>
                     </div>
 
@@ -63,8 +80,13 @@
     <div class="result_info p-3 border shadow">
         <div class="row px-3">
             <div class="col col-xl-3">
-                {% if result.id %}
-                <h3>Стоимость: {{ result.cost|default:"Сделайте расчет" }} руб.</h3>
+                {% if result.id and not form.errors %}
+                {% if result.cost == 500 %}
+                <h3>Стоимость: {{ result.cost }} руб. (минимальный заказ)</h3>
+                {% else %}
+                <h3>Стоимость: {{ result.cost }} руб.</h3>
+                {% endif %}
+                
                 <h5>Размер: {{ result.wide_size }}х{{ result.heigth_size }}</h5>
                 <h5>Материал: {{ result.material_print }}</h5>
                 <!-- <h5>Обработка: {{ result.post_obr }}</h5> -->
