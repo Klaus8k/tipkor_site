@@ -1,3 +1,4 @@
+from django import forms
 from django.http import HttpRequest, HttpResponse, HttpResponseRedirect
 from django.shortcuts import redirect, render, reverse
 from django.views.generic.base import TemplateView
@@ -18,17 +19,21 @@ class WideMeta(TemplateView, FormMixin):
     type_production = None
     
     def post(self, *args, **kwargs):
-        self.data_form = self.get_form_dict()
-        self.result = Wide.get_wide_object(self.data_form)
-        kwargs.update({'result': self.result})
-        kwargs.update({'ready_date': date_to_ready(self.template_name.split('.')[0])})
+        form = self.form_class(self.request.POST)
+        if form.is_bound:
+            self.data_form = self.get_form_dict()
+            self.result = Wide.get_wide_object(self.data_form)
+            kwargs.update({'result': self.result})
+            kwargs.update({'ready_date': date_to_ready(self.template_name.split('.')[0])})
         return self.get(*args, **kwargs)
     
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            context.update({'calc_form': self.form_class(self.data_form)})       
+            context.update({'calc_form': self.form_class(self.data_form)})
+            # if not self.get_form().is_valid():
+            #     logger.debug(context['form.errorlist'])                
         else:
             context.update({'calc_form': self.form_class()})
         return context

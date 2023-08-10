@@ -1,9 +1,12 @@
+from loguru import logger
+
 from django import forms
 from django.core.exceptions import ValidationError
+from django.core.validators import MaxValueValidator, MinValueValidator
 from django.forms import ModelForm
 
 from .constants import POST_OBR
-from .models import Material, Post_obr, Wide
+from .models import Material, Post_obr, Wide, wide_validator
 
 
 class Banner_Form(ModelForm):
@@ -24,6 +27,8 @@ class Banner_Form(ModelForm):
                                 queryset=Post_obr.objects.filter(type_wide_production='banner'),
                                 empty_label=None
                                 )
+        
+
 
 
 # Сделать форму с выбором форматов, дуплекс, тираж. Форматы из модели должны браться
