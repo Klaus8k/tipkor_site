@@ -76,7 +76,7 @@ class ConfirmView(DetailView, FormMixin):
         return context
     
     def post(self, *args, **kwargs):
-        
+
         confirm_dict = self.request.POST.dict()
         
         name = confirm_dict['name'].lower()
@@ -117,7 +117,7 @@ class ConfirmView(DetailView, FormMixin):
     
 class SuccessView(DetailView):
     model = Orders
-    template_name = 'success.html'
+    template_name = 'poly/success.html'
     context_object_name = 'order'
 
     

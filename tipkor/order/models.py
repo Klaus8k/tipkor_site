@@ -46,13 +46,17 @@ def date_to_ready(type_production):
 
     time_create = datetime.datetime.now()
     if time_create.hour >= 15 or time_create.hour <= 9 or time_create.weekday() >= 5:
+        start_time = time_create.replace(hour=10)
         start_time = time_create + datetime.timedelta(days=1)
         if start_time.weekday() >= 5:
-            while start_time.weekday() != 0:
+            while start_time.weekday() in [5,6]:
                 start_time += datetime.timedelta(days=1)
+    else:
+        start_time = datetime.datetime.now()
                 
-    time_ready = time_create + datetime.timedelta(days=work_time)
+    time_ready = start_time + datetime.timedelta(days=work_time)
+    
     if time_ready.weekday() >= 5: # Перенос готовности на понедельник, если выпадает на выходные
-        while time_ready.weekday() != 0:
-            time_ready += datetime.timedelta(days=work_time)
+        while time_ready.weekday() in [5,6]:
+            time_ready += datetime.timedelta(days=1)
     return time_ready

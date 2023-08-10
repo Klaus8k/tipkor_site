@@ -70,13 +70,14 @@ class Poly(models.Model):
 def multiply_cost(cost: int, pressrun: int):
     if pressrun < 500:
         marge = 400
-        return ((cost + marge) // 10 + 1) * 10
+        result_cost = ((cost + marge) // 10 + 1) * 10
     elif pressrun == 500:
         marge = 1000
-        return ((cost + marge) // 10 + 1) * 10
+        result_cost = ((cost + marge) // 10 + 1) * 10
     elif pressrun == 1000:
         marge = 1200
-        return ((cost + marge) // 10 + 1) * 10
+        result_cost = ((cost + marge) // 10 + 1) * 10
     else:
-        return ((cost * 1.46) // 10 + 1) * 10
-        
+        result_cost = ((cost * 1.46) // 10 + 1) * 10
+    
+    return round(int(result_cost), 0)

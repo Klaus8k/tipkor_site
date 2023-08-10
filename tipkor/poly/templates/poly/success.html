@@ -22,6 +22,8 @@
 
                 <div class="col">
                     <h4>Стоимость: {{ order.product.cost }} руб.</h4>
+                    <h5>Продукция: {{ order.product.type_production }}</h5>
+
                     <h5>Формат: {{ order.product.format_p }}</h5>
                     <h5>Материал: {{ order.product.paper }} г/м</h5>
                     <h5>Двухсторонняя печать: {{ order.product.duplex|yesno:"Да,Нет" }}</h5>
@@ -31,7 +33,7 @@
                     <h5>Тираж: {{ order.product.pressrun }} штук.</h5>
 
                     <div class="col">
-                        <h3 style="color: rgb(1, 58, 124);">Готовность: {{ order.ready_date.time }}</h3>
+                        <h3 style="color: rgb(1, 58, 124);">Готовность: {{ order.ready_date.date }}</h3>
                     </div>
                     <div class="col">
                         <h5>После проверки заказа, свяжемся с вами.</h5>

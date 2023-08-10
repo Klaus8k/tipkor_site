@@ -98,5 +98,6 @@ def calc_cost(x,y,material,post_obr, type_production):
         
     if result_cost < 500:
         return 500
-    else: return result_cost
+    else:
+        return round(int((result_cost // 10 + 1) * 10), 0)
     

@@ -21,19 +21,19 @@ class WideMeta(TemplateView, FormMixin):
     def post(self, *args, **kwargs):
         form = self.form_class(self.request.POST)
         if form.is_bound:
+            type_production = self.template_name.split('.')[0]
             self.data_form = self.get_form_dict()
+            self.data_form.update({'type_production': type_production})
             self.result = Wide.get_wide_object(self.data_form)
             kwargs.update({'result': self.result})
-            kwargs.update({'ready_date': date_to_ready(self.template_name.split('.')[0])})
+            kwargs.update({'ready_date': date_to_ready(type_production=type_production)})
         return self.get(*args, **kwargs)
     
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         if self.get_form().is_bound:
-            context.update({'calc_form': self.form_class(self.data_form)})
-            # if not self.get_form().is_valid():
-            #     logger.debug(context['form.errorlist'])                
+            context.update({'calc_form': self.form_class(self.data_form)})              
         else:
             context.update({'calc_form': self.form_class()})
         return context
@@ -41,7 +41,7 @@ class WideMeta(TemplateView, FormMixin):
     
     def get_form_dict(self):
         form_dict = self.request.POST.copy().dict()
-        form_dict.update({'type_production':self.type_production})
+        # form_dict.update({'type_production':self.type_production})
         del form_dict['csrfmiddlewaretoken']
         del form_dict['calc_form']
         return form_dict
@@ -53,18 +53,18 @@ class WideMeta(TemplateView, FormMixin):
 class BannerView(WideMeta):
     form_class = Banner_Form
     template_name = 'banner.html'
-    type_production = 'banner'
+    # type_production = 'banner'
 
 class StickerView(WideMeta):
     form_class = Sticker_Form
     template_name = 'sticker.html'
-    type_production = 'sticker'
+    # type_production = 'sticker'
     
     
 class TableView(WideMeta):
     form_class = Table_Form
     template_name = 'table.html'
-    type_production = 'table'
+    # type_production = 'table'
     
     
 class ConfirmView(DetailView, FormMixin):
@@ -74,13 +74,16 @@ class ConfirmView(DetailView, FormMixin):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['order'] =  self.get_object() 
-        context['form'] = self.form_class(initial={'type_production': self.get_order_type()})
-        context['ready_date'] =  date_to_ready(self.get_order_type())
+        context['order'] =  self.get_object()
+        type_production =  self.get_order_type()
+        context['form'] = self.form_class(initial={'type_production': type_production})
+        context['ready_date'] =  date_to_ready(type_production)
+        context['type_production'] = type_production
         
         return context
     
     def post(self, *args, **kwargs):
+        
         confirm_dict = self.request.POST.dict()
         
         name = confirm_dict['name'].lower()
@@ -106,7 +109,7 @@ class ConfirmView(DetailView, FormMixin):
         
         if email:
             send_email(email, order=order)
-        return HttpResponseRedirect(reverse('wide:success', args=[order.id]))
+        return HttpResponseRedirect(reverse('wide:success', kwargs={'pk': order.id}) + '#a_success')
     
     
     def get_order_type(self):
@@ -122,7 +125,7 @@ class ConfirmView(DetailView, FormMixin):
     
 class SuccessView(DetailView):
     model = Orders
-    template_name = 'success.html'
+    template_name = 'wide/success.html'
     context_object_name = 'order'
 
     
