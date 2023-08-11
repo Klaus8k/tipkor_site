@@ -85,12 +85,6 @@ body {
     transform: translate(-50%, -50%);
   }
 
-
-
-
-
-
-
 .disabled {
     
 }
@@ -105,16 +99,22 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-    .hi_grafic {
-        display: none;
-    }
+
 
     .text {
         margin-top: 15px;
     }
+
+    .centered h1 {
+        font-size: 2.5rem;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    .hi_grafic {
+        display: none;
+    }
+
     .top_line {
         padding: 10px !important;
     }
@@ -133,7 +133,7 @@ body {
     }
 
     .centered h1 {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
 
     .card-img-top {
@@ -146,6 +146,11 @@ body {
 @media screen and (max-width: 576px) {
 
     .centered h1 {
-        font-size: 1.2rem;
+        font-size: 1rem;
     }
+
+    .hi_watssap .hi_teleg {
+        flex-direction: row;
+    }
+
 }
