@@ -3,9 +3,16 @@ p {
 }
 
 body {
-    background: linear-gradient(-45deg, #fbc0e7, #d0bbff, #a6e7ff, #c8fef1);
+    /* background: linear-gradient(-45deg, #fbc0e7, #d0bbff, #a6e7ff, #c8fef1); */
+
+    
+
+    /* background: linear-gradient(-45deg, #2a0101, #1f0061, #00435c, #4b005a); */
+    background: linear-gradient(60deg, #d30012, #ff00d4, #8800dd, #00ffc3);
+    /* background: linear-gradient(60deg, #a10000, #0099ff, #00ff08, #ffee00); */
     background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+    /* animation: gradient 10s ease infinite; */
+    animation: gradient 5s ease infinite;
     height: 100vh;
 }
 
