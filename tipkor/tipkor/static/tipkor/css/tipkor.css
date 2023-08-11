@@ -1,3 +1,28 @@
+p {
+    font-size: 15px;
+}
+
+body {
+    background: linear-gradient(-45deg, #d788bb, #b39ae8, #85c7df, #9bdbcc);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+    height: 100vh;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+ 
+    50% {
+        background-position: 100% 50%;
+    }
+ 
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 .main_logo {
     max-width: 170px;
 }
@@ -36,7 +61,7 @@
 
 #titles {
     text-align: center;
-    color: rgb(0, 191, 244);
+    color: rgb(2, 67, 128);
     font-weight: 800;
     text-transform: uppercase;
 }
@@ -47,9 +72,29 @@
     font-weight: 600;
   }
 
+.container-top {
+    position: relative;
+    text-align: center;
+    color: white;
+  }
+
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+
+
+
+
+
+
 .disabled {
     
 }
+
 .size {
     width: auto;
 }
@@ -74,7 +119,6 @@
         padding: 10px !important;
     }
 
-
     .row {
         display: flex;
         flex-direction: column;
@@ -88,4 +132,20 @@
         margin-top: 15px;
     }
 
+    .centered h1 {
+        font-size: 1.5rem;
+    }
+
+    .card-img-top {
+        display: none;
+    }
+
+}
+
+/* xs срабатывает меньше 576px */
+@media screen and (max-width: 576px) {
+
+    .centered h1 {
+        font-size: 1.2rem;
+    }
 }

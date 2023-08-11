@@ -4,157 +4,175 @@
 <!-- Блок главной страницы -->
 {% block content %}
 <!-- Картинка -->
-<div class="hi_imgage container p-3">
-    <div class="row">
-        <img class="col" id="header_img" src="{% static '/tipkor/img/header_img.png' %}" alt="">
-    </div>
-</div>
 
 <!-- Описание главная -->
-<div class="container p-3">
-    <div class="row">
-        <h1 id="slogan">Офсетная печать, широкоформатка, печати штампы</h1>
-        <a href="/expirement" target="_blank">
-            <h1 id="slogan">Экспериметнальная страница</h1>
-        </a>
-    </div>
-    <div>
-        <p style="font-size: 18px; text-align: center; margin-top: 20px;">
-            Lorem ipsum dolor, sit amet consectetur
-            adipisicing elit. Reiciendis magnam eveniet culpa eum
-            reprehenderit velit, cupiditate corrupti voluptatum, aliquam quibusdam aspernatur maiores quae adipisci
-            est? Eaque quis delectus porro sunt.</p>
+<div class="container py-3 bg-light shadow border rounded">
+    <div class="row  ">
+        <div class="container-top">
+            <img src="{% static '/tipkor/img/image_top.jpg' %}" alt="Snow" class="w-100 rounded">
+            <div class="centered w-75">
+                <h1 class="top_text">ОФСЕТНАЯ ПЕЧАТЬ, ШИРОКОФОРМАТНАЯ ПЕЧАТЬ, ПЕЧАТИ И ШТАМПЫ</h1>
+            </div>
+        </div>
     </div>
 </div>
 
 <!-- Полиграфия -->
-<div class="container border shadow">
-    <div class="row pt-2">
-        <h2 id="titles">Полиграфия</h2>
-        <a name="poly"></a>
+<div class="container bg-light shadow border rounded mt-4 pb-3">
+    <div class="row py-2">
+        <h1 id="titles">Полиграфия (офсетная печать)</h1>
+        <hr>
     </div>
-    <div class="row row-cols-1 row-cols-md-3">
+
+    <div class="row row-col-4">
         <!-- карточка вида заказа -->
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/card.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Визитки</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/poly/card" class="btn btn-primary px-5">Расчет визиток</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Визитки</h3>
+                <img src="{% static '/tipkor/img/card.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Заказ визиток. Офсетная печать от 1го дня.
+                        Мелованный картон 300г/м.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/poly/card" class="btn btn-primary px-5">Заказать визитки</a>
                 </div>
             </div>
         </div>
 
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/leaflet.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Листовки</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/poly/leaflet" class="btn btn-primary px-5">Расчет листовок</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Листовки</h3>
+                <img src="{% static '/tipkor/img/leaflet.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Заказ листовок. Офсетная печать от 1го дня.
+                        Бумага на выбор 130г/м, 170г/м, 300г/м.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/poly/leaflet" class="btn btn-primary px-5">Заказать листовки</a>
                 </div>
             </div>
         </div>
 
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/booklet.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Буклеты</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/poly/booklet" class="btn btn-primary px-5">Расчет буклетов</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Буклеты</h3>
+                <img src="{% static '/tipkor/img/booklet.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Изготовление буклетов. Евробуклет, гармошка, книжка.
+                        Бумага на выбор.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/poly/booklet" class="btn btn-primary px-5">Заказать буклеты</a>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
 <br><br>
 
 <!-- Широкоформатка -->
-
-<div class="container border shadow">
+<div class="container bg-light shadow border rounded mt-4 pb-3">
     <div class="row pt-2">
-        <h2 id="titles">Широкоформатка</h2>
-        <a name="poly"></a>
+        <h1 id="titles">Широкоформатная печать</h1>
+        <hr>
     </div>
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-col-4">
         <!-- карточка вида заказа -->
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/banner.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Баннеры</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/wide/banner" class="btn btn-primary px-5">Расчет баннера</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Баннеры</h3>
+                <img src="{% static '/tipkor/img/banner.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Изотовление баннеров. Установка люверсов. Интерьерная печать.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/wide/banner" class="btn btn-primary px-5">Заказать баннер</a>
                 </div>
             </div>
         </div>
 
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/sticker.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Наклейеки</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/wide/sticker" class="btn btn-primary px-5">Расчет наклйки</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Наклейки</h3>
+                <img src="{% static '/tipkor/img/sticker.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Печать широкоформатных наклеек. Интерьерая печать.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/wide/sticker" class="btn btn-primary px-5">Заказать наклейки</a>
                 </div>
             </div>
         </div>
 
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/tablets.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Таблички</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/wide/table" class="btn btn-primary px-5">Расчет таблички</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Таблички</h3>
+                <img src="{% static '/tipkor/img/tablets.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Изготовление табличек. Маленьких и больших размеров. ПВХ 5мм с накаткой.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/wide/table" class="btn btn-primary px-5">Заказать таблички</a>
                 </div>
             </div>
         </div>
+
     </div>
 </div>
+<br><br>
 
 <!-- Печати -->
-<div class="container border shadow">
+<div class="container bg-light shadow border rounded mt-4 pb-3">
     <div class="row pt-2">
-        <h2 id="titles">Печати</h2>
-        <a name="poly"></a>
+        <h1 id="titles">Изготовление печатей и штампов</h1>
+        <hr>
     </div>
-    <div class="row row-cols-1 row-cols-md-3">
+    <div class="row row-col-3 justify-content-start">
         <!-- карточка вида заказа -->
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/circle_stamp.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Печати ИП ООО</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/stamp/c_stamp" class="btn btn-primary px-5">Заказ печати</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Печати ИП, ООО</h3>
+                <img src="{% static '/tipkor/img/c_stamp.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Изготовление печатей. Новых и по оттиску. 3 вида оснасток. Срочное изготовление.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/stamp/c_stamp" class="btn btn-primary px-5">Заказать печать</a>
                 </div>
             </div>
         </div>
 
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/stamp.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Штампы</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="/stamp/r_stamp" class="btn btn-primary px-5">Заказ штампа</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Наклейки</h3>
+                <img src="{% static '/tipkor/img/r_stamp.jpg' %}" class="card-img-top" alt="...">
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Печать широкоформатных наклеек. Интерьерая печать.
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/stamp/r_stamp" class="btn btn-primary px-5">Заказать штамп</a>
                 </div>
             </div>
         </div>
 
-        <div class="p-3">
-            <div class="card p-2 border shadow-sm">
-                <img src="{% static '/tipkor/img/other_stamp.gif' %}" class="icard-img-top img-fluid" alt="...">
-                <div class="card-body">
-                    <h3 class="card-title">Другое</h3>
-                    <p class="card-text">По кнопке якорь на прайс ниже.</p>
-                    <a href="#" class="btn btn-primary px-5">Другое</a>
+        <div class="col">
+            <div class="card text-center mx-3 mb-2">
+                <h3 class="card-header">Другие услуги</h3>
+                <!-- <img src="{% static '/tipkor/img/r_stamp.jpg' %}" class="card-img-top" alt="..."> -->
+                <div class="card-body d-grid gap-2">
+                    <p class="card-text">Ризография, плоттерная резка, наклейки для упаковки. Разработка дизайна и правка макетов.
+
+                    </div>
+                    </p>
+                    <!-- <h5>Цена: 50 руб.</h5> -->
+                    <a role="button" href="/stamp/r_stamp" class="btn btn-primary px-5">Отправить запрос</a>
                 </div>
             </div>
         </div>
+
+
     </div>
 </div>
 <br><br>
