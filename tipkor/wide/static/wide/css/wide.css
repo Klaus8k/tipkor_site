@@ -1,13 +1,16 @@
 .title_text {
-    font-weight:800;
+    font-weight: 800;
 }
 
 
-.card_img {
+.calc_img {
     background-color: rgb(210, 210, 210);
 }
 
-#id_wide_size, #id_heigth_size, #id_material_print, #id_post_obr  {
+#id_wide_size,
+#id_heigth_size,
+#id_material_print,
+#id_post_obr {
     height: 40px;
     width: 200px;
 }
@@ -22,19 +25,22 @@
     width: 200px;
 }
 
+#id_comment {
+    width: 50%;
+    height: 100px;
+}
+
 
 
 /* md срабатывает меньше 992 */
-@media screen and (max-width: 992px) {
-
-}
+@media screen and (max-width: 992px) {}
 
 /* sm срабатывает меньше 768 */
 @media screen and (max-width: 768px) {
 
     .card_form {
         flex-direction: row;
-    }        
+    }
 }
 
 /* xs срабатывает меньше 576px */
@@ -49,7 +55,18 @@
         flex-direction: row;
     }
 
-    .card_img {
-        display: none;        
+    .calc_img {
+        display: none;
+    }
+
+    #id_comment {
+        width: 100%;
+        height: 100px;
+    }
+
+    #id_name,
+    #id_email,
+    #id_tel {
+        width: 100%;
     }
 }
