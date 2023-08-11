@@ -13,7 +13,7 @@
 <!-- Заголовок коллапс блока -->
 <div class="container">
     <div class="snap_block">
-        <div class="container py-3">
+        <div class="container py-3 container shadow border rounded">
             <a class="" data-bs-toggle="collapse" href="#snap_items_collapse" aria-expanded="true"
                 aria-controls="snap_items_collapse">
                 <h4 class="how_snap">Какую оснастку выбрать?</h4>
@@ -47,8 +47,8 @@
     </div>
 
     <!-- Форма -->
-    <div class="container">
-        <hr width="100%" size="8" color="#0d6efd" />
+    <div class="container bg-light shadow border rounded my-3 pb-2">
+        <!-- <hr width="100%" size="8" color="#0d6efd" /> -->
 
         <h1 id="after_calc" class="title_text pt-3">Изготовление штампов</h1>
 
@@ -91,9 +91,9 @@
     </div>
 
     <br><br>
-    <div class="container">
-        <div class="result_info p-3 shadow">
-            <div class="row py-3 mx-1 border border-bg-secondary border-2 rounded bg-light">
+    <div class="container bg-success bg-opacity-25 shadow rounded">
+        <div class="result_info py-3">
+            <div class="row py-3 mx-1 rounded bg-light shadow">
                 <!-- Результаты расчета -->
                 <div class="col">
                     {% if result.id %}
@@ -111,7 +111,7 @@
             </div>
 
             <!-- Форма отправки заказа -->
-            <form class="form-control-lg border border-2 mt-4" action="{% url 'stamp:confirm' %}" method="post"
+            <form class="form-control-lg bg-light bg-opacity-75 shadow border rounded mt-4 mx-1" action="{% url 'stamp:confirm' %}" method="post"
                 enctype="multipart/form-data">
 
                 <div class="row">
@@ -130,7 +130,7 @@
 
                 <!-- Данные клиента -->
                 <br>
-                <div class="row p-3 mx-1 border border-success border-2 rounded ">
+                <div class="row p-3 mx-1 border border-success bg-success bg-opacity-25 border-2 rounded">
                     <h3>Контактные данные для обратной связи:</h3>
                     <div class="col">
                         <p>Имя: </p>{{ confirm_form.name }}

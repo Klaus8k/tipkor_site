@@ -14,7 +14,7 @@
 <div class="container">
 
     <div class="confirm_order border shadow rounded p-3">
-        <div class="row py-3 mx-1 border border-bg-secondary border-2 rounded bg-light">
+        <div class="row py-3 mx-1  rounded bg-light">
 
             <div class="row px-3">
                 <h1 id="a_confirm">Подтверждение заказа</h1>
@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <form class="form-control-lg border border-2 rounded mt-4" action="{% url 'wide:confirm' order.id %}"
+        <form class="form-control-lg bg-light bg-opacity-75 shadow rounded mt-4 mx-1" action="{% url 'wide:confirm' order.id %}"
             method="post" enctype="multipart/form-data">
 
             <div class="row">
@@ -51,7 +51,7 @@
 
             <!-- Данные клиента -->
             <br>
-            <div class="row p-3 mx-1 border border-success border-2 rounded">
+            <div class="row p-3 mx-1 border border-success bg-success bg-opacity-25 border-2 rounded">
                 <h3>Контактные данные:</h3>
                 <div class="col">
                     <p>Имя: </p>{{ form.name }}
