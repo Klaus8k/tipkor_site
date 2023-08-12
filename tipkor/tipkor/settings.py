@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.getenv('DJ_KEY', default='siunpweiua4pu34983hbndjs')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJ_D') 
+DEBUG = os.getenv('DJ_D', False) 
 
 ALLOWED_HOSTS = ['*', 'www.tipkor.ru', 'tipkor.ru', '79.133.181.123', 'localhost', '127.0.0.1']
 
