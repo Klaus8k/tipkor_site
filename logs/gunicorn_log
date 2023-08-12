@@ -3731,3 +3731,454 @@ django.core.exceptions.ImproperlyConfigured: The SECRET_KEY setting must not be 
 [2023-08-12 13:22:37 +0300] [2266] [DEBUG] GET /poly/booklet/
 [2023-08-12 13:31:54 +0300] [2266] [DEBUG] GET /poly/booklet/
 [2023-08-12 13:31:57 +0300] [2265] [DEBUG] GET /poly/booklet/
+[2023-08-12 13:37:10 +0300] [2265] [DEBUG] GET /poly/booklet/
+[2023-08-12 13:37:34 +0300] [2264] [DEBUG] GET /
+[2023-08-12 13:37:37 +0300] [2265] [DEBUG] GET /
+[2023-08-12 13:39:26 +0300] [2264] [DEBUG] GET /
+[2023-08-12 13:39:31 +0300] [2266] [DEBUG] GET /stamp/c_stamp/
+[2023-08-12 13:41:32 +0300] [2264] [DEBUG] GET /
+[2023-08-12 13:41:32 +0300] [2265] [DEBUG] GET /css/style.css
+[2023-08-12 13:41:32 +0300] [2266] [DEBUG] GET /css/navigation-f0351af4-e148-37dc-b482-5526bffb4881.css
+[2023-08-12 13:41:32 +0300] [2266] [DEBUG] GET /modules/navigation/navigation.css
+[2023-08-12 13:41:32 +0300] [2265] [DEBUG] GET /css/text-790d01ea-a20a-489d-6e5d-9a26342fdaeb.css
+[2023-08-12 13:41:32 +0300] [2264] [DEBUG] GET /modules/text/text.css
+[2023-08-12 13:41:32 +0300] [2266] [DEBUG] GET /css/text-e16fb729-3def-222d-4d93-1b887ed7463f.css
+[2023-08-12 13:41:32 +0300] [2265] [DEBUG] GET /css/navigation-1305f53a-2f18-82b7-6c33-89c601e3ea11.css
+[2023-08-12 13:41:33 +0300] [2264] [DEBUG] GET /css/text-5e2a09e4-0c4b-9723-5286-6eda607e4a88.css
+[2023-08-12 13:41:33 +0300] [2264] [DEBUG] GET /css/navigation-98be9dff-3316-9dc6-c0f7-728450921f45.css
+[2023-08-12 13:42:58 +0300] [2264] [INFO] Worker exiting (pid: 2264)
+[2023-08-12 13:42:58 +0300] [2266] [INFO] Worker exiting (pid: 2266)
+[2023-08-12 13:42:58 +0300] [2265] [INFO] Worker exiting (pid: 2265)
+[2023-08-12 13:42:58 +0300] [2257] [INFO] Handling signal: term
+[2023-08-12 13:42:58 +0300] [2257] [WARNING] Worker with pid 2264 was terminated due to signal 15
+[2023-08-12 13:42:58 +0300] [2257] [WARNING] Worker with pid 2266 was terminated due to signal 15
+[2023-08-12 13:42:58 +0300] [2257] [INFO] Shutting down: Master
+[2023-08-12 13:42:58 +0300] [2677] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock']
+  backlog: 1024
+  workers: 3
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 5
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /home/o_adm/www/tipkor_site/tipkor
+  daemon: False
+  raw_env: ['SPAM=eggs']
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: logs/gunicorn_log.txt
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /home/o_adm/www/tipkor_site/logs/gunicorn_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: tipkor.wsgi:application
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f61c09a2790>
+  on_reload: <function OnReload.on_reload at 0x7f61c09a28b0>
+  when_ready: <function when_ready at 0x7f61c0de15e0>
+  pre_fork: <function pre_fork at 0x7f61c0de14c0>
+  post_fork: <function post_fork at 0x7f61c0de1430>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f61c09a2d30>
+  worker_int: <function worker_int at 0x7f61c0de1670>
+  worker_abort: <function worker_abort at 0x7f61c0de1700>
+  pre_exec: <function pre_exec at 0x7f61c0de1550>
+  pre_request: <function PreRequest.pre_request at 0x7f61c09b61f0>
+  post_request: <function PostRequest.post_request at 0x7f61c09b6280>
+  child_exit: <function ChildExit.child_exit at 0x7f61c09b63a0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f61c09b64c0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f61c09b65e0>
+  on_exit: <function OnExit.on_exit at 0x7f61c09b6700>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-08-12 13:42:58 +0300] [2677] [INFO] Starting gunicorn 20.1.0
+[2023-08-12 13:42:58 +0300] [2677] [DEBUG] Arbiter booted
+[2023-08-12 13:42:58 +0300] [2677] [INFO] Listening at: unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock (2677)
+[2023-08-12 13:42:58 +0300] [2677] [INFO] Using worker: sync
+[2023-08-12 13:42:58 +0300] [2677] [INFO] Server is ready. Spawning workers
+[2023-08-12 13:42:58 +0300] [2698] [INFO] Booting worker with pid: 2698
+[2023-08-12 13:42:58 +0300] [2698] [INFO] Worker spawned (pid: 2698)
+[2023-08-12 13:42:58 +0300] [2699] [INFO] Booting worker with pid: 2699
+[2023-08-12 13:42:58 +0300] [2699] [INFO] Worker spawned (pid: 2699)
+[2023-08-12 13:42:58 +0300] [2700] [INFO] Booting worker with pid: 2700
+[2023-08-12 13:42:58 +0300] [2700] [INFO] Worker spawned (pid: 2700)
+[2023-08-12 13:42:58 +0300] [2677] [DEBUG] 3 workers
+[2023-08-12 13:43:16 +0300] [2698] [DEBUG] GET /
+[2023-08-12 13:43:19 +0300] [2699] [DEBUG] GET /
+[2023-08-12 13:43:35 +0300] [2699] [DEBUG] GET /
+[2023-08-12 13:43:38 +0300] [2699] [DEBUG] GET /
+[2023-08-12 13:43:45 +0300] [2699] [DEBUG] GET /poly/card/
+[2023-08-12 13:45:00 +0300] [2700] [INFO] Worker exiting (pid: 2700)
+[2023-08-12 13:45:00 +0300] [2677] [INFO] Handling signal: term
+[2023-08-12 13:45:00 +0300] [2698] [INFO] Worker exiting (pid: 2698)
+[2023-08-12 13:45:00 +0300] [2699] [INFO] Worker exiting (pid: 2699)
+[2023-08-12 13:45:00 +0300] [2677] [INFO] Shutting down: Master
+[2023-08-12 13:45:00 +0300] [2834] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock']
+  backlog: 1024
+  workers: 3
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 5
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /home/o_adm/www/tipkor_site/tipkor
+  daemon: False
+  raw_env: ['SPAM=eggs']
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: logs/gunicorn_log.txt
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /home/o_adm/www/tipkor_site/logs/gunicorn_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: tipkor.wsgi:application
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f7827bd6790>
+  on_reload: <function OnReload.on_reload at 0x7f7827bd68b0>
+  when_ready: <function when_ready at 0x7f78280155e0>
+  pre_fork: <function pre_fork at 0x7f78280154c0>
+  post_fork: <function post_fork at 0x7f7828015430>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f7827bd6d30>
+  worker_int: <function worker_int at 0x7f7828015670>
+  worker_abort: <function worker_abort at 0x7f7828015700>
+  pre_exec: <function pre_exec at 0x7f7828015550>
+  pre_request: <function PreRequest.pre_request at 0x7f7827bea1f0>
+  post_request: <function PostRequest.post_request at 0x7f7827bea280>
+  child_exit: <function ChildExit.child_exit at 0x7f7827bea3a0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f7827bea4c0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f7827bea5e0>
+  on_exit: <function OnExit.on_exit at 0x7f7827bea700>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-08-12 13:45:00 +0300] [2834] [INFO] Starting gunicorn 20.1.0
+[2023-08-12 13:45:00 +0300] [2834] [DEBUG] Arbiter booted
+[2023-08-12 13:45:00 +0300] [2834] [INFO] Listening at: unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock (2834)
+[2023-08-12 13:45:00 +0300] [2834] [INFO] Using worker: sync
+[2023-08-12 13:45:00 +0300] [2834] [INFO] Server is ready. Spawning workers
+[2023-08-12 13:45:00 +0300] [2859] [INFO] Booting worker with pid: 2859
+[2023-08-12 13:45:00 +0300] [2859] [INFO] Worker spawned (pid: 2859)
+[2023-08-12 13:45:00 +0300] [2860] [INFO] Booting worker with pid: 2860
+[2023-08-12 13:45:00 +0300] [2860] [INFO] Worker spawned (pid: 2860)
+[2023-08-12 13:45:01 +0300] [2861] [INFO] Booting worker with pid: 2861
+[2023-08-12 13:45:01 +0300] [2861] [INFO] Worker spawned (pid: 2861)
+[2023-08-12 13:45:01 +0300] [2834] [DEBUG] 3 workers
+[2023-08-12 13:45:02 +0300] [2861] [DEBUG] GET /
+[2023-08-12 13:45:04 +0300] [2861] [DEBUG] GET /poly/card/
+[2023-08-12 13:47:07 +0300] [2834] [INFO] Handling signal: term
+[2023-08-12 13:47:07 +0300] [2859] [INFO] Worker exiting (pid: 2859)
+[2023-08-12 13:47:07 +0300] [2860] [INFO] Worker exiting (pid: 2860)
+[2023-08-12 13:47:07 +0300] [2861] [INFO] Worker exiting (pid: 2861)
+[2023-08-12 13:47:07 +0300] [2834] [INFO] Shutting down: Master
+[2023-08-12 13:47:08 +0300] [2881] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock']
+  backlog: 1024
+  workers: 3
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 5
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /home/o_adm/www/tipkor_site/tipkor
+  daemon: False
+  raw_env: ['SPAM=eggs']
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: logs/gunicorn_log.txt
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /home/o_adm/www/tipkor_site/logs/gunicorn_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: tipkor.wsgi:application
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f8f6b33d790>
+  on_reload: <function OnReload.on_reload at 0x7f8f6b33d8b0>
+  when_ready: <function when_ready at 0x7f8f6b77c5e0>
+  pre_fork: <function pre_fork at 0x7f8f6b77c4c0>
+  post_fork: <function post_fork at 0x7f8f6b77c430>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f8f6b33dd30>
+  worker_int: <function worker_int at 0x7f8f6b77c670>
+  worker_abort: <function worker_abort at 0x7f8f6b77c700>
+  pre_exec: <function pre_exec at 0x7f8f6b77c550>
+  pre_request: <function PreRequest.pre_request at 0x7f8f6b3511f0>
+  post_request: <function PostRequest.post_request at 0x7f8f6b351280>
+  child_exit: <function ChildExit.child_exit at 0x7f8f6b3513a0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f8f6b3514c0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f8f6b3515e0>
+  on_exit: <function OnExit.on_exit at 0x7f8f6b351700>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-08-12 13:47:08 +0300] [2881] [INFO] Starting gunicorn 20.1.0
+[2023-08-12 13:47:08 +0300] [2881] [DEBUG] Arbiter booted
+[2023-08-12 13:47:08 +0300] [2881] [INFO] Listening at: unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock (2881)
+[2023-08-12 13:47:08 +0300] [2881] [INFO] Using worker: sync
+[2023-08-12 13:47:08 +0300] [2881] [INFO] Server is ready. Spawning workers
+[2023-08-12 13:47:08 +0300] [2903] [INFO] Booting worker with pid: 2903
+[2023-08-12 13:47:08 +0300] [2903] [INFO] Worker spawned (pid: 2903)
+[2023-08-12 13:47:08 +0300] [2904] [INFO] Booting worker with pid: 2904
+[2023-08-12 13:47:08 +0300] [2904] [INFO] Worker spawned (pid: 2904)
+[2023-08-12 13:47:08 +0300] [2905] [INFO] Booting worker with pid: 2905
+[2023-08-12 13:47:08 +0300] [2905] [INFO] Worker spawned (pid: 2905)
+[2023-08-12 13:47:08 +0300] [2881] [DEBUG] 3 workers
+[2023-08-12 13:47:13 +0300] [2904] [DEBUG] GET /poly/card/
+[2023-08-12 13:47:18 +0300] [2903] [DEBUG] POST /poly/card/
+[2023-08-12 13:47:27 +0300] [2904] [DEBUG] POST /poly/card/
+[2023-08-12 13:47:37 +0300] [2905] [DEBUG] GET /
+[2023-08-12 13:47:37 +0300] [2904] [DEBUG] GET /
+[2023-08-12 13:47:40 +0300] [2903] [DEBUG] GET /stamp/c_stamp/
+[2023-08-12 13:47:43 +0300] [2905] [DEBUG] POST /stamp/c_stamp/
+[2023-08-12 13:48:56 +0300] [2903] [DEBUG] POST /stamp/c_stamp/
+[2023-08-12 13:51:32 +0300] [2903] [INFO] Worker exiting (pid: 2903)
+[2023-08-12 13:51:32 +0300] [2904] [INFO] Worker exiting (pid: 2904)
+[2023-08-12 13:51:32 +0300] [2905] [INFO] Worker exiting (pid: 2905)
+[2023-08-12 13:51:32 +0300] [2881] [INFO] Handling signal: term
+[2023-08-12 13:51:32 +0300] [2881] [WARNING] Worker with pid 2903 was terminated due to signal 15
+[2023-08-12 13:51:32 +0300] [2881] [WARNING] Worker with pid 2904 was terminated due to signal 15
+[2023-08-12 13:51:32 +0300] [2881] [INFO] Shutting down: Master
+[2023-08-12 13:51:32 +0300] [2962] [DEBUG] Current configuration:
+  config: ./gunicorn.conf.py
+  wsgi_app: None
+  bind: ['unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock']
+  backlog: 1024
+  workers: 3
+  worker_class: sync
+  threads: 1
+  worker_connections: 1000
+  max_requests: 0
+  max_requests_jitter: 0
+  timeout: 30
+  graceful_timeout: 30
+  keepalive: 5
+  limit_request_line: 4094
+  limit_request_fields: 100
+  limit_request_field_size: 8190
+  reload: False
+  reload_engine: auto
+  reload_extra_files: []
+  spew: False
+  check_config: False
+  print_config: False
+  preload_app: False
+  sendfile: None
+  reuse_port: False
+  chdir: /home/o_adm/www/tipkor_site/tipkor
+  daemon: False
+  raw_env: ['SPAM=eggs']
+  pidfile: None
+  worker_tmp_dir: None
+  user: 1000
+  group: 1000
+  umask: 0
+  initgroups: False
+  tmp_upload_dir: None
+  secure_scheme_headers: {'X-FORWARDED-PROTOCOL': 'ssl', 'X-FORWARDED-PROTO': 'https', 'X-FORWARDED-SSL': 'on'}
+  forwarded_allow_ips: ['127.0.0.1']
+  accesslog: logs/gunicorn_log.txt
+  disable_redirect_access_to_syslog: False
+  access_log_format: %(h)s %(l)s %(u)s %(t)s "%(r)s" %(s)s %(b)s "%(f)s" "%(a)s"
+  errorlog: /home/o_adm/www/tipkor_site/logs/gunicorn_log
+  loglevel: debug
+  capture_output: False
+  logger_class: gunicorn.glogging.Logger
+  logconfig: None
+  logconfig_dict: {}
+  syslog_addr: udp://localhost:514
+  syslog: False
+  syslog_prefix: None
+  syslog_facility: user
+  enable_stdio_inheritance: False
+  statsd_host: None
+  dogstatsd_tags: 
+  statsd_prefix: 
+  proc_name: None
+  default_proc_name: tipkor.wsgi:application
+  pythonpath: None
+  paste: None
+  on_starting: <function OnStarting.on_starting at 0x7f74e8ce9790>
+  on_reload: <function OnReload.on_reload at 0x7f74e8ce98b0>
+  when_ready: <function when_ready at 0x7f74e91285e0>
+  pre_fork: <function pre_fork at 0x7f74e91284c0>
+  post_fork: <function post_fork at 0x7f74e9128430>
+  post_worker_init: <function PostWorkerInit.post_worker_init at 0x7f74e8ce9d30>
+  worker_int: <function worker_int at 0x7f74e9128670>
+  worker_abort: <function worker_abort at 0x7f74e9128700>
+  pre_exec: <function pre_exec at 0x7f74e9128550>
+  pre_request: <function PreRequest.pre_request at 0x7f74e8cfd1f0>
+  post_request: <function PostRequest.post_request at 0x7f74e8cfd280>
+  child_exit: <function ChildExit.child_exit at 0x7f74e8cfd3a0>
+  worker_exit: <function WorkerExit.worker_exit at 0x7f74e8cfd4c0>
+  nworkers_changed: <function NumWorkersChanged.nworkers_changed at 0x7f74e8cfd5e0>
+  on_exit: <function OnExit.on_exit at 0x7f74e8cfd700>
+  proxy_protocol: False
+  proxy_allow_ips: ['127.0.0.1']
+  keyfile: None
+  certfile: None
+  ssl_version: 2
+  cert_reqs: 0
+  ca_certs: None
+  suppress_ragged_eofs: True
+  do_handshake_on_connect: False
+  ciphers: None
+  raw_paste_global_conf: []
+  strip_header_spaces: False
+[2023-08-12 13:51:32 +0300] [2962] [INFO] Starting gunicorn 20.1.0
+[2023-08-12 13:51:32 +0300] [2962] [DEBUG] Arbiter booted
+[2023-08-12 13:51:32 +0300] [2962] [INFO] Listening at: unix:/home/o_adm/www/tipkor_site/deploy/tipkor.gunicorn.sock (2962)
+[2023-08-12 13:51:32 +0300] [2962] [INFO] Using worker: sync
+[2023-08-12 13:51:32 +0300] [2962] [INFO] Server is ready. Spawning workers
+[2023-08-12 13:51:32 +0300] [2986] [INFO] Booting worker with pid: 2986
+[2023-08-12 13:51:32 +0300] [2986] [INFO] Worker spawned (pid: 2986)
+[2023-08-12 13:51:32 +0300] [2987] [INFO] Booting worker with pid: 2987
+[2023-08-12 13:51:32 +0300] [2987] [INFO] Worker spawned (pid: 2987)
+[2023-08-12 13:51:32 +0300] [2988] [INFO] Booting worker with pid: 2988
+[2023-08-12 13:51:32 +0300] [2988] [INFO] Worker spawned (pid: 2988)
+[2023-08-12 13:51:33 +0300] [2962] [DEBUG] 3 workers
+[2023-08-12 13:51:37 +0300] [2987] [DEBUG] POST /stamp/c_stamp/
+[2023-08-12 13:51:43 +0300] [2988] [DEBUG] GET /poly/leaflet/
+[2023-08-12 13:51:46 +0300] [2988] [DEBUG] POST /poly/leaflet/
+[2023-08-12 13:53:13 +0300] [2988] [DEBUG] GET /wide/banner/
+[2023-08-12 13:53:16 +0300] [2987] [DEBUG] POST /wide/banner/
