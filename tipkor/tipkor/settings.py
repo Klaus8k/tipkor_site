@@ -27,7 +27,7 @@ SECRET_KEY = os.getenv('DJ_KEY', default='siunpweiua4pu34983hbndjs')
 DEBUG = os.getenv('DJ_D', False) 
 
 ALLOWED_HOSTS = ['*', 'www.tipkor.ru', 'tipkor.ru', '79.133.181.123', 'localhost', '127.0.0.1']
-CSRF_TRUSTED_ORIGINS = ['https://*.tipkor.com','https://*.79.133.181.123']
+CSRF_TRUSTED_ORIGINS = ['https://*.tipkor.com','https://*.127.0.0.1']
 
 INTERNAL_IPS = ["127.0.0.1",]
 
