@@ -171,5 +171,9 @@ db_csv_tipkor/*
 *.pdf
 deploy/*
 media/*/*
+<<<<<<< HEAD
+.tipkor_env
+=======
 static/*
 logs/*
+>>>>>>> 13c2118722ea43d7d784e4326729fcfa6cd0ef44
