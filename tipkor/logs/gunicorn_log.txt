@@ -1,0 +1,4 @@
+ - - [12/Aug/2023:13:22:28 +0300] "GET / HTTP/1.0" 200 14237 "-" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 YaBrowser/23.7.2.765 Yowser/2.5 Safari/537.36"
+ - - [12/Aug/2023:13:22:37 +0300] "GET /poly/booklet/ HTTP/1.0" 500 145 "https://tipkor.ru/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 YaBrowser/23.7.2.765 Yowser/2.5 Safari/537.36"
+ - - [12/Aug/2023:13:31:54 +0300] "GET /poly/booklet/ HTTP/1.0" 500 145 "https://tipkor.ru/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 YaBrowser/23.7.2.765 Yowser/2.5 Safari/537.36"
+ - - [12/Aug/2023:13:31:58 +0300] "GET /poly/booklet/ HTTP/1.0" 500 145 "https://tipkor.ru/" "Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 YaBrowser/23.7.2.765 Yowser/2.5 Safari/537.36"
