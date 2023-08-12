@@ -1,28 +1,7 @@
-
-p {
-    font-size: 15px;
+body {
+    height: 800%;
+    background: linear-gradient(45deg, #00c3ff, #7a0086);
 }
-
-/* body {
-    background: linear-gradient(-45deg, #fbc0e7, #d0bbff, #a6e7ff, #c8fef1);
-    background-size: 400% 400%;
-    animation: gradient 5s ease infinite;
-    height: 100vh;
-}
-
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-} */
 
 .main_logo {
     max-width: 170px;
