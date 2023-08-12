@@ -8,13 +8,13 @@
 <!-- Описание главная -->
 <!-- <div class="container py-3 bg-light shadow border rounded">
     <div class="row p-4 nopadding"> -->
-        <div class="container py-3 container-top shadow border rounded">
-            <img src="{% static '/tipkor/img/image_top.jpg' %}" alt="Snow" class="w-100 rounded">
-            <div class="centered w-100">
-                <h1 class="top_text">ОФСЕТНАЯ ПЕЧАТЬ, ШИРОКОФОРМАТНАЯ ПЕЧАТЬ, ПЕЧАТИ И ШТАМПЫ</h1>
-            </div>
-        </div>
-    <!-- </div>
+<div class="container py-3 container-top shadow border rounded">
+    <img src="{% static '/tipkor/img/image_top.jpg' %}" alt="Snow" class="w-100 rounded">
+    <div class="centered w-100">
+        <h1 class="top_text">ОФСЕТНАЯ ПЕЧАТЬ, ШИРОКОФОРМАТНАЯ ПЕЧАТЬ, ПЕЧАТИ И ШТАМПЫ</h1>
+    </div>
+</div>
+<!-- </div>
 </div> -->
 
 <!-- Полиграфия -->
@@ -136,7 +136,8 @@
                 <h3 class="card-header">Печати ИП, ООО</h3>
                 <img src="{% static '/tipkor/img/c_stamp.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body d-grid gap-2">
-                    <p class="card-text">Изготовление печатей. Новых и по оттиску. 3 вида оснасток. Срочное изготовление.
+                    <p class="card-text">Изготовление печатей. Новых и по оттиску. 3 вида оснасток. Срочное
+                        изготовление.
                     </p>
                     <!-- <h5>Цена: 50 руб.</h5> -->
                     <a role="button" href="/stamp/c_stamp/#calc" class="btn btn-primary px-5">Заказать печать</a>
@@ -146,10 +147,10 @@
 
         <div class="col">
             <div class="card text-center mx-3 mb-2  border border-3">
-                <h3 class="card-header">Наклейки</h3>
+                <h3 class="card-header">Штампы</h3>
                 <img src="{% static '/tipkor/img/r_stamp.jpg' %}" class="card-img-top" alt="...">
                 <div class="card-body d-grid gap-2">
-                    <p class="card-text">Печать широкоформатных наклеек. Интерьерая печать.
+                    <p class="card-text">Изготовление штампов и факсимиле. Новых и по оттиску. Срочное изготовление.
                     </p>
                     <!-- <h5>Цена: 50 руб.</h5> -->
                     <a role="button" href="/stamp/r_stamp/#calc" class="btn btn-primary px-5">Заказать штамп</a>
@@ -162,18 +163,24 @@
                 <h3 class="card-header">Другие услуги</h3>
                 <!-- <img src="{% static '/tipkor/img/r_stamp.jpg' %}" class="card-img-top" alt="..."> -->
                 <div class="card-body d-grid gap-2">
-                    <p class="card-text">Ризография, плоттерная резка, наклейки для упаковки. Разработка дизайна и правка макетов.
+                    <p class="card-text">Ризография, плоттерная резка, наклейки для упаковки. Разработка дизайна и
+                        правка макетов.
 
-                    </div>
-                    </p>
-                    <!-- <h5>Цена: 50 руб.</h5> -->
-                    <a role="button" href="#" class="btn btn-primary px-5">Отправить запрос</a>
                 </div>
+                </p>
+                <!-- <h5>Цена: 50 руб.</h5> -->
+                <a role="button" href="#" class="btn btn-primary px-5">Отправить запрос</a>
             </div>
         </div>
-
-
     </div>
+</div>
+
+<div id='map' class="container bg-light shadow border rounded mt-4 p-3">
+
+    <script type="text/javascript" charset="utf-8" async
+        src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3A02334a9e6f8d40bac72514daa31888f4dae190ef0d36ae4edf855fd230598474&amp;width=100%25&amp;height=400&amp;lang=ru_RU&amp;scroll=true"></script>
+
+</div>
 </div>
 <br><br>
 {% endblock %}

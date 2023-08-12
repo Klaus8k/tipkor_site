@@ -7,7 +7,7 @@
 	<meta charset="UTF-8">
 	<!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<!-- insert href of fonts -->
+	<!-- Шрифты установить -->
 	<link rel="icon" href="{% static 'tipkor/img/favicon.ico' %}" type="image/x-icon">
 	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/bootstrap.min.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'tipkor/css/tipkor.css' %}">
@@ -17,8 +17,7 @@
 <body>
 	<!-- Верхняя строка -->
 	<div class="container pt-4">
-		<div
-			class="top_line row bg-light shadow border d-flex justify-content-center align-items-center rounded p-3">
+		<div class="top_line row bg-light shadow border d-flex justify-content-center align-items-center rounded p-3">
 			<div class="col d-flex justify-content-center ">
 				<a href="/">
 					<img class="main_logo" src="{% static '/tipkor/img/logo.svg' %}" alt="">
@@ -35,9 +34,14 @@
 				<p class="fs-4  mb-0">пн-пт 10:00-18:00</p>
 			</div>
 
-			<div class="hi_mess col-md-2 ">
+			<div class="hi_mess col-md-3">
 
 				<div class="img_mess">
+					<a href="/#map">
+						<img id="hi_map" src="{% static '/tipkor/img/map.svg' %}" alt="" style="padding-left: 5px">
+						<a href="/#map" style="font-weight: 800; font-size: large; padding-left: 2px; padding-right: 15px">Карта</a>
+					</a>
+
 					<a href="https://wa.me/79645716551?text=" target="_blank">
 						<img id="hi_mess" src="{% static '/tipkor/img/whatsap.svg' %}" alt="" style="padding-left: 5px">
 						<a href="https://wa.me/79645716551?text=" target="_blank"
@@ -45,9 +49,13 @@
 					</a>
 
 					<a href="https://t.me/+79645716551" target="_blank">
-						<img id="hi_mess" src="{% static '/tipkor/img/telegram.svg' %}" alt="" style="padding-left: 5px">
+						<img id="hi_mess" src="{% static '/tipkor/img/telegram.svg' %}" alt=""
+							style="padding-left: 5px">
 						<a href="https://t.me/+79645716551" target="_blank"
 							style="font-weight: 800; font-size: large; padding-left: 2px">Telegram</a>
+					</a>
+
+
 				</div>
 			</div>
 		</div>
