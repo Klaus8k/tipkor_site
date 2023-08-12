@@ -171,3 +171,5 @@ db_csv_tipkor/*
 *.pdf
 deploy/*
 media/*/*
+static/*
+logs/*
