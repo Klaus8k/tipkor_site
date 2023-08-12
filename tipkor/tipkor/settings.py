@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('DJ_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv('DJ_D') 
 
-ALLOWED_HOSTS = ['tipkor.ru','79.133.181.123', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['www. tipkor.ru','tipkor.ru','79.133.181.123', 'localhost', '127.0.0.1']
 
 INTERNAL_IPS = ["127.0.0.1",]
 
