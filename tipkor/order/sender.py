@@ -59,8 +59,6 @@ def get_order_dict(order):
 
 
 def get_product_str(product: object, order_id, dates: list):
-    logger.debug(dates)
-    
     product_str = ''
     type_production = product['type_production']
     cost = product['cost']

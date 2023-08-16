@@ -36,4 +36,4 @@ def stamp_ready_time(express=False, time_create=dt.datetime.now()):
 
 
 if __name__ == '__main__':
-    logger.debug([stamp_ready_time(express=False, time_create=i) for i in TEST_TIMES] )
+    pass
