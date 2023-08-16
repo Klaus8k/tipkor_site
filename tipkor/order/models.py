@@ -1,8 +1,16 @@
 import datetime
 
+from django.core.exceptions import ValidationError
 from django.db import models
 from loguru import logger
 
+
+def file_size_validator(value):
+    logger.debug(value.size)
+    Mb_limit = 10
+    limit = (1024 * 1024) * 10
+    if value.size > limit:
+        raise ValidationError(message='Файл больше 10Мб пришлите на почту или ссылкой в комментарии.')
 
 class Clients(models.Model):
     name = models.CharField(max_length=50, blank=True, default='anon')
@@ -31,7 +39,7 @@ class Orders(models.Model):
     delivery = models.CharField(max_length=100, blank=True, default='no')
     ready_date = models.DateTimeField(blank=True)
     pay_info = models.BooleanField(blank=True, default=False)
-    file = models.FileField(upload_to='orders/', blank=True)
+    file = models.FileField(upload_to='orders/', blank=True, validators=[file_size_validator])
     
     def __str__(self):
         return f'client: {self.client}, prof: {self.product} date: {self.create_date}'

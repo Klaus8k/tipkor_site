@@ -106,20 +106,22 @@
                 </div>
 
                 <div class="col">
-                    <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.time }},  {{ ready_date.date }}</h3>
+                    <h3 style="color: rgb(1, 58, 124);">Готовность: {{ ready_date.time }}, {{ ready_date.date }}</h3>
                 </div>
             </div>
 
             <!-- Форма отправки заказа -->
-            <form class="form-control-lg bg-light bg-opacity-75 shadow border rounded mt-4 mx-1" action="{% url 'stamp:confirm' %}" method="post"
-                enctype="multipart/form-data">
+            <form class="form-control-lg bg-light bg-opacity-75 shadow border rounded mt-4 mx-1"
+                action="{% url 'stamp:confirm' %}" method="post" enctype="multipart/form-data">
 
                 <div class="row">
                     {% csrf_token %}
                     {{ confirm_form.id_stamp_obj }}
 
                     <div class="pb-4">
-                        <p>Прикрепите файл: </p>{{ confirm_form.file }}
+                        <p>Прикрепите файл: </p>
+                        <h4>До 10Мб, если больше пришлите на почту/мессенджеры или ссылкой в комментарии</h4>
+                        {{ confirm_form.file }}
                     </div>
 
                     <div>

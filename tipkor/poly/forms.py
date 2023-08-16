@@ -4,6 +4,7 @@ from django.forms import ModelForm
 
 from .constants import BOOKLETS, FORMAT, PAPER_CHOICE, PRESSRUN_OFFSET
 from .models import Formats, Poly
+from order.models import file_size_validator
 
 
 class Card_Form(ModelForm):
@@ -69,6 +70,7 @@ class Confirm_form(forms.Form):
     email = forms.EmailField(required=False)
     tel = forms.CharField(max_length=20)
     comment = forms.CharField(required=False, widget=forms.Textarea(attrs = {'cols': '50', 'rows': '4'}))
-    file = forms.FileField(required=False)
+    
+    file = forms.FileField(required=False, validators=[file_size_validator])
     
 

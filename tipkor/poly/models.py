@@ -65,8 +65,6 @@ class Poly(models.Model):
                      }
         return json_dict
 
-
-
 def multiply_cost(cost: int, pressrun: int):
     if pressrun < 500:
         marge = 400

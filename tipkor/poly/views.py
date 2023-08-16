@@ -8,7 +8,7 @@ from order.models import Clients, Orders, date_to_ready
 from order.sender import send_email
 
 from .forms import Booklet_Form, Card_Form, Confirm_form, Leaflet_Form
-from .models import Poly
+from .models import Poly, multiply_cost
 
 # Делаем 3 отдельными классами пока
 
@@ -67,6 +67,7 @@ class ConfirmView(DetailView, FormMixin):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['order'] =  self.get_object()
+        context['cost'] = multiply_cost(cost=context['object'].cost, pressrun=context['object'].pressrun)
         type_production =  self.get_order_type()
         context['form'] = self.form_class(initial={'type_production': type_production})
         context['ready_date'] =  date_to_ready(type_production)

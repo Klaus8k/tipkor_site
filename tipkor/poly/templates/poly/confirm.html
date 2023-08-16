@@ -19,7 +19,7 @@
                 <h1 id="a_confirm">Подтверждение заказа</h1>
                 <h2>{{ type_production }}</h2>
                 <div class="col col-xl-3">
-                    <h3>Стоимость: {{ order.cost }} руб.</h3>
+                    <h3>Стоимость: {{ cost }} руб.</h3>
                     <h5>Формат: {{ order.format_p }}</h5>
                     <h5>Материал: {{ order.paper }} г/м</h5>
                     <h5>Двухсторонняя печать: {{ order.duplex|yesno:"Да,Нет" }}</h5>
@@ -43,7 +43,8 @@
                 {{ form.type_production }}
 
                 <div class="pb-4">
-                    <p>Прикрепите файл: </p>{{ form.file }}
+                    <p>Прикрепите файл: </p><h4>До 10Мб, если больше пришлите на почту/мессенджеры или ссылкой в комментарии</h4>
+                    {{ form.file }}
                 </div>
 
                 <div>
