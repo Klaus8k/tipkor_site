@@ -12,8 +12,8 @@ HI = 'Спасибо за заказ.\n\n'
 MAIL_HOST = 'smtp.mail.ru'
 MAIL_LOGIN = os.getenv('EMAIL_U')
 MAIL_PASS = os.getenv('EMAIL_PASS')
-TO = 'tipkor@mail.ru'
-text = 'test message'
+# TO = 'tipkor@mail.ru'
+# text = 'test message'
 
 # С почтового сервера после аутенитфикации отправляется на почту письм. Пародля для мейла нужен для приложений а не обычный
 # Отправка емейла с вложениями и верстой https://realpython.com/python-send-email/#option-1-setting-up-a-gmail-account-for-development
@@ -32,6 +32,13 @@ def send_email(adress, order):
     mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
     mail_sender.login(MAIL_LOGIN, MAIL_PASS)
     mail_sender.sendmail(MAIL_LOGIN, adress, msg.as_string())
+    mail_sender.quit()
+    
+    # Письмо себе (тема - Новый заказ)
+    msg['Subject'] = Header('Новый заказ', 'utf-8')
+    mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
+    mail_sender.login(MAIL_LOGIN, MAIL_PASS)
+    mail_sender.sendmail(MAIL_LOGIN, MAIL_LOGIN, msg.as_string())
     mail_sender.quit()
 
 def get_order_dict(order):
@@ -52,6 +59,8 @@ def get_order_dict(order):
 
 
 def get_product_str(product: object, order_id, dates: list):
+    logger.debug(dates)
+    
     product_str = ''
     type_production = product['type_production']
     cost = product['cost']
@@ -69,6 +78,7 @@ def get_product_str(product: object, order_id, dates: list):
                             \rТираж: {product['pressrun']}шт. \
                             \r{duplex} \
                             \rПостобработка: {product['post_obr']} \
+                            \rГотовность: {dates[1].strftime('%d %B %Y')} После 14-00 \
                             \r\rЦена тиража: {cost} руб."
         return product_str
     
@@ -79,6 +89,7 @@ def get_product_str(product: object, order_id, dates: list):
                             \rМатериал: {product['material']} \
                             \rРазмер: {product['x']}х{product['x']}м \
                             \rПостобработка: {product['post_obr']} \
+                            \rГотовность: {dates[1].strftime('%d %B %Y')} После 14-00 \
                             \r\rЦена тиража: {cost} руб."
         return product_str
     else:
@@ -95,6 +106,7 @@ def get_product_str(product: object, order_id, dates: list):
                             \r{express} \
                             \rОснастка: {product['snap']} \
                             \rКоличество: {product['count']}шт. \
+                            \rГотовность: {dates[1].strftime('%d %B %Y   %H:%M')} \
                             \r\rЦена тиража: {cost} руб."
         return product_str
     
