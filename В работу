@@ -191,9 +191,9 @@
         x ssl
 
     CEO
-        - robot.txt
-        - sitemap
-        - Метаданные
+        x robot.txt
+        x sitemap
+        - Метаданные блоками или переменными/тегами
         
 
 
