@@ -1,0 +1,7 @@
+User-agent: *
+Sitemap: https://tipkor.ru/sitemap.xml
+Disallow: /*?*
+Disallow: /*%
+Disallow: /*?page=
+Disallow: /*&page=
+Disallow: /admin

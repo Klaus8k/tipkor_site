@@ -13,6 +13,7 @@ urlpatterns = [
     path('stamp/', include('stamp.urls'), name='stamp'),
     
     path('sitemap.xml',TemplateView.as_view(template_name='sitemap.xml', content_type='text/xml')),
+    path('robot.txt',TemplateView.as_view(template_name='robot.txt', content_type='text/plain')),
 
     
     path('expirement/', TemplateView.as_view(template_name='expirement.html')),
