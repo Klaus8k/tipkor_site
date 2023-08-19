@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load static %}
 
+{% block title_meta %}
+<title>Буклеты</title>
+<meta name="description" content="Изготовление буклетов. Евробуклет, гармошка, книжка. Мелованная бумага, офсетная печать. "/>
+{% endblock %}
 
 {% block content %}
 
@@ -8,8 +12,6 @@
     <link rel="stylesheet" type="text/css" href="{% static 'poly/css/poly.css' %}">
 </head>
 <br>
-
-
 
 <!-- Заголовок коллапс блока -->
 <!-- <div class="container shadow border rounded">
