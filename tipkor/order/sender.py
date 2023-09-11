@@ -36,6 +36,7 @@ def send_email(adress, order):
     
     # Письмо себе (тема - Новый заказ)
     msg['Subject'] = Header('Новый заказ', 'utf-8')
+    msg['To'] = MAIL_LOGIN
     mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
     mail_sender.login(MAIL_LOGIN, MAIL_PASS)
     mail_sender.sendmail(MAIL_LOGIN, MAIL_LOGIN, msg.as_string())
