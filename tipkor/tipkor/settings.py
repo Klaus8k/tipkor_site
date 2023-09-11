@@ -25,7 +25,7 @@ SECRET_KEY = os.getenv('DJ_KEY', default='siunpweiua4pu34983hbndjs')
 # SECRET_KEY = 'a;vmaorvma;lkjdfgkfdg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.getenv('DJ_D', False) 
+DEBUG = os.getenv('DJ_D', False) == 'True'
 
 ALLOWED_HOSTS = ['*', 'www.tipkor.ru', 'tipkor.ru', '79.133.181.123', 'localhost', '127.0.0.1']
 CSRF_TRUSTED_ORIGINS = ['https://*.tipkor.ru','https://*.127.0.0.1']
