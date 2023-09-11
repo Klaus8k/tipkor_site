@@ -12,8 +12,7 @@ HI = 'Спасибо за заказ.\n\n'
 MAIL_HOST = 'smtp.mail.ru'
 MAIL_LOGIN = os.getenv('EMAIL_U')
 MAIL_PASS = os.getenv('EMAIL_PASS')
-# TO = 'tipkor@mail.ru'
-# text = 'test message'
+
 
 # С почтового сервера после аутенитфикации отправляется на почту письм. Пародля для мейла нужен для приложений а не обычный
 # Отправка емейла с вложениями и верстой https://realpython.com/python-send-email/#option-1-setting-up-a-gmail-account-for-development
@@ -38,24 +37,7 @@ def send_email(adress, order):
         
         mail_sender.sendmail(MAIL_LOGIN, MAIL_LOGIN, msg.as_string())
         
-    
-    # msg = MIMEText(body, 'plain', 'utf-8')
-    # msg['Subject'] = Header(f'Заказ №{order.id}', 'utf-8')
-    # msg['From'] = MAIL_LOGIN
-    # msg['To'] = adress
 
-    # mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
-    # mail_sender.login(MAIL_LOGIN, MAIL_PASS)
-    # mail_sender.sendmail(MAIL_LOGIN, adress, msg.as_string())
-    # # mail_sender.quit()
-    
-    # # Письмо себе (тема - Новый заказ)
-    # msg['Subject'] = Header('Новый заказ', 'utf-8')
-    # msg['To'] = MAIL_LOGIN
-    # mail_sender = smtplib.SMTP_SSL(MAIL_HOST, 465)
-    # mail_sender.login(MAIL_LOGIN, MAIL_PASS)
-    # mail_sender.sendmail(MAIL_LOGIN, MAIL_LOGIN, msg.as_string())
-    # mail_sender.quit()
 
 def get_order_dict(order):
     client_name = order.client.name

@@ -70,7 +70,7 @@ class ConfirmView(DetailView, FormMixin):
         context['cost'] = multiply_cost(cost=context['object'].cost, pressrun=context['object'].pressrun)
         type_production =  self.get_order_type()
         context['form'] = self.form_class(initial={'type_production': type_production})
-        context['ready_date'] =  date_to_ready(type_production)
+        context['ready_date'] =  date_to_ready(type_production=self.order_type)
         context['type_production'] = type_production
         
         return context
@@ -105,12 +105,12 @@ class ConfirmView(DetailView, FormMixin):
         return HttpResponseRedirect(reverse('poly:success', kwargs={'pk': order.id}) + '#a_success')
     
     def get_order_type(self):
-        order_type = self.request.META.get('HTTP_REFERER').split('/')[-2]
-        if order_type == 'card':
+        self.order_type = self.request.META.get('HTTP_REFERER').split('/')[-2]
+        if self.order_type == 'card':
             return 'Визитки'
-        elif order_type == 'leaflet':
+        elif self.order_type == 'leaflet':
             return 'Листовки'
-        elif order_type == 'booklet':
+        elif self.order_type == 'booklet':
             return 'Буклеты'
         else: return 'Изделие не определено'
         

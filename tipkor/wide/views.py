@@ -74,10 +74,11 @@ class ConfirmView(DetailView, FormMixin):
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        logger.debug(context)
         context['order'] =  self.get_object()
         type_production =  self.get_order_type()
         context['form'] = self.form_class(initial={'type_production': type_production})
-        context['ready_date'] =  date_to_ready(type_production)
+        context['ready_date'] =  date_to_ready(type_production=self.order_type)
         context['type_production'] = type_production
         
         return context
@@ -113,12 +114,12 @@ class ConfirmView(DetailView, FormMixin):
     
     
     def get_order_type(self):
-        order_type = self.request.META.get('HTTP_REFERER').split('/')[-2]
-        if order_type == 'banner':
+        self.order_type = self.request.META.get('HTTP_REFERER').split('/')[-2]
+        if self.order_type == 'banner':
             return 'Баннер'
-        elif order_type == 'sticker':
+        elif self.order_type == 'sticker':
             return 'Наклейка'
-        elif order_type == 'table':
+        elif self.order_type == 'table':
             return 'Табличка'
         else: return 'Изделие не определено'
         
