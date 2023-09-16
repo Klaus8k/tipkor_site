@@ -15,9 +15,11 @@ urlpatterns = [
     path('sitemap.xml',TemplateView.as_view(template_name='sitemap.xml', content_type='text/xml')),
     path('robots.txt',TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 
-    
     path('expirement/', TemplateView.as_view(template_name='expirement.html')),
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    
+handler404 = 'tipkor.views.error_404_view'
+handler500 = 'tipkor.views.server_error'
