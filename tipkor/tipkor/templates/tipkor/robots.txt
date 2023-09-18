@@ -5,7 +5,7 @@ Disallow: /*%
 Disallow: /*?page=
 Disallow: /*&page=
 Disallow: /admin
-Disallow: /c_stamp/*
-Disallow: /r_stamp/*
+Disallow: /stamp/c_stamp/*/
+Disallow: /stamp/r_stamp/*/
 Disallow: /poly/success/*
 Disallow: /wide/success/*
