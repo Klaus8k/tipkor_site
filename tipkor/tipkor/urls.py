@@ -11,7 +11,7 @@ urlpatterns = [
     path('wide/', include('wide.urls'), name='wide'),
     path('poly/', include('poly.urls'), name='poly'),
     path('stamp/', include('stamp.urls'), name='stamp'),
-    
+    path('politica/', TemplateView.as_view(template_name='politica.html'), name='politica'),
     path('sitemap.xml',TemplateView.as_view(template_name='sitemap.xml', content_type='text/xml')),
     path('robots.txt',TemplateView.as_view(template_name='robots.txt', content_type='text/plain')),
 

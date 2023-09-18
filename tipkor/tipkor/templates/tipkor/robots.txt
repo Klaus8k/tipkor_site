@@ -9,3 +9,5 @@ Disallow: /stamp/c_stamp/*/
 Disallow: /stamp/r_stamp/*/
 Disallow: /poly/success/*
 Disallow: /wide/success/*
+Disallow: /poly/*/confirm/*
+Disallow: /wide/*/confirm/*
