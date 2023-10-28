@@ -49,7 +49,6 @@ class Poly(models.Model):
         try:
             result = Poly.objects.get(**data_form)
             result.cost = multiply_cost(result.cost, result.pressrun)
-            result.save()
             
             return result
         except: #TODO Нет строки в бд, попробовать с парсера (это на потом)

@@ -92,6 +92,7 @@ class ConfirmView(DetailView, FormMixin):
             
         product = self.get_object().json_combine()
         product['type_production'] = confirm_dict['type_production']
+        product['cost'] = multiply_cost(cost=product['cost'], pressrun=product['pressrun'])
 
         order = Orders.objects.create(client=client,
                                       product=product,
