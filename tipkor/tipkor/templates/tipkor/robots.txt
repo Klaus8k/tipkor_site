@@ -10,4 +10,11 @@ Disallow: /stamp/r_stamp/*/
 Disallow: /poly/success/*
 Disallow: /wide/success/*
 Disallow: /poly/*/confirm/*
-Disallow: /wide/*/confirm/*
+Disallow: /listovki/
+Disallow: /contacts/
+Disallow: /naruzhnaya-reklama/
+Disallow: /vizitki/
+Disallow: /listovki
+Disallow: /contacts
+Disallow: /naruzhnaya-reklama
+Disallow: /vizitki
