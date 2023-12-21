@@ -121,7 +121,7 @@ body {
     }
 
     .card-img-top {
-        display: none;
+        /* display: none; */
     }
 
 }
