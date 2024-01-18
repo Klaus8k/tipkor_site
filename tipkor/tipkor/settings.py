@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+from dotenv import load_dotenv
+load_dotenv(dotenv_path='../.tipkor_env')
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -22,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('DJ_KEY', default='siunpweiua4pu34983hbndjs')
+
 # SECRET_KEY = 'a;vmaorvma;lkjdfgkfdg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -96,8 +99,8 @@ DATABASES = {
         'NAME': 'tipkor',
         'USER': os.getenv('DJ_DB_USER'),
         'PASSWORD': os.getenv('DJ_DB_PASS'),
-        'HOST': 'localhost',
-        'PORT': '',
+        'HOST': os.getenv('DJ_DB_HOST'),
+        'PORT': 5432,
     }
 }
 
