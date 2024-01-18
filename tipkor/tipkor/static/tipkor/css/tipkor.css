@@ -82,7 +82,9 @@ body {
 }
 
 @media screen and (max-width: 992px) {
-
+    .hi_grafic {
+        display: none;
+    }
 
     .text {
         margin-top: 15px;
