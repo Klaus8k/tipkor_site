@@ -65,9 +65,9 @@ class Stamp(models.Model):
             return result
         except ObjectDoesNotExist:            
             if express:
-                cost = (Snap_item.objects.get(id=form_data['form-snap']).price + 1000) * count
+                cost = (Snap_item.objects.get(id=form_data['form-snap']).price + 1200) * count
             else:       
-                cost = (Snap_item.objects.get(id=form_data['form-snap']).price + 500) * count
+                cost = (Snap_item.objects.get(id=form_data['form-snap']).price + 700) * count
             form_data.update({'cost': cost, 'type_stamp': type_stamp, 'express': express})
             form_data['snap'] = snap
             new_stamp_object = Stamp(type_stamp=type_stamp,
