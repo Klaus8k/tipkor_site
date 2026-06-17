@@ -67,12 +67,12 @@ class RstampView(StampMeta):
 class ConfirmView(View):
     model = Stamp
 
-    # def get_context_data(self, **kwargs):
-    #     stamp_obj = self.get_object() 
-    #     context = super().get_context_data(**kwargs)
-    #     context['order'] =  stamp_obj
-    #     context['ready_date'] =  stamp_ready_time(stamp_obj.express)
-    #     return context
+    def get_context_data(self, **kwargs):
+        stamp_obj = self.get_object() 
+        context = super().get_context_data(**kwargs)
+        context['order'] =  stamp_obj
+        context['ready_date'] =  stamp_ready_time(stamp_obj.express)
+        return context
     
     def post(self, *args, **kwargs):
         confirm_dict = self.request.POST.dict()
