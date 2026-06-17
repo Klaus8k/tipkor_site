@@ -11,7 +11,7 @@ from order.sender import send_email
 
 from .forms import C_stamp_Form, Confirm_form, R_stamp_Form
 from .models import Stamp, stamp_ready_time
-
+from django.views import View
 
 class StampMeta(TemplateView, FormMixin):
     form_class = None
@@ -64,15 +64,15 @@ class RstampView(StampMeta):
     template_name = 'r_stamp.html'
     
 
-class ConfirmView(DetailView):
+class ConfirmView(View):
     model = Stamp
 
-    def get_context_data(self, **kwargs):
-        stamp_obj = self.get_object() 
-        context = super().get_context_data(**kwargs)
-        context['order'] =  stamp_obj
-        context['ready_date'] =  stamp_ready_time(stamp_obj.express)
-        return context
+    # def get_context_data(self, **kwargs):
+    #     stamp_obj = self.get_object() 
+    #     context = super().get_context_data(**kwargs)
+    #     context['order'] =  stamp_obj
+    #     context['ready_date'] =  stamp_ready_time(stamp_obj.express)
+    #     return context
     
     def post(self, *args, **kwargs):
         confirm_dict = self.request.POST.dict()
