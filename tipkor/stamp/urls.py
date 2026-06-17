@@ -8,11 +8,11 @@ app_name = 'stamp'
 
 urlpatterns = [
     path('c_stamp/', CstampView.as_view(), name='c_stamp'),
-    path('c_stamp/confirm/', ConfirmView.as_view(), name='confirm'),
+    path('c_stamp/confirm/', ConfirmView.as_view(), name='c_stamp_confirm'),
     path('c_stamp/<pk>/', CstampView.as_view(), name='c_stamp'),
     
     path('r_stamp/', RstampView.as_view(), name='r_stamp'),
-    path('r_stamp/confirm/', ConfirmView.as_view(), name='confirm'),
+    path('r_stamp/confirm/', ConfirmView.as_view(), name='r_stamp_confirm'),
     path('r_stamp/<pk>/', RstampView.as_view(), name='r_stamp'),
     
     path('success/<pk>/', SuccessView.as_view(), name='success'),

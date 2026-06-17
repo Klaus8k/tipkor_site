@@ -119,7 +119,7 @@
 
             <!-- Форма отправки заказа -->
             <form class="form-control-lg bg-light bg-opacity-75 shadow border rounded mt-4 mx-1"
-                action="{% url 'stamp:confirm' %}" method="post" enctype="multipart/form-data">
+                action="{% url 'stamp:r_stamp_confirm' %}" method="post" enctype="multipart/form-data">
 
                 <div class="row">
                     {% csrf_token %}
