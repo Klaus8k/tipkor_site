@@ -74,8 +74,8 @@ class ConfirmView(View):
         context['ready_date'] =  stamp_ready_time(stamp_obj.express)
         return context
     
-    def post(self, *args, **kwargs):
-        confirm_dict = self.request.POST.dict()
+    def post(self, request, *args, **kwargs):
+        confirm_dict = request.POST.dict()
         
         id_stamp = confirm_dict['confirm_form-id_stamp_obj']
         stamp_obj = Stamp.objects.get(id=id_stamp)
