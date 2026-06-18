@@ -6,7 +6,7 @@ from order.sender import send_email_safely
 
 
 class SendEmailSafelyTests(SimpleTestCase):
-    @patch('order.sender.send_email')
+    @patch('order.sender.send_email', return_value=(True, True))
     def test_returns_true_when_email_is_sent(self, send_email):
         order = Mock(id=42)
 
@@ -24,9 +24,11 @@ class SendEmailSafelyTests(SimpleTestCase):
         self.assertFalse(result)
         send_email.assert_called_once_with('client@example.com', order)
 
-    @patch('order.sender.send_email')
-    def test_empty_email_is_skipped(self, send_email):
-        result = send_email_safely('', Mock(id=42))
+    @patch('order.sender.send_email', return_value=(False, True))
+    def test_empty_client_email_still_sends_order_notification(self, send_email):
+        order = Mock(id=42)
 
-        self.assertFalse(result)
-        send_email.assert_not_called()
+        result = send_email_safely('', order)
+
+        self.assertTrue(result)
+        send_email.assert_called_once_with('', order)
