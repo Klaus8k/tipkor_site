@@ -12,13 +12,14 @@ HI = 'Спасибо за заказ.\n\n'
 MAIL_HOST = 'smtp.mail.ru'
 MAIL_LOGIN = os.getenv('EMAIL_U')
 MAIL_PASS = os.getenv('EMAIL_PASS')
+ORDER_EMAIL = os.getenv('ORDER_EMAIL', 'tipkor@mail.ru')
 
 
 # С почтового сервера после аутенитфикации отправляется на почту письм. Пародля для мейла нужен для приложений а не обычный
 # Отправка емейла с вложениями и верстой https://realpython.com/python-send-email/#option-1-setting-up-a-gmail-account-for-development
 
 
-def send_email(adress, order):
+def _send_email_legacy(adress, order):
 
     body = get_order_dict(order)
     
@@ -38,22 +39,63 @@ def send_email(adress, order):
         mail_sender.sendmail(MAIL_LOGIN, MAIL_LOGIN, msg.as_string())
 
 
+def _create_message(body, subject, recipient):
+    msg = MIMEText(body, 'plain', 'utf-8')
+    msg['Subject'] = Header(subject, 'utf-8')
+    msg['From'] = MAIL_LOGIN
+    msg['To'] = recipient
+    return msg
+
+
+def send_email(address, order):
+    body = get_order_dict(order)
+
+    with smtplib.SMTP_SSL(MAIL_HOST, 465) as mail_sender:
+        mail_sender.login(MAIL_LOGIN, MAIL_PASS)
+
+        client_sent = False
+        if address:
+            client_msg = _create_message(
+                body,
+                f'Заказ №{order.id}',
+                address,
+            )
+            try:
+                mail_sender.sendmail(
+                    MAIL_LOGIN,
+                    address,
+                    client_msg.as_string(),
+                )
+                client_sent = True
+            except Exception:
+                logger.exception(
+                    'Order {}: client email to {} failed',
+                    order.id,
+                    address,
+                )
+
+        order_msg = _create_message(body, 'Новый заказ', ORDER_EMAIL)
+        mail_sender.sendmail(
+            MAIL_LOGIN,
+            ORDER_EMAIL,
+            order_msg.as_string(),
+        )
+
+    return client_sent, True
+
+
 def send_email_safely(address, order):
     """Send order notifications without breaking the successful order flow."""
-    if not address:
-        return False
-
     try:
-        send_email(address, order)
+        client_sent, order_sent = send_email(address, order)
     except Exception:
         logger.exception(
-            'Order {} was created, but email notification to {} failed',
+            'Order {} was created, but order notification failed',
             order.id,
-            address,
         )
         return False
 
-    return True
+    return client_sent or order_sent
         
 
 
