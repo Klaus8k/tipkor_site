@@ -22,13 +22,10 @@ class Clients(models.Model):
     
     @staticmethod
     def get_client_obj(**data: dict):
-        try:
-            client_obj = Clients.objects.get(**data)
+        client_obj = Clients.objects.filter(**data).order_by('pk').first()
+        if client_obj:
             return client_obj
-        except: 
-            new_client = Clients(**data)
-            new_client.save()
-            return new_client
+        return Clients.objects.create(**data)
         
 
 class Orders(models.Model):

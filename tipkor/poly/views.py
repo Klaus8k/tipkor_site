@@ -5,7 +5,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
 from loguru import logger
 from order.models import Clients, Orders, date_to_ready
-from order.sender import send_email
+from order.sender import send_email_safely
 
 from .forms import Booklet_Form, Card_Form, Confirm_form, Leaflet_Form
 from .models import Poly, multiply_cost
@@ -100,8 +100,7 @@ class ConfirmView(DetailView, FormMixin):
                                       comment=comment,
                                       file=file)
         
-        if email:
-            send_email(email, order=order)
+        send_email_safely(email, order=order)
         
         return HttpResponseRedirect(reverse('poly:success', kwargs={'pk': order.id}) + '#a_success')
     
@@ -120,9 +119,4 @@ class SuccessView(DetailView):
     model = Orders
     template_name = 'poly/success.html'
     context_object_name = 'order'
-
-    
-
-        
-    
     

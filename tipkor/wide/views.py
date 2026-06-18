@@ -6,7 +6,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
 from loguru import logger
 from order.models import Clients, Orders, date_to_ready
-from order.sender import send_email
+from order.sender import send_email_safely
 
 from .forms import Banner_Form, Confirm_form, Sticker_Form, Table_Form
 from .models import Wide
@@ -108,8 +108,7 @@ class ConfirmView(DetailView, FormMixin):
                                       comment=comment,
                                       file=file)
         
-        if email:
-            send_email(email, order=order)
+        send_email_safely(email, order=order)
         return HttpResponseRedirect(reverse('wide:success', kwargs={'pk': order.id}) + '#a_success')
     
     
@@ -128,9 +127,4 @@ class SuccessView(DetailView):
     model = Orders
     template_name = 'wide/success.html'
     context_object_name = 'order'
-
-    
-
-        
-    
     
