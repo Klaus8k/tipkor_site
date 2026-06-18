@@ -36,6 +36,24 @@ def send_email(adress, order):
         msg['To'] = MAIL_LOGIN
         
         mail_sender.sendmail(MAIL_LOGIN, MAIL_LOGIN, msg.as_string())
+
+
+def send_email_safely(address, order):
+    """Send order notifications without breaking the successful order flow."""
+    if not address:
+        return False
+
+    try:
+        send_email(address, order)
+    except Exception:
+        logger.exception(
+            'Order {} was created, but email notification to {} failed',
+            order.id,
+            address,
+        )
+        return False
+
+    return True
         
 
 

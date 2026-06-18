@@ -10,5 +10,5 @@ def error_404_view(request, exeption):
 
 def server_error(request):
     response = render(request, template_name='404.html')
-    response.status_code = 404
+    response.status_code = 500
     return response

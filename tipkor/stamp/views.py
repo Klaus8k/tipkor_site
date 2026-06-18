@@ -7,7 +7,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import FormMixin
 from loguru import logger
 from order.models import Clients, Orders
-from order.sender import send_email
+from order.sender import send_email_safely
 
 from .forms import C_stamp_Form, Confirm_form, R_stamp_Form
 from .models import Stamp, stamp_ready_time
@@ -101,8 +101,7 @@ class ConfirmView(View):
                                       comment=comment,
                                       file=file)
                                     #   delivery=delivery)
-        if email:
-            send_email(email, order=order)
+        send_email_safely(email, order=order)
         
         # return HttpResponseRedirect(reverse('stamp:success', args=[order.id] + '#success'))
         return HttpResponseRedirect(reverse('stamp:success', kwargs={'pk': order.id}) + '#a_success')
@@ -120,9 +119,3 @@ class SuccessView(DetailView):
     model = Orders
     template_name = 'stamp/success.html'
     context_object_name = 'order'
-
-    
-
-        
-
-    
